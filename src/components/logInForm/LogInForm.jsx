@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useUserStoreLogIn, useUserStorage } from "../Store";
+import { useNavigate } from "react-router-dom";
+import Loading from "../loading/Loading";
 
 const LogInForm = () => {
+    const navigate = useNavigate();
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -9,6 +13,26 @@ const LogInForm = () => {
 
     const [showPassword, setShowPassword] = useState(false);
     const [errors, setErrors] = useState({});
+
+    const postData = {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        userName: data.firstName + " " + data.lastName,
+        mail: data.email,
+        password: data.password,
+    };
+
+    const {
+        isLoading,
+        error,
+        errorMessage,
+        errorCode,
+        userData,
+        success,
+        apiCall,
+    } = useUserStoreLogIn();
+
+    const { success: successMessage } = useUserStorage();
 
     const inputHandler = (e) => {
         const { name, value } = e.target;
@@ -18,7 +42,7 @@ const LogInForm = () => {
         });
     };
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
 
         const newErrors = {};
@@ -29,24 +53,34 @@ const LogInForm = () => {
             }
         }
 
-        if (data.email == "asdf@gmail.com" && data.password == "asdf") {
-            newErrors.wrongPassword = "User Name or Password is invalid";
-        }
-
         setErrors(newErrors);
 
-        // console.log(newErrors);
-
         if (Object.keys(newErrors).length === 0) {
-            console.log("Form submitted:", data);
+            console.log("a");
+
+            await apiCall(postData);
+            console.log("b");
         }
     };
 
-    // console.log(data);
-    // console.warn(errors);
+    if (success) {
+        navigate("/");
+    }
 
     return (
         <section>
+            <Loading isLoading={isLoading} />
+
+            {successMessage && (
+                <p className="text-sky-500 text-lg font-bold text-center mb-5">
+                    Your Acc is created Successful! Plz Log in again
+                </p>
+            )}
+            {error && errorMessage && (
+                <p className="text-red-500 text-xl font-semibold text-center">
+                    {errorMessage}
+                </p>
+            )}
             <form
                 className="min-w-[350px]"
                 action="POST"

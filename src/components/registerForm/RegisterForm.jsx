@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
+import { useUserStorage } from "../Store";
+import { useNavigate } from "react-router-dom";
+import Loading from "../loading/Loading";
 
 const RegisterForm = () => {
+    const navigate = useNavigate();
+
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+    const expirationTime = 10 * 1000;
+
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
@@ -11,11 +20,30 @@ const RegisterForm = () => {
         confirmPassword: "",
     });
 
-    const [errors, setErrors] = useState({});
     const [showPassword, setShowPassword] = useState({
         password: "",
         confirmPassword: "",
     });
+
+    const postData = {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        userName: data.firstName + " " + data.lastName,
+        mail: data.email,
+        password: data.password,
+    };
+
+    const {
+        isLoading,
+        error,
+        errorMessage,
+        errorCode,
+        userData,
+        success,
+        apiCall,
+    } = useUserStorage();
+
+    const [errors, setErrors] = useState({});
 
     const inputHandler = (e) => {
         const { name, value } = e.target;
@@ -32,14 +60,8 @@ const RegisterForm = () => {
         });
     };
 
-    const apiPostNewUser = ``;
-
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
-
-        const apiUrl = import.meta.env.VITE_API_URL;
-        console.log(`API URL: ${apiUrl}/users`);
-        console.log(import.meta.env.VITE_API_URL);
 
         const newErrors = {};
 
@@ -53,25 +75,25 @@ const RegisterForm = () => {
             newErrors.notSamePassword = "Password aren't same";
         }
 
+        setErrors(newErrors);
+
         if (Object.keys(newErrors).length === 0) {
-            axios
-                .post(apiPostNewUser, {
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    userName: data.firstName + " " + data.lastName,
-                    mail: data.email,
-                    password: data.password,
-                })
-                .then((res) => {
-                    console.log(res.data);
-                    localStorage("userData", res.data);
-                })
-                .catch((err) => console.log(err));
+            await apiCall(postData);
         }
     };
 
+    if (success) {
+        navigate("/login");
+    }
+
     return (
         <section>
+            <Loading isLoading={isLoading} />
+            {error && errorMessage && (
+                <p className="text-red-500 text-xl font-semibold text-center">
+                    {errorMessage}
+                </p>
+            )}
             <form
                 className="min-w-[350px]"
                 action=""
@@ -87,7 +109,7 @@ const RegisterForm = () => {
                     <div className="input-box mb-3">
                         <input
                             className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 ${
-                                errors.name
+                                errors.firstName
                                     ? "border-red-400"
                                     : "border-slate-300"
                             }`}
@@ -108,7 +130,7 @@ const RegisterForm = () => {
                     <div className="input-box mb-3">
                         <input
                             className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 ${
-                                errors.name
+                                errors.lastName
                                     ? "border-red-400"
                                     : "border-slate-300"
                             }`}
