@@ -6,13 +6,13 @@ import Footer from "./components/footer/Footer";
 
 function App() {
     return (
-        <>
+        <div className="font-Roboto">
             <BrowserRouter>
                 <NavBar />
                 <Router />
                 <Footer />
             </BrowserRouter>
-        </>
+        </div>
     );
 }
 
