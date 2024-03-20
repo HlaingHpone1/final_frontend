@@ -3,16 +3,31 @@ import ContactUs from "../../pages/ContactUs";
 import LogIn from "../../pages/LogIn";
 import Register from "../../pages/Register";
 import Home from "../../pages/Home";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 const Router = () => {
+    const data = sessionStorage.getItem("userData");
+
     return (
         <div>
             <Routes>
-                <Route path="/" element={<Home />}></Route>
-                <Route path="/login" element={<LogIn />}></Route>
-                <Route path="/register" element={<Register />}></Route>
-                <Route path="/contact" element={<ContactUs />}></Route>
+                {data == null && (
+                    <>
+                        <Route
+                            path="*"
+                            element={<Navigate to="/login" replace />}
+                        ></Route>
+                        <Route path="/login" element={<LogIn />}></Route>
+                        <Route path="/register" element={<Register />}></Route>
+                    </>
+                )}
+
+                {data != null && (
+                    <>
+                        <Route path="/" element={<Home />}></Route>
+                        <Route path="/contact" element={<ContactUs />}></Route>
+                    </>
+                )}
             </Routes>
         </div>
     );
