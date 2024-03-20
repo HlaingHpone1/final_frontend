@@ -115,7 +115,7 @@ const RegisterForm = () => {
                             }`}
                             type="text"
                             name="firstName"
-                            id="firstName"
+                            // id="firstName"
                             value={data.firstName}
                             onChange={inputHandler}
                             placeholder="Enter Your First Name"
@@ -136,7 +136,7 @@ const RegisterForm = () => {
                             }`}
                             type="text"
                             name="lastName"
-                            id="lastName"
+                            // id="lastName"
                             value={data.lastName}
                             onChange={inputHandler}
                             placeholder="Enter Your Last Name"
@@ -156,7 +156,7 @@ const RegisterForm = () => {
                         }`}
                         type="email"
                         name="email"
-                        id="email"
+                        // id="email"
                         value={data.email}
                         onChange={inputHandler}
                         placeholder="Enter your Email"
@@ -180,7 +180,7 @@ const RegisterForm = () => {
                             className={`focus:outline-none bg-transparent  w-full block text-lg px-2 py-2.5 `}
                             type={showPassword.password ? "text" : "password"}
                             name="password"
-                            id="password"
+                            // id="password"
                             value={data.password}
                             onChange={inputHandler}
                             placeholder="Enter your Password"
@@ -219,7 +219,7 @@ const RegisterForm = () => {
                                     : "password"
                             }
                             name="confirmPassword"
-                            id="confirmPassword"
+                            // id="confirmPassword"
                             value={data.confirmPassword}
                             onChange={inputHandler}
                             placeholder="Enter your Password Again"

@@ -5,12 +5,19 @@ import NavBar from "./components/navBar/NavBar";
 import Footer from "./components/footer/Footer";
 
 function App() {
+    const data = sessionStorage.getItem("userData");
     return (
         <div className="font-Roboto">
             <BrowserRouter>
-                <NavBar />
+                {data != null && (
+                    <div className="">
+                        <NavBar />
+                        <Router />
+                        <Footer />
+                    </div>
+                )}
+
                 <Router />
-                <Footer />
             </BrowserRouter>
         </div>
     );

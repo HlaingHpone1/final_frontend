@@ -21,25 +21,27 @@ export const useUserStorage = create(
         apiCall: async (postData) => {
             set({ isLoading: true });
 
-            try {
-                const res = await axios.post(apiPostNewUser, postData, {
-                    signal
-                });
-                if (res.data.httpStatusCode === 201) {
-                    set(() => ({
-                        userData: res.data, success: true, isLoading: false
-                    }))
+            setTimeout(async () => {
+                try {
+                    const res = await axios.post(apiPostNewUser, postData, {
+                        signal
+                    });
+                    if (res.data.httpStatusCode === 201) {
+                        set(() => ({
+                            userData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                        }))
+                    }
+                } catch (err) {
+                    if (err.response) {
+                        set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                    } else {
+                        set({ error: true })
+                    }
+                } finally {
+                    // abortController.abort();
+                    set({ isLoading: false })
                 }
-            } catch (err) {
-                if (err.response) {
-                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
-                } else {
-                    set({ error: true })
-                }
-            } finally {
-                // abortController.abort();
-                set({ isLoading: false })
-            }
+            }, "1500")
 
         },
     })
@@ -58,25 +60,27 @@ export const useUserStoreLogIn = create(devtools(
         apiCall: async (postData) => {
             set({ isLoading: true });
 
-            try {
-                const res = await axios.post(apiPostUserValidate, postData, {
-                    signal
-                });
-                set(() => ({ userData: res.data, success: true, isLoading: false }))
-                sessionStorage.setItem('userData', JSON.stringify(res.data));
-                console.log(res.data);
+            setTimeout(async () => {
+                try {
+                    const res = await axios.post(apiPostUserValidate, postData, {
+                        signal
+                    });
+                    set(() => ({ userData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null }))
+                    sessionStorage.setItem('userData', JSON.stringify(res.data));
+                    console.log(res.data);
 
-            } catch (err) {
-                if (err.response) {
-                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
-                } else {
-                    set({ error: true })
+                } catch (err) {
+                    if (err.response) {
+                        set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                    } else {
+                        set({ error: true })
+                    }
+                } finally {
+                    // abortController.abort();
+                    set({ isLoading: false })
+
                 }
-            } finally {
-                // abortController.abort();
-                set({ isLoading: false })
-
-            }
+            }, "1500")
         },
     }),
 ))

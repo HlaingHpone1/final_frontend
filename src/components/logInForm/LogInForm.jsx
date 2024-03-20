@@ -56,21 +56,17 @@ const LogInForm = () => {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
-            console.log("a");
-
             await apiCall(postData);
-            console.log("b");
         }
     };
 
     if (success) {
-        navigate("/");
+        window.location.href = "/";
     }
 
     return (
         <section>
-            <Loading isLoading={isLoading} />
-
+            <Loading isLoading={isLoading} />;
             {successMessage && (
                 <p className="text-sky-500 text-lg font-bold text-center mb-5">
                     Your Acc is created Successful! Plz Log in again
@@ -98,7 +94,7 @@ const LogInForm = () => {
                         }`}
                         type="email"
                         name="email"
-                        id="email"
+                        // id="email"
                         value={data.email}
                         onChange={inputHandler}
                         placeholder="Enter your Email"
@@ -122,7 +118,7 @@ const LogInForm = () => {
                             className={`focus:outline-none bg-transparent  w-full block text-lg px-2 py-2.5 `}
                             type={showPassword ? "text" : "password"}
                             name="password"
-                            id="password"
+                            // id="password"
                             value={data.password}
                             onChange={inputHandler}
                             placeholder="Enter your Password"
