@@ -10,8 +10,8 @@ export default {
                 'primary': "#189AB4",
                 'secondary': "#75E6DA",
                 'tertiary': "#D4F1F4",
-                'fourth': "05445E",
-                'nav': '05445E',
+                'fourth': "#05445E",
+                'nav': '#05445E',
 
             },
             fontFamily: {
