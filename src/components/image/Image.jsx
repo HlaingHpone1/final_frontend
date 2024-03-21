@@ -9,6 +9,7 @@ import job from "../../assets/img/job.svg";
 import like from "../../assets/img/like.svg";
 import likefull from "../../assets/img/likefull.svg";
 import logo5 from "../../assets/img/logo5.png";
+import footerlogo from "../../assets/img/logo.png";
 import logo from "../../assets/img/logo-removebg.png";
 import menu from "../../assets/img/menu.svg";
 import message from "../../assets/img/message.svg";
@@ -19,6 +20,9 @@ import noti from "../../assets/img/notification.svg";
 import search from "../../assets/img/noun-search-1157129.svg";
 import user from "../../assets/img/noun-user-6461941.svg";
 import plus from "../../assets/img/plus.svg";
+import ads from "../../assets/img/ads.png";
+import userBg from "../../assets/img/userbg.jpg";
+import userProfile from "../../assets/img/userProfile.jpg"
 
 const images = {
     comment,
@@ -31,6 +35,7 @@ const images = {
     like,
     likefull,
     logo5,
+    footerlogo,
     logo,
     menu,
     message,
@@ -41,6 +46,9 @@ const images = {
     search,
     user,
     plus,
+    ads,
+    userBg,
+    userProfile,
 }
 
 export default images;

@@ -13,15 +13,19 @@ function App() {
                     <div className="">
                         <NavBar />
                         <Router />
-                        <Footer />
+                        {/* <Footer /> */}
                     </div>
                 )}
+<<<<<<< HEAD
 
                 {data == null && (
                     <div className="">
                         <Router />
                     </div>
                 )}
+=======
+                {/* <Router /> */}
+>>>>>>> master
             </BrowserRouter>
         </div>
     );
