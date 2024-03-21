@@ -32,7 +32,8 @@ export default {
                 'gradient': 'linear-gradient(-45deg, rgba(24,154,180,1) 50%, rgba(37,118,152,1) 50%)',
             },
             screens: {
-                xs: "320px"
+                xs: "460px",
+                xs2: "320px"
             }
         },
     },
