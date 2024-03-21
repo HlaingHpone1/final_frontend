@@ -7,23 +7,22 @@ import SharePost from "../components/sharePost/SharePost";
 
 const Home = () => {
     return (
-    <main className="bg-[#171B24] ">
-        <div className=" max-w-1240px grid grid-cols-[248px_minmax(608px,_1fr)_335px] mx-auto font-Roboto pt-6 gap-x-6">
-            <Profile/>
+        <main className="bg-[#171B24] hidden">
+            <div className=" max-w-1240px grid grid-cols-[248px_minmax(608px,_1fr)_335px] mx-auto font-Roboto pt-6 gap-x-6">
+                <Profile />
 
-            <section>
-                <SharePost/>
-                <Post/>
-            </section>
-           
-            <section>
-                <Ads/>
-                <Footer/>
-            </section>
-        </div>
-    </main>
-    )
+                <section>
+                    <SharePost />
+                    <Post />
+                </section>
 
+                <section>
+                    <Ads />
+                    <Footer />
+                </section>
+            </div>
+        </main>
+    );
 };
 
 export default Home;
