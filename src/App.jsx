@@ -16,7 +16,16 @@ function App() {
                         {/* <Footer /> */}
                     </div>
                 )}
+<<<<<<< HEAD
+
+                {data == null && (
+                    <div className="">
+                        <Router />
+                    </div>
+                )}
+=======
                 {/* <Router /> */}
+>>>>>>> master
             </BrowserRouter>
         </div>
     );
