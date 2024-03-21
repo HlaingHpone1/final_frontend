@@ -17,7 +17,11 @@ function App() {
                     </div>
                 )}
 
-                <Router />
+                {data == null && (
+                    <div className="">
+                        <Router />
+                    </div>
+                )}
             </BrowserRouter>
         </div>
     );
