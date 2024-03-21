@@ -3,7 +3,7 @@ import images from '../image/Image'
 
 const Profile = () => {
   return (
-    <section className='w-[248px] bg-[#3E3E3E] text-white rounded-2xl'>
+    <section className='w-[248px] bg-[#3E3E3E] text-white rounded-2xl h-fit'>
 
       {/* userProfile */}
       <div className='relative'>
@@ -24,7 +24,7 @@ const Profile = () => {
             <p>Connections</p>
             <p>Grow Your Connections</p>
           </div>
-          <img src={images.network1} className='size-8 mt-1' />
+          <img src={images.network1} className='size-5 mt-1' />
         </div>
       </div>
 
@@ -43,7 +43,7 @@ const Profile = () => {
       </div>
 
       <div className='inner w-56 flex mx-auto py-2'>
-          <img src={images.group} className='size-9 my-auto' />
+          <img src={images.group} className='size-6 my-auto mr-1' />
           <p className='my-1 text-[14px]'>Group</p>
       </div>
     </section>
