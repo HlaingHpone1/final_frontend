@@ -13,11 +13,10 @@ function App() {
                     <div className="">
                         <NavBar />
                         <Router />
-                        <Footer />
+                        {/* <Footer /> */}
                     </div>
                 )}
-
-                <Router />
+                {/* <Router /> */}
             </BrowserRouter>
         </div>
     );
