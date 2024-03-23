@@ -133,7 +133,7 @@ const NavBar = () => {
                                         </li>
                                         <li>
                                             <MyLink
-                                                to="/login"
+                                                to="/network"
                                                 text={images.network}
                                             />
                                         </li>

@@ -17,7 +17,6 @@ const LogInForm = () => {
     const postData = {
         firstName: data.firstName,
         lastName: data.lastName,
-        userName: data.firstName + " " + data.lastName,
         mail: data.email,
         password: data.password,
     };
