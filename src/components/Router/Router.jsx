@@ -28,6 +28,8 @@ const Router = () => {
                         <Route path="/" element={<Home />}></Route>
                         <Route path="/contact" element={<ContactUs />}></Route>
                         <Route path="/network" element={<Network />}></Route>
+                        <Route path="/profile" element={<Network />}></Route>
+                        <Route path="/settings" element={<Network />}></Route>
                     </>
                 )}
             </Routes>
