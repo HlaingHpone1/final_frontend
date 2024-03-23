@@ -7,11 +7,10 @@ export default {
     theme: {
         extend: {
             colors: {
-                'primary': "#189AB4",
-                'secondary': "#75E6DA",
+                'primary': "#1A5DB4",
+                'secondary': "#EBEBEB",
                 'tertiary': "#D4F1F4",
-                'fourth': "#05445E",
-                'nav': '#05445E',
+                'nav': '#1A5DB4',
 
             },
             fontFamily: {
@@ -34,8 +33,20 @@ export default {
             screens: {
                 xs: "460px",
                 xs2: "320px"
+            },
+            boxShadow: {
+                'custom': '0px 0px 10px 0px rgba(0,0,0,0.3)',
+            },
+            gridTemplateColumns: {
+                'home3': 'repeat(4, minmax(0, 295px))',
+                'home2': 'repeat(3, minmax(0, 295px))',
+                'home1': 'repeat(1, minmax(0, 295px))',
+
             }
         },
     },
-    plugins: [],
+    plugins: [
+        require('tailwind-scrollbar'),
+        require('tailwind-scrollbar-hide')
+    ]
 }

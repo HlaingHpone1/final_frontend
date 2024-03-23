@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import images from "../images";
+import { Link } from "react-router-dom";
+import { images } from "../images";
+import { useLocalSessionStore } from "../Store";
 
 // Check Active Link
 
@@ -38,6 +39,9 @@ const NavBar = () => {
     const [searchData, setSearchData] = useState(null);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const [inputValue, setInputValue] = useState("");
+
+    const { userData } = useLocalSessionStore();
 
     const searchHandler = () => {
         setSearchData(inputRef.current.value);
@@ -53,6 +57,7 @@ const NavBar = () => {
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
             searchHandler();
+            setInputValue("");
         }
     };
 
@@ -84,8 +89,15 @@ const NavBar = () => {
         window.location.reload();
     };
 
+    const searchInputStyle = {
+        backgroundImage: inputValue ? "none" : `url(${images.search})`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "95%",
+        backgroundSize: "25px",
+    };
+
     return (
-        <header className="l-header bg-nav w-full py-3">
+        <header className="l-header bg-nav w-full py-3 px-5">
             <div className="l-wrap-inner max-w-[1240px] mx-auto">
                 <nav className="l-header__list">
                     <div className="logo flex justify-between items-center">
@@ -93,7 +105,7 @@ const NavBar = () => {
                             <Link to="/" className="block">
                                 <img
                                     src={images.logo}
-                                    className=" w-40 sm:w-64"
+                                    className="w-14 sm:w-16"
                                 />
                             </Link>
 
@@ -102,21 +114,26 @@ const NavBar = () => {
                                 ref={containerRef}
                             >
                                 <input
-                                    className={`px-3 py-2 w-full rounded-lg focus:outline-none md:block ${
+                                    className={`px-3 py-2 w-full rounded-lg focus:outline-none md:block border-none shadow transition-all duration-300 ease-in-out bg-slate-800 text-white  ${
                                         show ? "block" : "hidden"
                                     }`}
+                                    style={searchInputStyle}
                                     type="text"
                                     placeholder="Search"
+                                    value={inputValue}
                                     ref={inputRef}
                                     onKeyDown={handleKeyDown}
+                                    onInput={(e) =>
+                                        setInputValue(e.target.value)
+                                    }
                                 />
                                 {!show && (
                                     <button
-                                        className="xs2:max-md:block md:hidden"
+                                        className="xs2:max-md:block md:hidden block size-9 xs:size-10 sm:size-12 rounded-lg p-2 sm:p-2.5 bg-slate-800"
                                         onClick={toggleSearch}
                                     >
                                         <img
-                                            className="block size-8 xs:size-9 sm:size-10 rounded-lg p-2 sm:p-2.5 bg-slate-600"
+                                            className="block w-full h-full"
                                             src={images.search}
                                             alt="Search"
                                         />
@@ -157,7 +174,7 @@ const NavBar = () => {
                                 >
                                     <img
                                         className="rounded-full size-9 sm:size-12 object-cover aspect-square"
-                                        src={images.profile}
+                                        src={userData.data.profileImg}
                                         alt=""
                                         onClick={() =>
                                             setDropdownOpen(!dropdownOpen)

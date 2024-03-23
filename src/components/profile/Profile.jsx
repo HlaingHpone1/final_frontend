@@ -1,53 +1,76 @@
-import React from 'react'
-import images from '../image/Image'
+import React from "react";
+import { images } from "../images.js";
+import { useLocalSessionStore } from "../Store";
 
 const Profile = () => {
-  return (
-    <section className='w-[248px] bg-[#3E3E3E] text-white rounded-2xl h-fit'>
+    const { userData } = useLocalSessionStore();
 
-      {/* userProfile */}
-      <div className='relative'>
-        <img src={images.userBg} className='h-14 w-full rounded-t-2xl'/>
-        <div className='inner w-56 mx-auto'>
-          <div className=' absolute top-5 left-[89px]'>
-            <img src={images.userProfile} className='rounded-full size-[70px] border border-[#858484]' />
-          </div>
-            <p className=' mt-10 text-center text-[25px] mb-2'>Hlaing Hpone</p>
-            <p className=' text-center text-xs text-[#c5c5c5]'>Passionate Junior Web Developer | Proficient in React, JavaScript, and PHP | Dedicated to Continuous Learning and Growth</p>
-        </div>
-      </div>
+    return (
+        <section className="bg-white rounded-2xl shadow-custom">
+            {/* userProfile */}
+            <div className="">
+                <div className="banner-img">
+                    <img
+                        src={userData.data.bannerImg}
+                        className="block w-full h-14 rounded-t-2xl"
+                    />
+                </div>
+                <div className="inner-card ">
+                    <div className="info px-3">
+                        <div className="profile-img -mt-9">
+                            <img
+                                src={userData.data.profileImg}
+                                className="rounded-full aspect-square object-cover size-20 mx-auto border-black"
+                            />
+                        </div>
+                        <p className=" mt-3 text-center text-2xl font-Roboto-Slab font-bold text-primary capitalize">
+                            {userData.data.userName}
+                        </p>
+                        <p className="text-center text-xs py-3">
+                            {userData.data.bio}
+                        </p>
+                    </div>
+                    {/* Connection */}
+                    <div className="border-y border-[#858484] px-3">
+                        <div className="inner flex justify-between py-3">
+                            <div className="">
+                                <p className="text-xs text-slate-500">
+                                    Connections
+                                </p>
+                                <p className="text-sm">Grow Your Connections</p>
+                            </div>
+                            <img
+                                src={images.network1}
+                                className="size-5 mt-1"
+                            />
+                        </div>
+                    </div>
 
-      {/* Connection */}
-      <div className='border-y border-[#858484] mt-3'>
-        <div className='inner w-56 flex mx-auto justify-between py-3'>
-          <div className='text-xs'>
-            <p>Connections</p>
-            <p>Grow Your Connections</p>
-          </div>
-          <img src={images.network1} className='size-5 mt-1' />
-        </div>
-      </div>
+                    {/* follower&following */}
+                    <div className="px-3">
+                        <div className="inner flex text-xs py-3 justify-between">
+                            <div className="flex">
+                                <img src={images.user} className="size-6" />
+                                <p className="my-auto">5K Followers</p>
+                            </div>
+                            <div className="flex">
+                                <img src={images.user} className="size-6" />
+                                <p className="my-auto">100 Following</p>
+                            </div>
+                        </div>
+                    </div>
 
-      {/* follower&following */}
-      <div className='border-b'>
-        <div className='inner w-56 flex text-xs py-2 justify-between mx-auto'>
-          <div className='flex'>
-            <img src={images.user} className='size-6' />
-            <p className='my-auto'>5K Followers</p>
-          </div>
-          <div className='flex'>
-            <img src={images.user} className='size-6' />
-            <p className='my-auto'>100 Following</p>
-          </div>
-        </div>
-      </div>
+                    <div className="inner border-t border-[#858484] flex  py-3 px-3">
+                        <img
+                            src={images.group}
+                            className="size-6 my-auto mr-1"
+                        />
+                        <p className="my-1 text-[14px]">Group</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
 
-      <div className='inner w-56 flex mx-auto py-2'>
-          <img src={images.group} className='size-6 my-auto mr-1' />
-          <p className='my-1 text-[14px]'>Group</p>
-      </div>
-    </section>
-  )
-}
-
-export default Profile
+export default Profile;
