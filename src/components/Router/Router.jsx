@@ -4,6 +4,7 @@ import LogIn from "../../pages/LogIn";
 import Register from "../../pages/Register";
 import Home from "../../pages/Home";
 import { Routes, Route, Navigate } from "react-router-dom";
+import Network from "../../pages/Network";
 
 const Router = () => {
     const data = sessionStorage.getItem("userData");
@@ -26,6 +27,7 @@ const Router = () => {
                     <>
                         <Route path="/" element={<Home />}></Route>
                         <Route path="/contact" element={<ContactUs />}></Route>
+                        <Route path="/network" element={<Network />}></Route>
                     </>
                 )}
             </Routes>
