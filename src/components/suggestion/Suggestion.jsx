@@ -17,7 +17,7 @@ const Suggestion = () => {
                 </div>
                 <div className="suggestion">
                     {companies.map((item, index) => (
-                        <CompanyPage key={index} data={item} /> // Assuming Post component accepts a prop named 'data'
+                        <CompanyPage key={index} data={item} />
                     ))}
                 </div>
                 <div className="view-all">

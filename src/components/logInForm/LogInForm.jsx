@@ -65,7 +65,7 @@ const LogInForm = () => {
 
     return (
         <section>
-            <Loading isLoading={isLoading} />;
+            <Loading isLoading={isLoading} />
             {successMessage && (
                 <p className="text-sky-500 text-lg font-bold text-center mb-5">
                     Your Acc is created Successful! Plz Log in again

@@ -9,7 +9,9 @@ const Post = ({ data }) => {
         setShowFullDes(!showFullDes);
     };
 
-    const shortDesc = data.caption.split(" ").slice(0, 50).join(" ") + "...";
+    const words = data.caption.split(" ");
+    const shortDesc =
+        words.slice(0, 50).join(" ") + (words.length > 50 ? "..." : "");
     const fullDesc = data.caption;
     const followers = data.followers.toLocaleString();
 
@@ -21,7 +23,7 @@ const Post = ({ data }) => {
                     <div className="flex gap-2">
                         <div>
                             <img
-                                src={data.profileImage}
+                                src={data.profileImg}
                                 className="rounded-full size-14 aspect-square object-cover border-2 border-black"
                             />
                         </div>
@@ -49,10 +51,10 @@ const Post = ({ data }) => {
 
                 {/* 2nd row */}
                 <div className="mx-4 text-sm mb-5">
-                    <p className="">
+                    <p className="break-all">
                         {showFullDes ? fullDesc : shortDesc}
                         &nbsp; &nbsp;
-                        {!showFullDes && (
+                        {!showFullDes && words.length > 50 && (
                             <button className="" onClick={toggleDesc}>
                                 See more
                             </button>

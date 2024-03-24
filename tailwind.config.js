@@ -11,7 +11,7 @@ export default {
                 'secondary': "#EBEBEB",
                 'tertiary': "#D4F1F4",
                 'nav': '#1A5DB4',
-
+                'background': '#EBEBEB',
             },
             fontFamily: {
                 'Roboto': ['Roboto', 'sans-serif'],
