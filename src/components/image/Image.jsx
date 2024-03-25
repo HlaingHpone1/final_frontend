@@ -25,6 +25,7 @@ import userBg from "../../assets/img/userbg.jpg";
 import userProfile from "../../assets/img/userProfile.jpg";
 import send from "../../assets/img/send.png";
 import repost from "../../assets/img/repost.png";
+import backArw from "../../assets/img/backArrow.png"
 
 const images = {
     comment,
@@ -53,6 +54,7 @@ const images = {
     userProfile,
     send,
     repost,
+    backArw,
 }
 
 export default images;
