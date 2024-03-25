@@ -12,6 +12,8 @@ import Settings from "../../pages/Settings";
 import Skill from "../../pages/Skill";
 import Education from "../../pages/Education";
 import Experience from "../../pages/Experience";
+import About from "../../pages/About";
+import Faq from "../../pages/Faq";
 
 const Router = () => {
     const data = sessionStorage.getItem("userData");
@@ -50,6 +52,8 @@ const Router = () => {
                         ></Route>
                         <Route path="/message" element={<Message />}></Route>
                         <Route path="/settings" element={<Settings />}></Route>
+                        <Route path="/about" element={<About />}></Route>
+                        <Route path="/faq" element={<Faq />}></Route>
                     </>
                 )}
             </Routes>
