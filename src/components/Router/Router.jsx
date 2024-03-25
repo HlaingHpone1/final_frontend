@@ -9,6 +9,9 @@ import Network from "../../pages/Network";
 import Profile from "../../pages/Profile";
 import Message from "../../pages/Message";
 import Settings from "../../pages/Settings";
+import Skill from "../../pages/Skill";
+import Education from "../../pages/Education";
+import Experience from "../../pages/Experience";
 
 const Router = () => {
     const data = sessionStorage.getItem("userData");
@@ -33,6 +36,18 @@ const Router = () => {
                         <Route path="/contact" element={<ContactUs />}></Route>
                         <Route path="/network" element={<Network />}></Route>
                         <Route path="/profile" element={<Profile />}></Route>
+                        <Route
+                            path="/profile/skill"
+                            element={<Skill />}
+                        ></Route>
+                        <Route
+                            path="/profile/education"
+                            element={<Education />}
+                        ></Route>
+                        <Route
+                            path="/profile/experience"
+                            element={<Experience />}
+                        ></Route>
                         <Route path="/message" element={<Message />}></Route>
                         <Route path="/settings" element={<Settings />}></Route>
                     </>

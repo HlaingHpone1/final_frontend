@@ -1,6 +1,6 @@
 import React from "react";
-import images from "../image/Image";
-import img from "../img";
+
+import { img } from "../img";
 import Btn from "../btn/Btn";
 
 const UserCard = ({ data }) => {

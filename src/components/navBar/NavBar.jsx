@@ -105,7 +105,7 @@ const NavBar = () => {
                         <div className="logo flex justify-center items-center space-x-3">
                             <Link to="/" className="block">
                                 <img
-                                    src={images.logo}
+                                    src={images.logoWhite}
                                     className="w-14 sm:w-16"
                                 />
                             </Link>

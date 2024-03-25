@@ -1,6 +1,6 @@
 import React from "react";
 
-import images from "../image/Image";
+import { images } from "../images";
 
 const Footer = () => {
     return (
@@ -12,7 +12,7 @@ const Footer = () => {
                 <p>More</p>
             </div>
             <div className="flex gap-x-5">
-                <img src={images.footerlogo} className="size-16" />
+                <img src={images.logo1} className="size-16" />
                 <p className="text-xs my-auto">BizConnect Corpotion @ 2024</p>
             </div>
         </section>

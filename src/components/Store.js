@@ -26,9 +26,7 @@ export const useUserStorage = create(
 
             setTimeout(async () => {
                 try {
-                    const res = await axios.post(apiPostNewUser, postData, {
-                        signal
-                    });
+                    const res = await axios.post(apiPostNewUser, postData);
                     if (res.data.httpStatusCode === 201) {
                         set(() => ({
                             userData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
@@ -65,9 +63,7 @@ export const useUserStoreLogIn = create(devtools(
 
             setTimeout(async () => {
                 try {
-                    const res = await axios.post(apiPostUserValidate, postData, {
-                        signal
-                    });
+                    const res = await axios.post(apiPostUserValidate, postData);
                     set(() => ({ userData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null }))
                     sessionStorage.setItem('userData', JSON.stringify(res.data));
 
@@ -106,9 +102,7 @@ export const useCreatePost = create(devtools(
         apiCall: async (postData) => {
             set({ isLoading: true });
             try {
-                const res = await axios.post(apiPostNewPost, postData, {
-                    signal
-                });
+                const res = await axios.post(apiPostNewPost, postData);
                 if (res.data.httpStatusCode === 201) {
                     set(() => ({
                         postsData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null

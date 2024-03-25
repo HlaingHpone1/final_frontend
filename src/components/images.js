@@ -9,6 +9,7 @@ import user from "../assets/myicon/user.png"
 import group from "../assets/myicon/group.png"
 import logo from "../assets/myicon/logo.png"
 import logo1 from "../assets/myicon/logo1.png"
+import logoWhite from "../assets/myicon/logoWhite.png"
 import downArrow from "../assets/myicon/downArrow.png"
 import banner from "../assets/myicon/banner.jpg"
 import dot from "../assets/myicon/dot.png"
@@ -22,12 +23,14 @@ import notice from "../assets/myicon/notice.png"
 import plus from "../assets/myicon/plus.png"
 import imageIcon from "../assets/myicon/image.png"
 import group1 from "../assets/myicon/group1.png"
+import backArrow from "../assets/myicon/backArrow.png"
 
 
 
 export const images = {
     logo,
     logo1,
+    logoWhite,
     home,
     network,
     message,
@@ -50,6 +53,7 @@ export const images = {
     plus,
     imageIcon,
     group1,
+    backArrow,
 
 };
 

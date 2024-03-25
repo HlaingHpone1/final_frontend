@@ -1,5 +1,5 @@
 import React from "react";
-import img from "../img";
+import { img } from "../img";
 import { images } from "../images";
 
 const ManageNw = () => {
