@@ -1,6 +1,7 @@
 import React from "react";
-import LogInForm from "../components/logInForm/LogInForm";
 import { Link } from "react-router-dom";
+
+import LogInForm from "../components/logInForm/LogInForm";
 
 const LogIn = () => {
     return (

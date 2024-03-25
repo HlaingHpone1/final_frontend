@@ -21,6 +21,7 @@ import comment from "../assets/myicon/comment.png"
 import notice from "../assets/myicon/notice.png"
 import plus from "../assets/myicon/plus.png"
 import imageIcon from "../assets/myicon/image.png"
+import group1 from "../assets/myicon/group1.png"
 
 
 
@@ -48,6 +49,7 @@ export const images = {
     notice,
     plus,
     imageIcon,
+    group1,
 
 };
 

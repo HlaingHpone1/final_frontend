@@ -1,8 +1,9 @@
 import React, { useState, useRef } from "react";
-import { images } from "../images";
 import Modal from "react-modal";
+
 import { useCreatePost, useLocalSessionStore } from "../Store";
-import Loading from "../loading/Loading";
+import { images } from "../images";
+import { Loading } from "../loading/Loading";
 
 Modal.setAppElement("#root");
 
@@ -60,9 +61,13 @@ const CreatePost = () => {
         e.preventDefault();
         const postData = {
             caption: inputValue,
-            uploadPhoto: fileName,
             userId: userData.data.id,
         };
+
+        if (fileName) {
+            postData.uploadPhoto = fileName;
+        }
+
         await apiCall(postData);
     };
 
@@ -73,11 +78,6 @@ const CreatePost = () => {
     return (
         <>
             <Loading isLoading={isLoading} />
-            {success && (
-                <p className="text-sky-500 text-lg font-bold text-center mb-5">
-                    Your Acc is created Successful! Plz Log in again
-                </p>
-            )}
             {error && errorMessage && (
                 <p className="text-red-500 text-xl font-semibold text-center">
                     {errorMessage}
@@ -86,7 +86,7 @@ const CreatePost = () => {
             <div className="bg-white rounded-2xl shadow-custom">
                 <div className="inner flex py-5 justify-between items-center space-x-5 px-4">
                     <img
-                        src={images.profile}
+                        src={userData.data.profileImg}
                         className="rounded-full size-14 aspect-square object-cover border-2 border-black"
                     />
                     <div className="w-full ">
@@ -105,7 +105,10 @@ const CreatePost = () => {
                             <div>
                                 <button
                                     className="absolute top-5 right-5 bg-slate-300 p-2 rounded-full"
-                                    onClick={() => setModalIsOpen(false)}
+                                    onClick={() => {
+                                        setModalIsOpen(false);
+                                        setInputValue("");
+                                    }}
                                 >
                                     <img
                                         className="block size-6"
@@ -148,7 +151,6 @@ const CreatePost = () => {
                                             ref={fileInputRef}
                                             onChange={handleFileChange}
                                             style={{ display: "none" }}
-                                            required
                                         />
 
                                         {preview && (

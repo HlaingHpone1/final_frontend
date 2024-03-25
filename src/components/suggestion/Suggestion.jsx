@@ -1,9 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { images } from "../images";
 import CompanyPage from "../companyPage/CompanyPage";
-import { companies } from "../demo";
+
+import { Link } from "react-router-dom";
+import { useGetAllUsers } from "../Store";
+import { PostLoading } from "../loading/Loading";
 
 const Suggestion = () => {
+    const {
+        isLoading,
+        error,
+        errorMessage,
+        errorCode,
+        success,
+        allUsersData,
+        apiCall,
+    } = useGetAllUsers();
+
+    const [data, setData] = useState([]);
+    const [page, setPage] = useState(0);
+
+    useEffect(() => {
+        const controller = new AbortController();
+
+        const fetchUsers = async () => {
+            const result = await apiCall(page, controller.signal);
+            setData(result.content);
+        };
+
+        fetchUsers();
+
+        return () => controller.abort();
+    }, []);
+
     return (
         <div className="mb-5 bg-white shadow-custom rounded-2xl">
             <div className="inner-card px-3 py-4">
@@ -16,14 +45,18 @@ const Suggestion = () => {
                     />
                 </div>
                 <div className="suggestion">
-                    {companies.map((item, index) => (
-                        <CompanyPage key={index} data={item} />
-                    ))}
+                    {isLoading && <PostLoading isLoading={isLoading} />}
+                    {data &&
+                        data
+                            .slice(0, 4)
+                            .map((item, index) => (
+                                <CompanyPage key={index} data={item} />
+                            ))}
                 </div>
                 <div className="view-all">
-                    <button className="text-sm font-semibold">
+                    <Link to="/network" className="text-sm font-semibold">
                         View All Recommendation
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>

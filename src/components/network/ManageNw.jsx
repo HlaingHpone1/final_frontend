@@ -1,5 +1,6 @@
 import React from "react";
 import img from "../img";
+import { images } from "../images";
 
 const ManageNw = () => {
     return (
@@ -11,35 +12,31 @@ const ManageNw = () => {
             <div className=" space-y-3 text-lg">
                 <div className="flex">
                     <img
-                        className="block size-9 object-cover aspect-square px-1 pr-2"
-                        src={img.twopeople}
+                        className="block size-7 object-cover aspect-square me-1"
+                        src={images.group1}
                     />
-                    <a href="">Connection</a>
+                    <button>Connection</button>
                 </div>
                 <div className="flex">
                     <img
-                        className="block size-9 object-cover aspect-square px-1 pr-2"
-                        src={img.userBlack}
+                        className="block size-7 object-cover aspect-square me-1"
+                        src={images.user}
                     />
-                    <a href="">Followers & followings</a>
+                    <button>Followers & Followings</button>
                 </div>
                 <div className="flex">
                     <img
-                        className="block size-9 object-cover aspect-square px-1 pr-2"
-                        src={img.groupblack}
+                        className="block size-7 object-cover aspect-square me-1"
+                        src={images.group}
                     />
-                    <a href="" className="my-auto">
-                        Groups
-                    </a>
+                    <button>Groups</button>
                 </div>
                 <div className="flex">
                     <img
-                        className="block size-9 object-cover aspect-square px-1 pr-2"
+                        className="block size-7 object-cover aspect-square me-1"
                         src={img.page}
                     />
-                    <a href="" className="my-auto">
-                        Pages
-                    </a>
+                    <button>Pages</button>
                 </div>
             </div>
         </div>

@@ -1,10 +1,14 @@
 import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+
 import ContactUs from "../../pages/ContactUs";
 import LogIn from "../../pages/LogIn";
 import Register from "../../pages/Register";
 import Home from "../../pages/Home";
-import { Routes, Route, Navigate } from "react-router-dom";
 import Network from "../../pages/Network";
+import Profile from "../../pages/Profile";
+import Message from "../../pages/Message";
+import Settings from "../../pages/Settings";
 
 const Router = () => {
     const data = sessionStorage.getItem("userData");
@@ -28,8 +32,9 @@ const Router = () => {
                         <Route path="/" element={<Home />}></Route>
                         <Route path="/contact" element={<ContactUs />}></Route>
                         <Route path="/network" element={<Network />}></Route>
-                        <Route path="/profile" element={<Network />}></Route>
-                        <Route path="/settings" element={<Network />}></Route>
+                        <Route path="/profile" element={<Profile />}></Route>
+                        <Route path="/message" element={<Message />}></Route>
+                        <Route path="/settings" element={<Settings />}></Route>
                     </>
                 )}
             </Routes>

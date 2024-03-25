@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { images } from "../images";
 import moment from "moment";
+
+import { images } from "../images";
 
 const Post = ({ data }) => {
     const [showFullDes, setShowFullDes] = useState(false);
@@ -24,7 +25,7 @@ const Post = ({ data }) => {
                         <div>
                             <img
                                 src={data.profileImg}
-                                className="rounded-full size-14 aspect-square object-cover border-2 border-black"
+                                className="rounded-full size-12 aspect-square object-cover border-2 border-black"
                             />
                         </div>
                         <div>
@@ -41,10 +42,10 @@ const Post = ({ data }) => {
                     </div>
                     <div>
                         <button>
-                            <img src={images.dot} className="size-6 mr-2" />
+                            <img src={images.dot} className="size-5 mr-2" />
                         </button>
                         <button>
-                            <img src={images.cross} className="size-7" />
+                            <img src={images.cross} className="size-5" />
                         </button>
                     </div>
                 </div>
@@ -64,11 +65,13 @@ const Post = ({ data }) => {
 
                 {/* 3rd row */}
                 <div>
-                    <img
-                        className="block object-cover w-full aspect-auto"
-                        src={data.uploadPhoto}
-                        alt="this is post images"
-                    />
+                    {data.uploadPhoto && (
+                        <img
+                            className="block object-cover w-full aspect-auto"
+                            src={data.uploadPhoto}
+                            alt="this is post images"
+                        />
+                    )}
                 </div>
 
                 {/* 4th row */}

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+
 import { FollowButton, FollowingButton } from "../button/Button";
+
 const CompanyPage = ({ data }) => {
     const [follow, setFollow] = useState(false);
     const followHandler = () => {
@@ -10,12 +12,12 @@ const CompanyPage = ({ data }) => {
             <div className="img ">
                 <img
                     className="size-12 rounded-full"
-                    src={data.logo}
+                    src={data.profileImg}
                     alt="This is Logo"
                 />
             </div>
             <div className="text-bloc space-y-1">
-                <div className="name">{data.name}</div>
+                <div className="name">{data.userName}</div>
                 {/* <div className="flex justify-center items-center space-x-2">
                     <div className="type">{data.type}</div>
                     <div className="company-category">{data.category}</div>

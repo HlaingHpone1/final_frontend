@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { React, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import axios from "axios";
-import { useUserStorage } from "../Store";
 import { useNavigate } from "react-router-dom";
-import Loading from "../loading/Loading";
+
+import { useUserStorage } from "../Store";
+import { Loading } from "../loading/Loading";
 
 const RegisterForm = () => {
     const navigate = useNavigate();
-
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-    const expirationTime = 10 * 1000;
 
     const [data, setData] = useState({
         firstName: "",
