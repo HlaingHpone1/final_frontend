@@ -1,7 +1,8 @@
-import React, { useRef, useState, useEffect } from "react";
+import { React, useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { images } from "../images";
+
 import { useLocalSessionStore } from "../Store";
+import { images } from "../images";
 
 // Check Active Link
 
@@ -156,7 +157,7 @@ const NavBar = () => {
                                         </li>
                                         <li>
                                             <MyLink
-                                                to="/d"
+                                                to="/message"
                                                 text={images.message}
                                             />
                                         </li>
@@ -181,7 +182,7 @@ const NavBar = () => {
                                         }
                                     />
                                     {dropdownOpen && (
-                                        <div className="dropdown-list absolute right-0 w-28 text-center bg-white shadow-md mt-2 rounded-md py-2">
+                                        <div className="dropdown-list absolute right-0 w-28 text-center bg-white shadow-md mt-2 rounded-md py-2 z-50">
                                             {/* Dropdown items */}
                                             <Link
                                                 to="/profile"

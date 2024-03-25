@@ -1,8 +1,9 @@
 import React from "react";
 import { images } from "../images.js";
-import { useLocalSessionStore } from "../Store";
+import { Link } from "react-router-dom";
+import { useLocalSessionStore } from "../Store.js";
 
-const Profile = () => {
+const UserProfile = () => {
     const { userData } = useLocalSessionStore();
 
     return (
@@ -31,20 +32,24 @@ const Profile = () => {
                         </p>
                     </div>
                     {/* Connection */}
-                    <div className="border-y border-[#858484] px-3">
-                        <div className="inner flex justify-between py-3">
-                            <div className="">
-                                <p className="text-xs text-slate-500">
-                                    Connections
-                                </p>
-                                <p className="text-sm">Grow Your Connections</p>
+                    <Link to="/network" className="block w-full">
+                        <div className="border-y border-[#858484] px-3">
+                            <div className="inner flex justify-between py-3">
+                                <div className="">
+                                    <p className="text-xs text-start text-slate-500">
+                                        Connections
+                                    </p>
+                                    <p className="text-sm">
+                                        Grow Your Connections
+                                    </p>
+                                </div>
+                                <img
+                                    src={images.network1}
+                                    className="size-5 mt-1"
+                                />
                             </div>
-                            <img
-                                src={images.network1}
-                                className="size-5 mt-1"
-                            />
                         </div>
-                    </div>
+                    </Link>
 
                     {/* follower&following */}
                     <div className="px-3">
@@ -73,4 +78,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default UserProfile;

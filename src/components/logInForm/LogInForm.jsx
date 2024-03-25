@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { React, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useUserStoreLogIn, useUserStorage } from "../Store";
 import { useNavigate } from "react-router-dom";
-import Loading from "../loading/Loading";
+
+import { useUserStoreLogIn, useUserStorage } from "../Store";
+import { Loading } from "../loading/Loading";
 
 const LogInForm = () => {
     const navigate = useNavigate();
