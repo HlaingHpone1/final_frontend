@@ -12,10 +12,16 @@ const LogIn = () => {
                         Log in
                     </div>
                     <LogInForm />
-                    <div className="mt-3">
+                    <div className="mt-3 flex justify-between">
                         <Link className="text-lg font-semibold" to="/register">
                             Create Acc ?
                         </Link>
+                        <div className=" text-right">
+                            <Link className=" font-medium" to="/reset">Forgot Password?</Link>
+                            <div>
+                                <Link className="font-medium" to="/reset">Reset password with OTP</Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
