@@ -233,3 +233,42 @@ export const useGetUser = create(devtools(
         },
     })
 ));
+
+// API_GET_POST_BY_USER
+export const useGetPostByUser = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        totalPages: 0,
+        postsData: null,
+        apiCall: async (userId, page, signal) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.get(`${apiGetPost}?id=${userId}&page=${page}`, {
+                    signal
+                });
+                set(() => ({
+                    postsData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                }))
+
+                console.log('====================================');
+                console.log(`${apiGetPost}?id=${userId}&page=${page}`);
+                console.log('====================================');
+
+                return res.data;
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+));

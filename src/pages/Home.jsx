@@ -15,7 +15,6 @@ const Home = () => {
     const [data, setData] = useState([]);
     const [page, setPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
-    const [loading, setLoading] = useState(true);
     const [postLoad, setPostLoad] = useState(true);
 
     const { error, errorMessage, errorCode, postsAllData, success, apiCall } =

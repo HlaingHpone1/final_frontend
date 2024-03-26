@@ -1,11 +1,11 @@
 import React from "react";
 
-const ProfileEducationContent = () => {
+const ProfileSkillContent = () => {
     return (
         <div className="flex space-x-4 border-b border-black py-5">
             <img
-                className="block size-12 p-1 bg-slate-300 object-cover rounded-xl aspect-square"
-                src="https://cdn-icons-png.freepik.com/512/6570/6570884.png"
+                className="block size-12 bg-slate-300 object-cover rounded-xl aspect-square"
+                src="https://p7.hiclipart.com/preview/339/1014/503/computer-icons-knowledge-skill-recruitment-mind.jpg"
                 alt="this is icon"
             />
             <div className="content ">
@@ -26,4 +26,4 @@ const ProfileEducationContent = () => {
     );
 };
 
-export default ProfileEducationContent;
+export default ProfileSkillContent;

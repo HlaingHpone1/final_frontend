@@ -16,7 +16,7 @@ const ProfileEducation = () => {
                             <ProfileEducationContent />
                         </div>
                     </div>
-                    <button className="block w-full text-xl py-4 bg-white hover:bg-slate-400 font-semibold text-center">
+                    <button className="block w-full text-xl py-4 bg-white transition-colors duration-200 ease-linear  hover:bg-slate-400 font-semibold text-center">
                         See All Education
                     </button>
                 </div>

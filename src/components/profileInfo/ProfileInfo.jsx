@@ -1,11 +1,12 @@
-import { React, useState, useEffect } from "react";
+import { React } from "react";
+import { useParams } from "react-router-dom";
 
 import { MessageButton, ProfileFollowButton } from "../button/Button";
 import { useLocalSessionStore } from "../Store";
 
 const ProfileInfo = ({ data }) => {
     const { userData } = useLocalSessionStore();
-    console.log(userData.data.id);
+    const { id } = useParams();
 
     return (
         <section className="py-2">
@@ -51,7 +52,7 @@ const ProfileInfo = ({ data }) => {
                                 </p>
                             </div>
                             <div className="button-gp mt-5">
-                                {data.id !== userData.data.id ? (
+                                {id !== userData.data.id ? (
                                     <div className="flex items-center space-x-4">
                                         <ProfileFollowButton />
                                         <MessageButton />

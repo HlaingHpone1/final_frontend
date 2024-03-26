@@ -4,8 +4,8 @@ const ProfileExperienceContent = () => {
     return (
         <div className="flex space-x-4 border-b border-black py-5">
             <img
-                className="block size-12 bg-slate-300 object-cover rounded-xl aspect-square"
-                src="https://cdn-icons-png.freepik.com/512/6570/6570884.png"
+                className="block size-12 p-2 bg-slate-300 object-cover rounded-xl aspect-square"
+                src="https://icons.veryicon.com/png/o/miscellaneous/zr_icon/work-experience-2.png"
                 alt="this is icon"
             />
             <div className="content ">
