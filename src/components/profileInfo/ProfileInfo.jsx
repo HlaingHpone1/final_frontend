@@ -1,0 +1,77 @@
+import { React, useState, useEffect } from "react";
+
+import { MessageButton, ProfileFollowButton } from "../button/Button";
+import { useLocalSessionStore } from "../Store";
+
+const ProfileInfo = ({ data }) => {
+    const { userData } = useLocalSessionStore();
+    console.log(userData.data.id);
+
+    return (
+        <section className="py-2">
+            <div className="inner max-w-1240px mx-auto px-10 xl:px-0">
+                <div className="bg-white shadow-custom rounded-lg overflow-hidden ">
+                    <div className="banner-img">
+                        <img
+                            className="block w-full h-52 bg-slate-500"
+                            src={data.bannerImg}
+                            alt="This is Banner Img"
+                        />
+                    </div>
+                    <div className="user-info px-9 pb-10 -mt-24 grid grid-cols-4 items-center">
+                        <div className="info col-span-4 md:col-span-3">
+                            <div className="profile-img">
+                                <img
+                                    className="rounded-full bg-slate-500 aspect-square object-cover mx-auto md:m-0 size-36 xs:size-52"
+                                    src={data.profileImg}
+                                    alt="This is Profile Img"
+                                />
+                            </div>
+                            <p className="text-2xl text-center md:text-start font-Roboto-Slab font-bold text-primary capitalize mb-3">
+                                {data.userName}
+                            </p>
+                            <p className="text-base mb-1 text-center md:text-start">
+                                {data.bio}
+                            </p>
+                            <p className="text-sm text-slate-600 text-center md:text-start">
+                                {data.address}
+                            </p>
+                            <div className="follower-following flex space-x-5 justify-center md:justify-start">
+                                <p className="text-sm text-slate-600">
+                                    {data && data.followers
+                                        ? data.followers.toLocaleString()
+                                        : "0"}{" "}
+                                    Followers
+                                </p>
+                                <p className="text-sm text-slate-600">
+                                    {data && data.followings
+                                        ? data.followings.toLocaleString()
+                                        : "0"}{" "}
+                                    Following
+                                </p>
+                            </div>
+                            <div className="button-gp mt-5">
+                                {data.id !== userData.data.id ? (
+                                    <div className="flex items-center space-x-4">
+                                        <ProfileFollowButton />
+                                        <MessageButton />
+                                    </div>
+                                ) : (
+                                    ""
+                                )}
+                            </div>
+                        </div>
+                        <div className="education hidden md:block col-span-1">
+                            <p className=" text-xl lg:text-2xl font-bold font-Roboto-Slab">
+                                Strategy First University
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default ProfileInfo;
+<div className="inner max-w-1240px"></div>;

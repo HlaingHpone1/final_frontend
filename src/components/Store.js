@@ -6,6 +6,7 @@ import axios from "axios";
 // const signal = abortController.signal;
 
 const apiPostNewUser = import.meta.env.VITE_API_USER_URL;
+const apiGetUser = import.meta.env.VITE_API_USER_URL;
 const apiPostUserValidate = `${import.meta.env.VITE_API_USER_URL}/validate`;
 const apiGetAllUsers = `${import.meta.env.VITE_API_USER_URL}/get-all-users`;
 
@@ -198,3 +199,37 @@ export const useGetAllUsers = create(devtools(
         },
     })
 ))
+
+// API_GET_USER
+export const useGetUser = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        userData: null,
+        apiCall: async (userId, signal) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.get(`${apiGetUser}?id=${userId}`, {
+                    signal
+                });
+                set(() => ({
+                    userData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                }))
+
+                return res.data;
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+));
