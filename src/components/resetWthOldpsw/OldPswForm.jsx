@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from "axios";
 
 const OldPswForm = () => {
+    const {id} = useParams();
+    const navigate = useNavigate();
+
     const [data, setData] = useState({
         oldPassword: "",
         newPassword: "",
@@ -13,6 +18,8 @@ const OldPswForm = () => {
         newPassword: "",
         confirmNewPassword: "",
     });
+
+    const [errors, setErrors] = useState({});
 
     const inputHandler = (e) => {
         const { name, value } = e.target;
@@ -28,15 +35,56 @@ const OldPswForm = () => {
             [field]: !showPassword[field],
         });
     };
+
+    const submitHandler =async (e) =>{
+        e.preventDefault(e);
+
+        const newErrors= {};
+
+        for (const fieldName in data) {
+            if (data[fieldName] == "") {
+                newErrors[fieldName] = `${fieldName} is required`;
+            }
+        }
+
+
+
+        setErrors(newErrors);
+
+        if (Object.keys(newErrors).length === 0) {
+            try { 
+
+                const response = await axios.put(`http://localhost:8080/users/${id}/reset-password`, {
+                    oldPassword: data.oldPassword,
+                    newPassword: data.newPassword
+                })
+                
+                console.log(response);
+                navigate('/')
+
+            } catch (error) {
+                console.error('Error resetting password:', error);
+                
+                alert('Your old password does not match.Try again! ');
+            }
+            
+        }
+
+        
+    }
+
+    // console.log(errors);
+
     return (
         <section>
             <form
                 className=" min-w-[350px]"
                 action=""
-            // onSubmit={submitHandler}
+             onSubmit={submitHandler}
             >
 
                 {/* oldPassword */}
+                
                 <div className="input-box mb-3">
                     <div
                         className={`flex items-center border-b-2 transition-colors duration-200 ease-linear  focus:border-slate-700`}
@@ -61,6 +109,11 @@ const OldPswForm = () => {
                             )}
                         </button>
                     </div>
+                    {
+                    errors.oldPassword && (
+                        <p>{errors.oldPassword}</p>
+                    )
+                }
                 </div>
 
 
