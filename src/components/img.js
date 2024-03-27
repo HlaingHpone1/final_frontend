@@ -6,6 +6,11 @@ import cancelBlack from "../assets/img/cancelBlack.png";
 import ads from "../assets/img/ads.png";
 import userBg from "../assets/img/userbg.jpg";
 import userProfile from "../assets/img/userProfile.jpg";
+import dashboard from "../assets/img/dashboard.png";
+import adminProfile from "../assets/img/admin-account.png";
+import logout from "../assets/img/log-out.png";
+import group from "../assets/img/group.png";
+import sidenav from "../assets/img/sidenav.png";
 
 export const img = {
     twopeople,
@@ -16,6 +21,10 @@ export const img = {
     ads,
     userBg,
     userProfile,
-
+    dashboard,
+    adminProfile,
+    logout,
+    group,
+    sidenav,
 };
 
