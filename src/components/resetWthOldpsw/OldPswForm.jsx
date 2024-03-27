@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
+import { useUserStorage } from '../Store';
 
 const OldPswForm = () => {
+    const navigate = useNavigate()
     const [data, setData] = useState({
         oldPassword: "",
         newPassword: "",
@@ -13,6 +16,14 @@ const OldPswForm = () => {
         newPassword: "",
         confirmNewPassword: "",
     });
+
+    const {
+        isLoading,
+        error,
+        errorMessage,
+    } = useUserStorage();
+
+    const [errors, setErrors] = useState({});
 
     const inputHandler = (e) => {
         const { name, value } = e.target;
@@ -28,13 +39,39 @@ const OldPswForm = () => {
             [field]: !showPassword[field],
         });
     };
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+
+        const newErrors = {};
+
+        for (const fieldName in data) {
+            if (data[fieldName] == "") {
+                newErrors[fieldName] = `${fieldName} is required`;
+            }
+        }
+
+        if (data.newPassword != data.confirmNewPassword) {
+            newErrors.notSamePassword = "Password aren't same";
+        }
+
+        setErrors(newErrors);
+    };
+
+    
     return (
         <section>
+            
             <form
                 className=" min-w-[350px]"
                 action=""
-            // onSubmit={submitHandler}
+                onSubmit={submitHandler}
             >
+                {errors.notSamePassword && (
+                    <p className="text-red-700 rounded-lg mt-2">
+                        {errors.notSamePassword}
+                    </p>
+                )}
 
                 {/* oldPassword */}
                 <div className="input-box mb-3">
@@ -43,7 +80,7 @@ const OldPswForm = () => {
                     >
                         <input
                             className={`focus:outline-none bg-transparent  w-full block text-lg px-2 py-2.5 `}
-                            type={showPassword.password ? "text" : "password"}
+                            type={showPassword.oldPassword ? "text" : "password"}
                             name="oldPassword"
                             value={data.password}
                             onChange={inputHandler}
@@ -52,15 +89,20 @@ const OldPswForm = () => {
                         />
                         <button
                             type="button"
-                            onClick={() => showPasswordVisibility("password")}
+                            onClick={() => showPasswordVisibility("oldPassword")}
                         >
-                            {showPassword.password ? (
+                            {showPassword.oldPassword ? (
                                 <FaEye className="opacity-75" size={20} />
                             ) : (
                                 <FaEyeSlash className="opacity-25" size={20} />
                             )}
                         </button>
                     </div>
+                    {errors.oldPassword && (
+                        <p className="text-red-700 rounded-lg mt-2">
+                            {errors.oldPassword}
+                        </p>
+                    )}
                 </div>
 
 
@@ -71,7 +113,7 @@ const OldPswForm = () => {
                     >
                         <input
                             className={`focus:outline-none bg-transparent  w-full block text-lg px-2 py-2.5 `}
-                            type={showPassword.password ? "text" : "password"}
+                            type={showPassword.newPassword ? "text" : "password"}
                             name="newPassword"
                             value={data.newPassword}
                             onChange={inputHandler}
@@ -80,15 +122,20 @@ const OldPswForm = () => {
                         />
                         <button
                             type="button"
-                            onClick={() => showPasswordVisibility("password")}
+                            onClick={() => showPasswordVisibility("newPassword")}
                         >
-                            {showPassword.password ? (
+                            {showPassword.newPassword ? (
                                 <FaEye className="opacity-75" size={20} />
                             ) : (
                                 <FaEyeSlash className="opacity-25" size={20} />
                             )}
                         </button>
                     </div>
+                    {errors.newPassword && (
+                        <p className="text-red-700 rounded-lg mt-2">
+                            {errors.newPassword}
+                        </p>
+                    )}
                 </div>
 
 
@@ -99,7 +146,7 @@ const OldPswForm = () => {
                     >
                         <input
                             className={`focus:outline-none bg-transparent  w-full block text-lg px-2 py-2.5 `}
-                            type={showPassword.password ? "text" : "password"}
+                            type={showPassword.confirmNewPassword ? "text" : "password"}
                             name="confirmNewPassword"
                             value={data.confirmNewPassword}
                             onChange={inputHandler}
@@ -108,15 +155,20 @@ const OldPswForm = () => {
                         />
                         <button
                             type="button"
-                            onClick={() => showPasswordVisibility("password")}
+                            onClick={() => showPasswordVisibility("confirmNewPassword")}
                         >
-                            {showPassword.password ? (
+                            {showPassword.confirmNewPassword ? (
                                 <FaEye className="opacity-75" size={20} />
                             ) : (
                                 <FaEyeSlash className="opacity-25" size={20} />
                             )}
                         </button>
                     </div>
+                    {errors.confirmNewPassword && (
+                        <p className="text-red-700 rounded-lg mt-2">
+                            {errors.confirmNewPassword}
+                        </p>
+                    )}
                 </div>
 
                 <button

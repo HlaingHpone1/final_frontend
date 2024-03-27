@@ -4,13 +4,16 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 const PswChgForm = () => {
     const [data, setData] = useState({
         newPassword: "",
-        confirmNewPassword: "",
+        confirmPassword: "",
     });
 
     const [showPassword, setShowPassword] = useState({
         newPassword: "",
-        confirmNewPassword: "",
+        confirmPassword: "",
     });
+
+    const [errors, setErrors] = useState({});
+
 
     const inputHandler = (e) => {
         const { name, value } = e.target;
@@ -26,20 +29,43 @@ const PswChgForm = () => {
             [field]: !showPassword[field],
         });
     };
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+
+        const newErrors = {};
+
+        for (const fieldName in data) {
+            if (data[fieldName] == "") {
+                newErrors[fieldName] = `${fieldName} is required`;
+            }
+        }
+
+        if (data.newPassword != data.confirmPassword) {
+            newErrors.notSamePassword = "Password aren't same";
+        }
+
+        setErrors(newErrors);
+    };
   return (
     <section>
             <form
                 className=" min-w-[350px]"
                 action=""
-            // onSubmit={submitHandler}
+                onSubmit={submitHandler}
             >
+                {errors.notSamePassword && (
+                    <p className="text-red-700 rounded-lg mt-2">
+                        {errors.notSamePassword}
+                    </p>
+                )}
                 <div className="input-box mb-3">
                     <div
                         className={`flex items-center border-b-2 transition-colors duration-200 ease-linear  focus:border-slate-700`}
                     >
                         <input
                             className={`focus:outline-none bg-transparent  w-full block text-lg px-2 py-2.5 `}
-                            type={showPassword.password ? "text" : "password"}
+                            type={showPassword.newPassword ? "text" : "password"}
                             name="newPassword"
                             value={data.newPassword}
                             onChange={inputHandler}
@@ -48,15 +74,20 @@ const PswChgForm = () => {
                         />
                         <button
                             type="button"
-                            onClick={() => showPasswordVisibility("password")}
+                            onClick={() => showPasswordVisibility("newPassword")}
                         >
-                            {showPassword.password ? (
+                            {showPassword.newPassword ? (
                                 <FaEye className="opacity-75" size={20} />
                             ) : (
                                 <FaEyeSlash className="opacity-25" size={20} />
                             )}
                         </button>
                     </div>
+                    {errors.newPassword && (
+                        <p className="text-red-700 rounded-lg mt-2">
+                            {errors.newPassword}
+                        </p>
+                    )}
                 </div>
 
 
@@ -67,24 +98,29 @@ const PswChgForm = () => {
                     >
                         <input
                             className={`focus:outline-none bg-transparent  w-full block text-lg px-2 py-2.5 `}
-                            type={showPassword.password ? "text" : "password"}
-                            name="confirmNewPassword"
-                            value={data.confirmNewPassword}
+                            type={showPassword.confirmPassword ? "text" : "password"}
+                            name="confirmPassword"
+                            value={data.confirmPassword}
                             onChange={inputHandler}
                             placeholder="Confirm Password"
                             autoComplete="off"
                         />
                         <button
                             type="button"
-                            onClick={() => showPasswordVisibility("password")}
+                            onClick={() => showPasswordVisibility("confirmPassword")}
                         >
-                            {showPassword.password ? (
+                            {showPassword.confirmPassword ? (
                                 <FaEye className="opacity-75" size={20} />
                             ) : (
                                 <FaEyeSlash className="opacity-25" size={20} />
                             )}
                         </button>
                     </div>
+                    {errors.confirmPassword && (
+                        <p className="text-red-700 rounded-lg mt-2">
+                            {errors.confirmPassword}
+                        </p>
+                    )}
                 </div>
 
                 <button

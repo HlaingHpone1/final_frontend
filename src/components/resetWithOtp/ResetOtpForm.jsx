@@ -2,6 +2,32 @@ import React, { useEffect, useState } from 'react'
 
 const ResetOtpForm = () => {
   const [remainingTime, setRemainingTime] = useState(60);
+  const [errors, setErrors] = useState({});
+  
+  const [data, setData] = useState({
+    Otp: "",
+  });
+
+  const inputHandler = (e) => {
+    const { name } = e.target;
+    setData({
+        ...name,
+    });
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    const newErrors = {};
+
+    for (const Otp in data) {
+      if (data[Otp] == "") {
+        newErrors[Otp] = `${Otp} is required`;
+      }
+    }
+
+    setErrors(newErrors);
+  }
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -21,15 +47,23 @@ const ResetOtpForm = () => {
     <section>
       <form className="  min-w-[350px]"
         action=''
-      // onSubmit={submitHandler}
+        onSubmit={submitHandler}
       >
 
         <div className="mb-5">
           <input
             type="text"
+            name='Otp'
+            value={data.Otp}
             className="bg-transparent border-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 rounded-sm my-3"
-            // onChange={inputHandler}
-            required />
+            onChange={inputHandler}
+            
+          />
+          {errors.Otp && (
+            <p className="text-red-700 rounded-lg mt-2">
+              {errors.Otp}
+            </p>
+          )}
           <div className='flex justify-between'>
             <button>Resend OTP</button>
             <p>{remainingTime} sec</p>
