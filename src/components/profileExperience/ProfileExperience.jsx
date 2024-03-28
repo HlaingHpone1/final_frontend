@@ -1,10 +1,13 @@
-import React from "react";
+import { React, useState } from "react";
 import { Link } from "react-router-dom";
 
 import ProfileExperienceContent from "../profileExperienceContent/ProfileExperienceContent";
+import CreateExperienceModel from "../createExperienceModel/CreateExperienceModel";
 import { images } from "../images";
 
 const ProfileExperience = ({ data, isOwnProfile }) => {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
     return (
         <section className="py-2">
             <div className="inner max-w-1240px mx-auto px-10 xl:p-0">
@@ -19,22 +22,29 @@ const ProfileExperience = ({ data, isOwnProfile }) => {
                                     <button>
                                         <img
                                             src={images.plus}
-                                            alt=""
+                                            alt="This is add icon"
                                             className="xs2:size-5 xs:size-6 md:size-7"
+                                            onClick={() => setModalIsOpen(true)}
                                         />
                                     </button>
+                                    <CreateExperienceModel
+                                        modalIsOpen={modalIsOpen}
+                                        setModalIsOpen={setModalIsOpen}
+                                    />
                                 </div>
                             )}
                         </div>
                         <div className="">
                             {data.length > 0 ? (
-                                data.map((item, index) => (
-                                    <ProfileExperienceContent
-                                        key={index}
-                                        data={item}
-                                        noBorder={index === data.length - 1}
-                                    />
-                                ))
+                                data
+                                    .slice(0, 2)
+                                    .map((item, index) => (
+                                        <ProfileExperienceContent
+                                            key={index}
+                                            data={item}
+                                            noBorder={index === data.length - 1}
+                                        />
+                                    ))
                             ) : (
                                 <div className="text-lg py-4">
                                     No Experience available yet

@@ -17,6 +17,7 @@ const apiGetEducationByUser = `${import.meta.env.VITE_API_EDUCATION_URL}/all`;
 const apiPostEducation = `${import.meta.env.VITE_API_EDUCATION_URL}`;
 
 const apiGetWorkExpByUser = `${import.meta.env.VITE_API_WORK_EXP_URL}/all`;
+const apiPostWorkExp = `${import.meta.env.VITE_API_WORK_EXP_URL}`;
 
 const apiGetSkillByUser = `${import.meta.env.VITE_API_SKILL_URL}/all`;
 
@@ -402,6 +403,40 @@ export const useCreateEducation = create(devtools(
                 if (res.data.httpStatusCode === 201) {
                     set(() => ({
                         educationData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+                    return res.data;
+                }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+))
+
+// API_CREATE_WORK_EXP
+export const useCreateWorkExp = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        workExpData: null,
+        apiCall: async (id, postData) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.post(`${apiPostWorkExp}/${id}`, postData);
+                if (res.data.httpStatusCode === 201) {
+                    set(() => ({
+                        workExpData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
                     }))
                     return res.data;
                 }

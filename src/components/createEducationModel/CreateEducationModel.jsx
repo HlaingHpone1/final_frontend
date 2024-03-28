@@ -20,7 +20,7 @@ const CreateEducationModel = ({ modalIsOpen, setModalIsOpen }) => {
         endDate: "",
     });
 
-    const postDate = {
+    const postData = {
         schoolName: education.universityName,
         degree: education.degree,
         fieldOfStudy: education.fieldOfStudy,
@@ -52,7 +52,7 @@ const CreateEducationModel = ({ modalIsOpen, setModalIsOpen }) => {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
-            await apiCall(id, postDate);
+            await apiCall(id, postData);
         }
     };
 
