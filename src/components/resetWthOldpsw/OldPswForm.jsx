@@ -110,7 +110,11 @@ const OldPswForm = () => {
                             )}
                         </button>
                     </div>
-                    {errors.oldPassword && <p>{errors.oldPassword}</p>}
+                    {errors.oldPassword && (
+                        <p className="text-red-700 rounded-lg mt-2">
+                            {errors.oldPassword}
+                        </p>
+                    )}
                 </div>
 
                 {/* newPassword */}

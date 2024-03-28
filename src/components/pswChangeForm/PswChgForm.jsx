@@ -29,8 +29,22 @@ const PswChgForm = () => {
         });
     };
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
+
+        const newErrors = {};
+
+        for (const fieldName in data) {
+            if (data[fieldName] == "") {
+                newErrors[fieldName] = `${fieldName} is required`;
+            }
+        }
+
+        if (data.newPassword != data.confirmPassword) {
+            newErrors.notSamePassword = "Password aren't same";
+        }
+
+        setErrors(newErrors);
     };
 
     return (
@@ -118,7 +132,7 @@ const PswChgForm = () => {
                     className="bg-slate-500 text-white px-5 py-2 rounded-md text-lg"
                     type="submit"
                 >
-                    Submit onSubmit={submitHandler}
+                    Submit
                 </button>
             </form>
         </section>
