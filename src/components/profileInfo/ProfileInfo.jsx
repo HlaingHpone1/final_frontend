@@ -4,10 +4,9 @@ import { useParams } from "react-router-dom";
 import { MessageButton, ProfileFollowButton } from "../button/Button";
 import { useLocalSessionStore } from "../Store";
 
-const ProfileInfo = ({ data }) => {
+const ProfileInfo = ({ data, edu, isOwnProfile }) => {
     const { userData } = useLocalSessionStore();
     const { id } = useParams();
-
     return (
         <section className="py-2">
             <div className="inner max-w-1240px mx-auto px-10 xl:px-0">
@@ -52,7 +51,7 @@ const ProfileInfo = ({ data }) => {
                                 </p>
                             </div>
                             <div className="button-gp mt-5">
-                                {id !== userData.data.id ? (
+                                {!isOwnProfile ? (
                                     <div className="flex items-center space-x-4">
                                         <ProfileFollowButton />
                                         <MessageButton />
@@ -62,9 +61,14 @@ const ProfileInfo = ({ data }) => {
                                 )}
                             </div>
                         </div>
-                        <div className="education hidden md:block col-span-1">
+                        <div className="education hidden md:flex space-x-2 col-span-1  items-center">
+                            <img
+                                className="block size-12 p-1 bg-slate-300 object-cover rounded-xl aspect-square"
+                                src="https://cdn-icons-png.freepik.com/512/6570/6570884.png"
+                                alt="this is icon"
+                            />
                             <p className=" text-xl lg:text-2xl font-bold font-Roboto-Slab">
-                                Strategy First University
+                                {edu ? edu.schoolName : ""}
                             </p>
                         </div>
                     </div>

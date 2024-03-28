@@ -1,8 +1,12 @@
 import React from "react";
+import moment from "moment-timezone";
 
-const ProfileEducationContent = () => {
+const ProfileEducationContent = ({ data, noBorder }) => {
     return (
-        <div className="flex space-x-4 border-b border-black py-5">
+        <div
+            className="flex space-x-4 border-b border-black py-5"
+            style={{ border: noBorder ? "none" : "" }}
+        >
             <img
                 className="block size-12 p-1 bg-slate-300 object-cover rounded-xl aspect-square"
                 src="https://cdn-icons-png.freepik.com/512/6570/6570884.png"
@@ -10,16 +14,24 @@ const ProfileEducationContent = () => {
             />
             <div className="content ">
                 <p className="title font-semibold font-Roboto-Slab text-lg">
-                    NCC Education
+                    {data.schoolName}
                 </p>
                 <div className="edu flex space-x-3 text-sm">
-                    <p className="degree">B.Sc BIT</p>
-                    <p className="field">CS</p>
+                    <p className="degree">{data.degree}</p>
+                    <p className="field">{data.fieldOfStudy}</p>
                 </div>
-                <div className="duration flex space-x-3 text-slate-500 text-sm">
-                    <p className="start">Dec 2020</p>
+                <div className="duration flex space-x-2 text-slate-500 text-sm">
+                    <p className="start">
+                        {moment(data.startDate)
+                            .tz("Asia/Yangon")
+                            .format("MMMM YYYY")}
+                    </p>
                     <p>-</p>
-                    <p className="end">Dec 2023</p>
+                    <p className="end">
+                        {moment(data.endDate)
+                            .tz("Asia/Yangon")
+                            .format("MMMM YYYY")}
+                    </p>
                 </div>
             </div>
         </div>

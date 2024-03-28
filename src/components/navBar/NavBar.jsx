@@ -82,7 +82,7 @@ const NavBar = () => {
     };
 
     return (
-        <header className="l-header bg-nav w-full py-3 px-5">
+        <header className="l-header bg-nav w-full py-3 px-10 xl:px-0">
             <div className="l-wrap-inner max-w-[1240px] mx-auto">
                 <nav className="l-header__list">
                     <div className="logo flex justify-between items-center">

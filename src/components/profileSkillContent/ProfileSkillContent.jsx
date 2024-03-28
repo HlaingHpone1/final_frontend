@@ -1,26 +1,20 @@
 import React from "react";
 
-const ProfileSkillContent = () => {
+const ProfileSkillContent = ({ data, noBorder }) => {
     return (
-        <div className="flex space-x-4 border-b border-black py-5">
+        <div
+            className="flex space-x-4 border-b border-black py-5"
+            style={{ border: noBorder ? "none" : "" }}
+        >
             <img
                 className="block size-12 bg-slate-300 object-cover rounded-xl aspect-square"
                 src="https://p7.hiclipart.com/preview/339/1014/503/computer-icons-knowledge-skill-recruitment-mind.jpg"
                 alt="this is icon"
             />
             <div className="content ">
-                <p className="title font-semibold font-Roboto-Slab text-lg">
-                    NCC Education
+                <p className="title font-semibold font-Roboto-Slab text-2xl capitalize">
+                    {data.skillName}
                 </p>
-                <div className="edu flex space-x-3 text-sm">
-                    <p className="degree">B.Sc BIT</p>
-                    <p className="field">CS</p>
-                </div>
-                <div className="duration flex space-x-3 text-slate-500 text-sm">
-                    <p className="start">Dec 2020</p>
-                    <p>-</p>
-                    <p className="end">Dec 2023</p>
-                </div>
             </div>
         </div>
     );

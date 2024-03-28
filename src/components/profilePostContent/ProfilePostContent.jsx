@@ -1,43 +1,63 @@
-import React from "react";
+import { React, useState } from "react";
+import moment from "moment";
 
 import { images } from "../images";
 
-const ProfilePostContent = () => {
+const ProfilePostContent = ({ data, noBorder }) => {
+    const [showFullDes, setShowFullDes] = useState(false);
+
+    const toggleDesc = () => {
+        setShowFullDes(!showFullDes);
+    };
+
+    const words = data.caption.split(" ");
+    const shortDesc =
+        words.slice(0, 40).join(" ") + (words.length > 40 ? "..." : "");
+    const fullDesc = data.caption;
     return (
-        <button>
-            <div className="pt-5">
-                <div className="info flex items-center space-x-4">
-                    <p className="text-sm text-slate-600">Hlaing Hpone</p>
-                    <p className="text-sm text-slate-600">1 hours</p>
-                </div>
-                <div className="post flex justify-center space-x-3">
+        <div className="pt-5 w-full block">
+            <div className="info flex space-x-4">
+                <p className="text-sm text-slate-600 capitalize">
+                    {data.accountName}
+                </p>
+                <p className="text-sm text-slate-600">
+                    {moment(data.uploadTime).fromNow()}
+                </p>
+            </div>
+            <div className="post flex space-x-3">
+                {data.uploadPhoto && (
                     <img
-                        className="block size-24 object-cover rounded-xl aspect-square"
-                        src={images.profile}
-                        alt="This is Post image"
+                        className="block object-cover w-full aspect-auto"
+                        src={data.uploadPhoto}
+                        alt="this is post images"
                     />
-                    <div className="content">
-                        <p className="text-justify ">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing
-                            elit. Fugiat corrupti cupiditate rem ab. Fuga
-                            distinctio blanditiis sapiente culpa soluta cumque,
-                            nulla atque sequi at adipisci eligendi nesciunt
-                            reprehenderit voluptatem sunt!
-                        </p>
-                    </div>
-                </div>
-                <div className="reaction border-b border-black py-3">
-                    <div className="like flex items-center space-x-1 ">
-                        <img
-                            className="size-4"
-                            src={images.likeFull}
-                            alt="this is like icon"
-                        />
-                        <p className="text-sm">125</p>
-                    </div>
+                )}
+                <div className="content">
+                    <p className="break-all text-justify text-lg">
+                        {showFullDes ? fullDesc : shortDesc}
+                        &nbsp; &nbsp;
+                        {!showFullDes && words.length > 40 && (
+                            <button className="" onClick={toggleDesc}>
+                                See more
+                            </button>
+                        )}
+                    </p>
                 </div>
             </div>
-        </button>
+            <div
+                className="reaction border-b border-black py-3"
+                style={{ border: noBorder ? "none" : "" }}
+            >
+                <div className="like flex items-center space-x-1 ">
+                    <img
+                        className="size-4"
+                        src={images.likeFull}
+                        alt="this is like icon"
+                    />
+                    <p className="text-sm">{data.like}</p>
+                </div>
+            </div>
+        </div>
     );
 };
 

@@ -1,60 +1,71 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 
 import ProfilePostContent from "../profilePostContent/ProfilePostContent";
-import { useGetUser } from "../Store";
+import CreatePostModal from "../../components/createPostModel/CreatePostModel";
 
-const ProfilePosts = ({ id }) => {
-    // const [data, setData] = useState([]);
-    // const [page, setPage] = useState(0);
-    // const [totalPages, setTotalPages] = useState(0);
-    // // const [postLoad, setPostLoad] = useState(true);
+const ProfilePosts = ({ data, isOwnProfile }) => {
+    const { id } = useParams();
 
-    // const { isLoading, error, errorMessage, errorCode, success, apiCall } =
-    //     useGetUser();
-
-    // useEffect(() => {
-    //     const controller = new AbortController();
-
-    //     const fetchPosts = async () => {
-    //         if (page <= totalPages) {
-    //             const result = await apiCall(id, page, controller.signal);
-    //             setData((prev) => [...prev, ...result.content]);
-    //             setTotalPages(result.totalPages);
-    //         } else {
-    //             console.log("No more data");
-    //         }
-
-    //         // setPostLoad(false);
-    //     };
-
-    //     fetchPosts();
-
-    //     return () => controller.abort();
-    // }, [page, apiCall]);
-
-    // console.log("====================================");
-    // console.log(data);
-    // console.log("====================================");
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     return (
-        <section className="py-2">
-            <div className="inner max-w-1240px mx-auto px-10 xl:p-0">
-                <div className="bg-white shadow-custom rounded-lg overflow-hidden pt-4 ">
-                    <div className="border-b border-black px-9">
-                        <div className="title text-xl font-semibold font-Roboto-Slab mb-3">
-                            Activity
+        <>
+            <section className="py-2">
+                <div className="inner max-w-1240px mx-auto px-10 xl:p-0">
+                    <div className="bg-white shadow-custom rounded-lg overflow-hidden pt-4 ">
+                        <div className="border-b border-black px-9">
+                            <div className="flex mb-5 items-center justify-between">
+                                <div className="title text-xl font-semibold font-Roboto-Slab ">
+                                    Activity
+                                </div>
+                                {isOwnProfile && (
+                                    <div className="create-post">
+                                        <button
+                                            className="bg-primary text-white px-5 py-2.5 rounded-xl"
+                                            onClick={() => setModalIsOpen(true)}
+                                        >
+                                            create post
+                                        </button>
+                                        <CreatePostModal
+                                            modalIsOpen={modalIsOpen}
+                                            setModalIsOpen={setModalIsOpen}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                            <div>
+                                {data.length > 0 ? (
+                                    data
+                                        .slice(0, 2)
+                                        .map((item, index) => (
+                                            <ProfilePostContent
+                                                key={index}
+                                                data={item}
+                                                noBorder={
+                                                    index === data.length - 1
+                                                }
+                                            />
+                                        ))
+                                ) : (
+                                    <p className="text-lg py-4">
+                                        No posts available yet.
+                                    </p>
+                                )}
+                                {/* <ProfilePostContent />
+                            <ProfilePostContent /> */}
+                            </div>
                         </div>
-                        <div className="">
-                            <ProfilePostContent />
-                            <ProfilePostContent />
-                        </div>
+                        <Link
+                            to={`posts`}
+                            className="block w-full text-xl py-4 bg-white transition-colors duration-200 ease-linear  hover:bg-slate-400 font-semibold text-center"
+                        >
+                            See All Activity
+                        </Link>
                     </div>
-                    <button className="block w-full text-xl py-4 bg-white transition-colors duration-200 ease-linear  hover:bg-slate-400 font-semibold text-center">
-                        See All Activity
-                    </button>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 };
 
