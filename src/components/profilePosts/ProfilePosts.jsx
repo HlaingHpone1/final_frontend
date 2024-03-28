@@ -52,8 +52,6 @@ const ProfilePosts = ({ data, isOwnProfile }) => {
                                         No posts available yet.
                                     </p>
                                 )}
-                                {/* <ProfilePostContent />
-                            <ProfilePostContent /> */}
                             </div>
                         </div>
                         <Link

@@ -33,51 +33,57 @@ const UserPosts = () => {
     }, []);
 
     return (
-        <section className="grid grid-cols-4 px-10 xl:px-0 pt-5 bg-background gap-5">
-            <div className="col-span-1">
-                <UserProfile show={false} />
-            </div>
-            <div className="col-span-3">
-                <div className="bg-white p-5 shadow-custom rounded-2xl overflow-hidden">
-                    <div className="flex items-center mb-5 space-x-3">
-                        <Link to={`/profile/${id}`}>
-                            <img
-                                src={images.backArrow}
-                                alt=""
-                                className="xs2:size-6 xs:size-7 md:size-8"
-                            />
-                        </Link>
-                        <div className="flex w-full items-center justify-between">
-                            <p className="title text-xl font-Roboto-Slab font-medium ">
-                                All Posts
-                            </p>
-                            {isOwnProfile && (
-                                <div className="create-post">
-                                    <button
-                                        className="bg-primary text-white px-5 py-2.5 rounded-xl"
-                                        onClick={() => setModalIsOpen(true)}
-                                    >
-                                        create post
-                                    </button>
-                                    <CreatePostModal
-                                        modalIsOpen={modalIsOpen}
-                                        setModalIsOpen={setModalIsOpen}
-                                    />
-                                </div>
-                            )}
-                        </div>
+        <section className=" bg-background ">
+            <div className="inner max-w-1240px mx-auto">
+                <div className="grid grid-cols-4 px-10 xl:px-0 pt-5  gap-5">
+                    <div className="col-span-1">
+                        <UserProfile show={false} />
                     </div>
-
-                    <div className="post">
-                        {postData.length > 0 ? (
-                            <div className="">
-                                {postData.map((item, index) => (
-                                    <Post key={index} data={item} />
-                                ))}
+                    <div className="col-span-3">
+                        <div className="bg-white p-5 shadow-custom rounded-2xl overflow-hidden">
+                            <div className="flex items-center mb-5 space-x-3">
+                                <Link to={`/profile/${id}`}>
+                                    <img
+                                        src={images.backArrow}
+                                        alt=""
+                                        className="xs2:size-6 xs:size-7 md:size-8"
+                                    />
+                                </Link>
+                                <div className="flex w-full items-center justify-between">
+                                    <p className="title text-xl font-Roboto-Slab font-medium ">
+                                        All Posts
+                                    </p>
+                                    {isOwnProfile && (
+                                        <div className="create-post">
+                                            <button
+                                                className="bg-primary text-white px-5 py-2.5 rounded-xl"
+                                                onClick={() =>
+                                                    setModalIsOpen(true)
+                                                }
+                                            >
+                                                create post
+                                            </button>
+                                            <CreatePostModal
+                                                modalIsOpen={modalIsOpen}
+                                                setModalIsOpen={setModalIsOpen}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
                             </div>
-                        ) : (
-                            <p>No posts available yet.</p>
-                        )}
+
+                            <div className="post">
+                                {postData.length > 0 ? (
+                                    <div className="">
+                                        {postData.map((item, index) => (
+                                            <Post key={index} data={item} />
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <p>No posts available yet.</p>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

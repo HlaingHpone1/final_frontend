@@ -24,7 +24,7 @@ const ProfilePostContent = ({ data, noBorder }) => {
                     {moment(data.uploadTime).fromNow()}
                 </p>
             </div>
-            <div className="post flex space-x-5+">
+            <div className="post flex space-x-5">
                 {data.uploadPhoto && (
                     <img
                         className="block object-cover w-40 rounded-xl aspect-auto"
