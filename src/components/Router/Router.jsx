@@ -20,6 +20,8 @@ import OtpReset from "../../pages/OtpReset";
 import OldPswReset from "../../pages/OldPswReset";
 import ChangePsw from "../../pages/ChangePsw";
 
+import UserPosts from "../userPosts/UserPosts";
+
 const Router = () => {
     const data = sessionStorage.getItem("userData");
 
@@ -50,6 +52,7 @@ const Router = () => {
                             path="/profile/:id/posts"
                             element={<UserPosts />}
                         ></Route>
+
                         <Route
                             path="/profile/:id/skill"
                             element={<Skill />}
