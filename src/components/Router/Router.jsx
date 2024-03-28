@@ -15,6 +15,11 @@ import Experience from "../../pages/Experience";
 import About from "../../pages/About";
 import Faq from "../../pages/Faq";
 
+import PswReset from "../../pages/PswReset";
+import OtpReset from "../../pages/OtpReset";
+import OldPswReset from "../../pages/OldPswReset";
+import ChangePsw from "../../pages/ChangePsw";
+
 const Router = () => {
     const data = sessionStorage.getItem("userData");
 
@@ -54,6 +59,10 @@ const Router = () => {
                         <Route path="/settings" element={<Settings />}></Route>
                         <Route path="/about" element={<About />}></Route>
                         <Route path="/faq" element={<Faq />}></Route>
+                        <Route path="/reset" element={<PswReset />}></Route>
+                        <Route path="/otp" element={<OtpReset />}></Route>
+                        <Route path="/settings/:id/oldpsw" element={<OldPswReset />}></Route>
+                        <Route path="/changepsw" element={<ChangePsw />}></Route>
                     </>
                 )}
             </Routes>

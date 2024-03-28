@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const EmailResetForm = () => {
     const [data, setData] = useState({
@@ -32,11 +33,11 @@ const EmailResetForm = () => {
                         autoComplete="off"
                     />
                 </div>
-                <button
+                <Link to='/otp'><button
                     className="bg-slate-500 text-white px-5 py-2 rounded-md text-lg"
                     type="submit">
                     Submit
-                </button>
+                </button></Link>
             </form>
         </section>
     )
