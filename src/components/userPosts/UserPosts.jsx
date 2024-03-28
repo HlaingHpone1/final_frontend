@@ -35,7 +35,7 @@ const UserPosts = () => {
     return (
         <section className=" bg-background ">
             <div className="inner max-w-1240px mx-auto">
-                <div className="grid grid-cols-4 px-10 xl:px-0 pt-5  gap-5">
+                <div className="grid grid-cols-4 px-5 xl:px-0 pt-5  gap-5">
                     <div className="col-span-1">
                         <UserProfile show={false} />
                     </div>

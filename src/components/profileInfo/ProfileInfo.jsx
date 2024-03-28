@@ -9,7 +9,7 @@ const ProfileInfo = ({ data, edu, isOwnProfile }) => {
     const { id } = useParams();
     return (
         <section className="py-2">
-            <div className="inner max-w-1240px mx-auto px-10 xl:px-0">
+            <div className="inner max-w-1240px mx-auto px-5 xl:px-0">
                 <div className="bg-white shadow-custom rounded-lg overflow-hidden ">
                     <div className="banner-img">
                         <img

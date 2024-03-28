@@ -7,7 +7,7 @@ const Register = () => {
     return (
         <main className="register__section container">
             <div className="flex justify-center items-center h-screen">
-                <div className="bg-white shadow-2xl px-10 py-10 rounded-lg">
+                <div className="bg-white shadow-2xl px-5 py-10 rounded-lg">
                     <div className="title mb-8 text-3xl font-bold text-center">
                         Sign Up
                     </div>

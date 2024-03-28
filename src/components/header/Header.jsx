@@ -25,7 +25,7 @@ const Header = () => {
 
     return (
         <div className=" bg-tertiary">
-            <div className="inner max-w-1240px mx-auto mb-6 px-10 xl:px-0">
+            <div className="inner max-w-1240px mx-auto mb-6 px-5 xl:px-0">
                 <div className="flex xs2:py-2 xs:py-3">
                     <div className="profile-img">
                         <img
