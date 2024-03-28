@@ -6,6 +6,8 @@ const EmailResetForm = () => {
         email: "",
     });
 
+    const [errors, setErrors] = useState({});
+
     const inputHandler = (e) => {
         const { name, value } = e.target;
         setData({
@@ -13,12 +15,26 @@ const EmailResetForm = () => {
             [name]: value.trim(),
         });
     };
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+
+        const newErrors = {};
+
+        for (const email in data) {
+            if (data[email] == "") {
+                newErrors[email] = `${email} is required`;
+            }
+        }
+
+        setErrors(newErrors);
+    }
     return (
         <section>
             <form
                 className=" min-w-[350px]"
                 action=""
-                // onSubmit={submitHandler}
+                onSubmit={submitHandler}
                 >
                 <div className="input-box mb-5 ">
                     <label className='text-lg'>Email</label>
@@ -31,7 +47,13 @@ const EmailResetForm = () => {
                         placeholder='Enter your email'
                         onChange={inputHandler}
                         autoComplete="off"
+                        
                     />
+                    {errors.email && (
+                        <p className="text-red-700 rounded-lg mt-2">
+                            {errors.email}
+                        </p>
+                    )}
                 </div>
                 <Link to='/otp'><button
                     className="bg-slate-500 text-white px-5 py-2 rounded-md text-lg"
