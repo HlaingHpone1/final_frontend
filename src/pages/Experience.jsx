@@ -2,12 +2,15 @@ import { React, useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 
 import ProfileExperienceContent from "../components/profileExperienceContent/ProfileExperienceContent";
-import Header from "../components/header/Header";
+import CreateExperienceModel from "../components/createExperienceModel/CreateExperienceModel";
 import { useLocalSessionStore, useGetWorkExpByUser } from "../components/Store";
+import Header from "../components/header/Header";
 
 import { images } from "../components/images";
 
 const Experience = () => {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
     const { apiCall: workExpAPI } = useGetWorkExpByUser();
     const { userData: localUser } = useLocalSessionStore();
 
@@ -54,10 +57,15 @@ const Experience = () => {
                                 <button>
                                     <img
                                         src={images.plus}
-                                        alt=""
+                                        alt="This is add icon"
                                         className="xs2:size-5 xs:size-6 md:size-7"
+                                        onClick={() => setModalIsOpen(true)}
                                     />
                                 </button>
+                                <CreateExperienceModel
+                                    modalIsOpen={modalIsOpen}
+                                    setModalIsOpen={setModalIsOpen}
+                                />
                             </div>
                         )}
                     </div>

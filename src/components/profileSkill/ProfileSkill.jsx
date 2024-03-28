@@ -1,10 +1,13 @@
-import React from "react";
+import { React, useState } from "react";
 import { Link } from "react-router-dom";
 
 import ProfileSkillContent from "../profileSkillContent/ProfileSkillContent";
+import CreateSkillModel from "../createSkillModel/CreateSkillModel";
 import { images } from "../images";
 
 const ProfileSkill = ({ data, isOwnProfile }) => {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
     return (
         <section className="py-2">
             <div className="inner max-w-1240px mx-auto px-10 xl:p-0">
@@ -19,10 +22,15 @@ const ProfileSkill = ({ data, isOwnProfile }) => {
                                     <button>
                                         <img
                                             src={images.plus}
-                                            alt=""
+                                            alt="This is add icon"
                                             className="xs2:size-5 xs:size-6 md:size-7"
+                                            onClick={() => setModalIsOpen(true)}
                                         />
                                     </button>
+                                    <CreateSkillModel
+                                        modalIsOpen={modalIsOpen}
+                                        setModalIsOpen={setModalIsOpen}
+                                    />
                                 </div>
                             )}
                         </div>

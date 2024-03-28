@@ -65,6 +65,12 @@ const Router = () => {
                             path="/profile/:id/experience"
                             element={<Experience />}
                         ></Route>
+
+                        <Route
+                            path="/profile/:id/experience/:expID/edit"
+                            element={<Experience />}
+                        ></Route>
+
                         <Route path="/message" element={<Message />}></Route>
                         <Route path="/settings" element={<Settings />}></Route>
                         <Route path="/about" element={<About />}></Route>

@@ -20,6 +20,7 @@ const apiGetWorkExpByUser = `${import.meta.env.VITE_API_WORK_EXP_URL}/all`;
 const apiPostWorkExp = `${import.meta.env.VITE_API_WORK_EXP_URL}`;
 
 const apiGetSkillByUser = `${import.meta.env.VITE_API_SKILL_URL}/all`;
+const apiPostSkill = `${import.meta.env.VITE_API_SKILL_URL}`;
 
 // API_NewUserRegister
 export const useUserStorage = create(
@@ -437,6 +438,40 @@ export const useCreateWorkExp = create(devtools(
                 if (res.data.httpStatusCode === 201) {
                     set(() => ({
                         workExpData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+                    return res.data;
+                }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+))
+
+// API_CREATE_SKILL
+export const useCreateSkill = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        skillData: null,
+        apiCall: async (id, postData) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.post(`${apiPostSkill}/${id}`, postData);
+                if (res.data.httpStatusCode === 201) {
+                    set(() => ({
+                        skillData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
                     }))
                     return res.data;
                 }
