@@ -42,17 +42,24 @@ const Router = () => {
                         <Route path="/" element={<Home />}></Route>
                         <Route path="/contact" element={<ContactUs />}></Route>
                         <Route path="/network" element={<Network />}></Route>
-                        <Route path="/profile" element={<Profile />}></Route>
                         <Route
-                            path="/profile/skill"
+                            path="/profile/:id"
+                            element={<Profile />}
+                        ></Route>
+                        <Route
+                            path="/profile/:id/posts"
+                            element={<UserPosts />}
+                        ></Route>
+                        <Route
+                            path="/profile/:id/skill"
                             element={<Skill />}
                         ></Route>
                         <Route
-                            path="/profile/education"
+                            path="/profile/:id/education"
                             element={<Education />}
                         ></Route>
                         <Route
-                            path="/profile/experience"
+                            path="/profile/:id/experience"
                             element={<Experience />}
                         ></Route>
                         <Route path="/message" element={<Message />}></Route>

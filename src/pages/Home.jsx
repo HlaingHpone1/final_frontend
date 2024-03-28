@@ -15,7 +15,6 @@ const Home = () => {
     const [data, setData] = useState([]);
     const [page, setPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
-    const [loading, setLoading] = useState(true);
     const [postLoad, setPostLoad] = useState(true);
 
     const { error, errorMessage, errorCode, postsAllData, success, apiCall } =
@@ -71,7 +70,7 @@ const Home = () => {
                 <div className=" max-w-1240px  mx-auto font-Roboto">
                     <div className="grid grid-cols-home1 md:grid-cols-home2 lg:grid-cols-home3 justify-between  pt-6 gap-x-6 px-10 xl:px-0">
                         <section className="col-span-2 md:col-span-1 mb-5 md:m-0">
-                            <UserProfile />
+                            <UserProfile show={true} />
                         </section>
                         <section className="col-span-2 ">
                             <CreatePost />

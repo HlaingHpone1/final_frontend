@@ -6,11 +6,19 @@ import axios from "axios";
 // const signal = abortController.signal;
 
 const apiPostNewUser = import.meta.env.VITE_API_USER_URL;
+const apiGetUser = import.meta.env.VITE_API_USER_URL;
 const apiPostUserValidate = `${import.meta.env.VITE_API_USER_URL}/validate`;
 const apiGetAllUsers = `${import.meta.env.VITE_API_USER_URL}/get-all-users`;
 
 const apiPostNewPost = `${import.meta.env.VITE_API_POST_URL}`;
 const apiGetPost = `${import.meta.env.VITE_API_POST_URL}/posts`;
+
+const apiGetEducationByUser = `${import.meta.env.VITE_API_EDUCATION_URL}/all`;
+const apiPostEducation = `${import.meta.env.VITE_API_EDUCATION_URL}`;
+
+const apiGetWorkExpByUser = `${import.meta.env.VITE_API_WORK_EXP_URL}/all`;
+
+const apiGetSkillByUser = `${import.meta.env.VITE_API_SKILL_URL}/all`;
 
 // API_NewUserRegister
 export const useUserStorage = create(
@@ -195,6 +203,219 @@ export const useGetAllUsers = create(devtools(
         abort: () => {
             get().controller.abort();
             set({ controller: new AbortController() });
+        },
+    })
+))
+
+// API_GET_USER
+export const useGetUser = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        userData: null,
+        apiCall: async (userId, signal) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.get(`${apiGetUser}?id=${userId}`, {
+                    signal
+                });
+                set(() => ({
+                    userData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                }))
+
+                return res.data;
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+));
+
+// API_GET_POST_BY_USER
+export const useGetPostByUser = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        totalPages: 0,
+        postsData: null,
+        apiCall: async (id, signal) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.get(`${apiGetPost}/${id}`, {
+                    signal
+                });
+                set(() => ({
+                    postsData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                }))
+
+                return res.data;
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+));
+
+// API_GET_EDUCATION_BY_USER
+export const useGetEducationByUser = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        educationData: null,
+        apiCall: async (id, signal) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.get(`${apiGetEducationByUser}/${id}`, {
+                    signal
+                });
+                if (res.data.httpStatusCode === 200) {
+                    set(() => ({
+                        educationData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+                    return res.data;
+                }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        }
+    })
+))
+
+// API_GET_WORK_EXP_BY_USER
+export const useGetWorkExpByUser = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        workExpData: null,
+        apiCall: async (id, signal) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.get(`${apiGetWorkExpByUser}/${id}`, {
+                    signal
+                });
+                if (res.data.httpStatusCode === 200) {
+                    set(() => ({
+                        workExpData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+                    return res.data;
+                }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        }
+    })
+))
+
+// API_GET_SKILL_BY_USER
+export const useGetSkillByUser = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        skillData: null,
+        apiCall: async (id, signal) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.get(`${apiGetSkillByUser}/${id}`, {
+                    signal
+                });
+                if (res.data.httpStatusCode === 200) {
+                    set(() => ({
+                        skillData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+
+                    return res.data;
+
+                }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        }
+    })
+))
+
+// API_CREATE_EDUCATION
+export const useCreateEducation = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        educationData: null,
+        apiCall: async (id, postData) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.post(`${apiPostEducation}/${id}`, postData);
+                if (res.data.httpStatusCode === 201) {
+                    set(() => ({
+                        educationData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+                    return res.data;
+                }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
         },
     })
 ))

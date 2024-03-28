@@ -23,3 +23,23 @@ export const FollowingButton = () => {
         </div>
     );
 };
+
+export const MessageButton = () => {
+    return (
+        <div>
+            <button className="flex items-center justify-center space-x-3 py-2 px-5 bg-primary text-white rounded-2xl">
+                <p>Message</p>
+            </button>
+        </div>
+    );
+};
+
+export const ProfileFollowButton = () => {
+    return (
+        <div>
+            <button className="flex items-center justify-center space-x-3 py-2 px-5 bg-primary text-white rounded-2xl">
+                <p>Follow</p>
+            </button>
+        </div>
+    );
+};

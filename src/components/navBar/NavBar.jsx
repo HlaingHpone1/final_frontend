@@ -4,13 +4,6 @@ import { Link } from "react-router-dom";
 import { useLocalSessionStore } from "../Store";
 import { images } from "../images";
 
-// Check Active Link
-
-// const useActiveLink = (path) => {
-//     const location = useLocation();
-//     return location.pathname === path;
-// };
-
 const MyLink = ({ text, to }) => {
     // const isActive = useActiveLink(to);
     return (
@@ -23,15 +16,6 @@ const MyLink = ({ text, to }) => {
         </Link>
     );
 };
-
-// For text Active Link class
-{
-    /* <Link
-    className={`block size-7 sm:size-8 aspect-square transition-all duration-200 ease-linear ${
-        isActive ? "text-red-400" : "text-slate-700"
-    }`}
-></Link>; */
-}
 
 const NavBar = () => {
     const [show, setShow] = useState(false);
@@ -98,7 +82,7 @@ const NavBar = () => {
     };
 
     return (
-        <header className="l-header bg-nav w-full py-3 px-5">
+        <header className="l-header bg-nav w-full py-3 px-10 xl:px-0">
             <div className="l-wrap-inner max-w-[1240px] mx-auto">
                 <nav className="l-header__list">
                     <div className="logo flex justify-between items-center">
@@ -185,7 +169,7 @@ const NavBar = () => {
                                         <div className="dropdown-list absolute right-0 w-28 text-center bg-white shadow-md mt-2 rounded-md py-2 z-50">
                                             {/* Dropdown items */}
                                             <Link
-                                                to="/profile"
+                                                to={`/profile/${userData.data.id}`}
                                                 className="block px-4 py-2 text-base text-gray-700 hover:bg-gray-100"
                                             >
                                                 Profile

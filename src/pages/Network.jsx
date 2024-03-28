@@ -50,15 +50,15 @@ const Network = () => {
     return (
         <main className="bg-background">
             <div className="max-w-1240px mx-auto">
-                <div className="grid-cols-1 md:grid-cols-4 grid pt-6 gap-6 drop-shadow-lg px-10 xl:px-0">
-                    <section className="col-span-1 md:col-span-2 lg:col-span-1 bg-white rounded-lg text-black h-fit">
+                <div className="grid-cols-1 md:grid-cols-4 grid pt-6 gap-6 px-10 xl:px-0">
+                    <section className="col-span-1 md:col-span-2 lg:col-span-1 bg-white shadow-custom rounded-lg text-black h-fit">
                         <ManageNw />
                         <div className=" pt-28 pb-7 hidden md:block">
                             <Ads />
                             <Footer />
                         </div>
                     </section>
-                    <section className="col-span-1 md:col-span-2 lg:col-span-3  bg-white rounded-lg">
+                    <section className="col-span-1 md:col-span-2 lg:col-span-3 shadow-custom bg-white rounded-lg">
                         <div className=" p-5">
                             <div className="mb-14">
                                 <div className="flex justify-between mb-3">
