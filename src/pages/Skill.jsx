@@ -5,10 +5,13 @@ import ProfileSkillContent from "../components/profileSkillContent/ProfileSkillC
 import { useGetSkillByUser, useLocalSessionStore } from "../components/Store";
 
 import Header from "../components/header/Header";
+import CreateSkillModel from "../components/createSkillModel/CreateSkillModel";
 
 import { images } from "../components/images";
 
 const Skill = () => {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
     const { apiCall: skillAPI } = useGetSkillByUser();
     const { userData: localUser } = useLocalSessionStore();
 
@@ -54,10 +57,15 @@ const Skill = () => {
                                 <button>
                                     <img
                                         src={images.plus}
-                                        alt=""
+                                        alt="This is add icon"
                                         className="xs2:size-5 xs:size-6 md:size-7"
+                                        onClick={() => setModalIsOpen(true)}
                                     />
                                 </button>
+                                <CreateSkillModel
+                                    modalIsOpen={modalIsOpen}
+                                    setModalIsOpen={setModalIsOpen}
+                                />
                             </div>
                         )}
                     </div>
