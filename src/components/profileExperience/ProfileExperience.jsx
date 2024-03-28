@@ -10,7 +10,7 @@ const ProfileExperience = ({ data, isOwnProfile }) => {
 
     return (
         <section className="py-2">
-            <div className="inner max-w-1240px mx-auto px-10 xl:p-0">
+            <div className="inner max-w-1240px mx-auto px-5 xl:p-0">
                 <div className="bg-white shadow-custom rounded-lg overflow-hidden pt-4 ">
                     <div className="border-b border-black px-9">
                         <div className="flex justify-between">
