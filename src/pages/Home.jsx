@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import Ads from "../components/ads/Ads";
+import { ShortAds } from "../components/ads/Ads";
 import Footer from "../components/footer/Footer";
 import UserProfile from "../components/userProfile/UserProfile";
 import Post from "../components/post/Post";
@@ -110,7 +110,7 @@ const Home = () => {
 
                         <section className="col-span-1 hidden lg:block">
                             <Suggestion />
-                            <Ads />
+                            <ShortAds />
                             <Footer />
                         </section>
                     </div>
