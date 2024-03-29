@@ -6,7 +6,10 @@ import { Link } from "react-router-dom";
 export const ShortAds = () => {
     return (
         <div>
-            <img src={img.ads} className="rounded-2xl w-[335px] h-64 mb-4" />
+            <img
+                src={img.ads}
+                className="rounded-2xl w-full object-contain mx-auto h-64 mb-4"
+            />
         </div>
     );
 };

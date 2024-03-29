@@ -3,11 +3,14 @@ import moment from "moment";
 
 import { images } from "../images";
 import { CommentContent } from "../comment/CommentContent";
+import { useLocalSessionStore } from "../Store";
 
 const Post = ({ data }) => {
     const [showFullDes, setShowFullDes] = useState(false);
     const [showCommentBox, setShowCommentBox] = useState(false);
     const [input, setInput] = useState({ comment: "" });
+
+    const { userData } = useLocalSessionStore();
 
     const toggleDesc = () => {
         setShowFullDes(!showFullDes);
