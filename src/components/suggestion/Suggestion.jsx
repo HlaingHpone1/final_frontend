@@ -3,7 +3,7 @@ import { images } from "../images";
 import CompanyPage from "../companyPage/CompanyPage";
 
 import { Link } from "react-router-dom";
-import { useGetAllUsers } from "../Store";
+import { useGetAllUsers, useLocalSessionStore } from "../Store";
 import { PostLoading } from "../loading/Loading";
 
 const Suggestion = () => {
@@ -16,6 +16,8 @@ const Suggestion = () => {
         allUsersData,
         apiCall,
     } = useGetAllUsers();
+
+    const { userData } = useLocalSessionStore();
 
     const [data, setData] = useState([]);
     const [page, setPage] = useState(0);
@@ -49,9 +51,16 @@ const Suggestion = () => {
                     {data &&
                         data
                             .slice(0, 4)
+                            .filter((item) => item.id !== userData.data.id)
                             .map((item, index) => (
                                 <CompanyPage key={index} data={item} />
                             ))}
+                    {/* {data &&
+                        data
+                            .slice(0, 4)
+                            .map((item, index) => (
+                                <CompanyPage key={index} data={item} />
+                            ))} */}
                 </div>
                 <div className="view-all">
                     <Link to="/network" className="text-sm font-semibold">

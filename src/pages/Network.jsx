@@ -6,7 +6,7 @@ import ManageNw from "../components/network/ManageNw";
 import UserCard from "../components/userCard/UserCard";
 import Group from "../components/group/Group";
 
-import { useGetAllUsers } from "../components/Store";
+import { useGetAllUsers, useLocalSessionStore } from "../components/Store";
 import { NetworkLoading } from "../components/loading/Loading";
 
 const Network = () => {
@@ -19,6 +19,8 @@ const Network = () => {
         allUsersData,
         apiCall,
     } = useGetAllUsers();
+
+    const { userData } = useLocalSessionStore();
 
     const [data, setData] = useState([]);
     const [page, setPage] = useState(0);
@@ -76,9 +78,17 @@ const Network = () => {
                                 </div>
                                 <div className=" grid grid-cols-1 sm:max-lg:grid-cols-2 lg:grid-cols-3 gap-5 z-10">
                                     {data &&
-                                        data.map((item, index) => (
-                                            <UserCard key={index} data={item} />
-                                        ))}
+                                        data
+                                            .filter(
+                                                (item) =>
+                                                    item.id !== userData.data.id
+                                            )
+                                            .map((item, index) => (
+                                                <UserCard
+                                                    key={index}
+                                                    data={item}
+                                                />
+                                            ))}
                                     {loading && (
                                         <NetworkLoading isLoading={loading} />
                                     )}
