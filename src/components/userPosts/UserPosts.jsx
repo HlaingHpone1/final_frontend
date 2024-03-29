@@ -76,7 +76,11 @@ const UserPosts = () => {
                                 {postData.length > 0 ? (
                                     <div className="">
                                         {postData.map((item, index) => (
-                                            <Post key={index} data={item} />
+                                            <Post
+                                                key={index}
+                                                isOwner={isOwnProfile}
+                                                data={item}
+                                            />
                                         ))}
                                     </div>
                                 ) : (

@@ -3,14 +3,14 @@ import moment from "moment";
 
 import { images } from "../images";
 import { CommentContent } from "../comment/CommentContent";
-import { useLocalSessionStore } from "../Store";
+import { useDeletePost } from "../Store";
 
-const Post = ({ data }) => {
+const Post = ({ data, isOwner }) => {
     const [showFullDes, setShowFullDes] = useState(false);
     const [showCommentBox, setShowCommentBox] = useState(false);
     const [input, setInput] = useState({ comment: "" });
 
-    const { userData } = useLocalSessionStore();
+    const { apiCall: deletePost } = useDeletePost();
 
     const toggleDesc = () => {
         setShowFullDes(!showFullDes);
@@ -41,6 +41,19 @@ const Post = ({ data }) => {
         words.slice(0, 50).join(" ") + (words.length > 50 ? "..." : "");
     const fullDesc = data.caption;
     const followers = data.followers.toLocaleString();
+
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleEdit = (id) => {};
+
+    const handleDelete = async (id) => {
+        await deletePost(id);
+        window.location.reload();
+    };
 
     // DEMO DATA
     const comments = [
@@ -94,10 +107,26 @@ const Post = ({ data }) => {
                             </p>
                         </div>
                     </div>
-                    <div>
-                        <button>
+                    <div className="relative">
+                        <button onClick={toggleDropdown}>
                             <img src={images.dot} className="size-5 mr-2" />
                         </button>
+                        {isDropdownOpen && isOwner && (
+                            <div className="dropdown-menu absolute top-5 right-0 z-30 shadow-md bg-white rounded-md py-2">
+                                <button
+                                    className="block px-4 py-2 w-full text-base text-gray-700 hover:bg-gray-100"
+                                    onClick={() => handleEdit(data.postId)}
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    className="block px-4 py-2 w-full text-base text-gray-700 hover:bg-gray-100"
+                                    onClick={() => handleDelete(data.postId)}
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        )}
                         <button>
                             <img src={images.cross} className="size-5" />
                         </button>
