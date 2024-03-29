@@ -49,12 +49,23 @@ const Router = () => {
                             element={<Profile />}
                         ></Route>
                         <Route
+                            path="/profile/:id/edit"
+                            element={<Profile />}
+                        ></Route>
+                        <Route
                             path="/profile/:id/posts"
                             element={<UserPosts />}
                         ></Route>
-
+                        <Route
+                            path="/profile/:id/posts/:postID/edit"
+                            element={<UserPosts />}
+                        ></Route>
                         <Route
                             path="/profile/:id/skill"
+                            element={<Skill />}
+                        ></Route>
+                        <Route
+                            path="/profile/:id/skill/:skillID/edit"
                             element={<Skill />}
                         ></Route>
                         <Route
@@ -62,10 +73,13 @@ const Router = () => {
                             element={<Education />}
                         ></Route>
                         <Route
+                            path="/profile/:id/education/:eduID/edit"
+                            element={<Education />}
+                        ></Route>
+                        <Route
                             path="/profile/:id/experience"
                             element={<Experience />}
                         ></Route>
-
                         <Route
                             path="/profile/:id/experience/:expID/edit"
                             element={<Experience />}
