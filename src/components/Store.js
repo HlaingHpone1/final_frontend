@@ -489,3 +489,37 @@ export const useCreateSkill = create(devtools(
         },
     })
 ))
+
+// API_DELETE_POST
+export const useDeletePost = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        postsData: null,
+        apiCall: async (id) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.delete(`${apiPostNewPost}/${id}`);
+                // if (res.data.httpStatusCode === 200) {
+                set(() => ({
+                    postsData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                }))
+                return res.data;
+                // }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+))
