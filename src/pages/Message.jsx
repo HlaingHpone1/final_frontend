@@ -1,6 +1,6 @@
 import React from "react";
 
-import Ads from "../components/ads/Ads";
+import { ShortAds } from "../components/ads/Ads";
 import Footer from "../components/footer/Footer";
 import UserChat from "../components/message/UserChat";
 import Chat from "../components/message/Chat";
@@ -18,6 +18,7 @@ const Message = () => {
                                 <div className="title px-4 py-2 text-2xl font-bold font-Roboto-Slab">
                                     Messaging
                                 </div>
+                                <UserChat />
                                 <UserChat />
                             </div>
                             <div className="col-span-3 flex justify-between flex-col relative">
@@ -62,7 +63,7 @@ const Message = () => {
                         </div>
                     </div>
                     <div className="col-span-1 ">
-                        <Ads />
+                        <ShortAds />
                         <Footer />
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import Ads from "../components/ads/Ads";
+import { ShortAds } from "../components/ads/Ads";
 import Footer from "../components/footer/Footer";
 import ManageNw from "../components/network/ManageNw";
 import UserCard from "../components/userCard/UserCard";
@@ -54,7 +54,7 @@ const Network = () => {
                     <section className="col-span-1 md:col-span-2 lg:col-span-1 bg-white shadow-custom rounded-lg text-black h-fit">
                         <ManageNw />
                         <div className=" pt-28 pb-7 hidden md:block">
-                            <Ads />
+                            <ShortAds />
                             <Footer />
                         </div>
                     </section>
