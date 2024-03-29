@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useUserStorage } from "../Store";
 import { Loading } from "../loading/Loading";
 
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
+
 const RegisterForm = () => {
     const navigate = useNavigate();
 

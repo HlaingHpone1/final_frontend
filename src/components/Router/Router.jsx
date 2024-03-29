@@ -21,6 +21,7 @@ import OldPswReset from "../../pages/OldPswReset";
 import ChangePsw from "../../pages/ChangePsw";
 
 import UserPosts from "../userPosts/UserPosts";
+import Subscription from "../../pages/Subscription";
 
 const Router = () => {
     const data = sessionStorage.getItem("userData");
@@ -44,6 +45,10 @@ const Router = () => {
                         <Route path="/" element={<Home />}></Route>
                         <Route path="/contact" element={<ContactUs />}></Route>
                         <Route path="/network" element={<Network />}></Route>
+                        <Route
+                            path="/subscription"
+                            element={<Subscription />}
+                        ></Route>
                         <Route
                             path="/profile/:id"
                             element={<Profile />}
