@@ -13,6 +13,8 @@ import check from "../assets/img/check.png";
 import longads from "../assets/img/longads.jpg";
 import longads2 from "../assets/img/longads2.jpg";
 import mediumads from "../assets/img/mediumads.jpg";
+import users from "../assets/img/users.png";
+
 
 export const img = {
     twopeople,
@@ -29,6 +31,7 @@ export const img = {
     check,
     longads,
     longads2,
-    mediumads
+    mediumads,
+    users,
 };
 

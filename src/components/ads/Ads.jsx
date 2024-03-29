@@ -16,14 +16,20 @@ export const SubscriptionAds = () => {
         <div className=" w-80 bg-gray-600 rounded-xl">
             <div className="p-4 text-white">
                 <p className="font-medium text-lg">Grow Your Network with Premium</p>
-                <p className="text-sm py-4">Premium InMail is 4.6x more effective in hearing back than cold email.</p>
+                <p className="text-sm py-2">Premium InMail is 4.6x more effective in hearing back than cold email.</p>
+
+                <div className="flex pb-4">
+                    <img src={img.users} className=" size-10 mr-2"/>
+                    <p className=" text-sm my-auto text-gray-300">Millions of members use Premium</p>
+                </div>
+                
 
                 <Link to={"/subscription"}
                 className="py-2 px-5 bg-yellow-200 text-black font-semibold rounded-3xl " >
                     Try Premium for free
                 </Link>
 
-                <p className="text-sm text-gray-200 pt-4">
+                <p className="text-sm text-gray-300 pt-4">
                     1-month free trial. We'll send you a reminder 7 days before your trial ends.</p>
             </div>
         </div>
