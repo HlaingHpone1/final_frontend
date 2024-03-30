@@ -1,41 +1,53 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import Modal from "react-modal";
 
 import { images } from "../images";
 
-import { useCreateEducation } from "../Store";
-import { useParams } from "react-router-dom";
+import { useCreateEducation, useUpdateEducation } from "../Store";
+import { useParams, useNavigate } from "react-router-dom";
 
 Modal.setAppElement("#root");
 
-const CreateEducationModel = ({ modalIsOpen, setModalIsOpen }) => {
-    const { id } = useParams();
-    const { apiCall, success } = useCreateEducation();
+const CreateEducationModel = ({ modalIsOpen, setModalIsOpen, data }) => {
+    const navigate = useNavigate();
+
+    const { id, eduID } = useParams();
+
+    const { apiCall: updateEducation } = useUpdateEducation();
+    const { apiCall: createEducation, success } = useCreateEducation();
 
     const [education, setEducation] = useState({
-        universityName: "",
+        schoolName: "",
         degree: "",
         fieldOfStudy: "",
         startDate: "",
         endDate: "",
     });
 
-    const postData = {
-        schoolName: education.universityName,
-        degree: education.degree,
-        fieldOfStudy: education.fieldOfStudy,
-        startDate: education.startDate,
-        endDate: education.endDate,
-    };
-
     const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        if (data) {
+            setEducation({
+                ...data,
+            });
+        }
+    }, [data]);
 
     const inputHandler = (e) => {
         const { name, value } = e.target;
         setEducation({
             ...education,
-            [name]: value.trim(),
+            [name]: value,
         });
+    };
+
+    const postData = {
+        schoolName: education.schoolName,
+        degree: education.degree,
+        fieldOfStudy: education.fieldOfStudy,
+        startDate: education.startDate,
+        endDate: education.endDate,
     };
 
     const handleSubmit = async (e) => {
@@ -52,7 +64,12 @@ const CreateEducationModel = ({ modalIsOpen, setModalIsOpen }) => {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
-            await apiCall(id, postData);
+            if (eduID === undefined) {
+                await createEducation(id, postData);
+            } else {
+                await updateEducation(eduID, postData);
+                window.location.href = `/profile/${id}/education`;
+            }
         }
     };
 
@@ -75,6 +92,8 @@ const CreateEducationModel = ({ modalIsOpen, setModalIsOpen }) => {
         },
     };
 
+    // console.log(education);
+
     return (
         <div>
             <Modal
@@ -88,6 +107,9 @@ const CreateEducationModel = ({ modalIsOpen, setModalIsOpen }) => {
                         className="absolute top-5 right-5 bg-slate-300 p-2 rounded-full"
                         onClick={() => {
                             setModalIsOpen(false);
+                            if (eduID) {
+                                navigate(`/profile/${id}/education`);
+                            }
                         }}
                     >
                         <img
@@ -100,16 +122,18 @@ const CreateEducationModel = ({ modalIsOpen, setModalIsOpen }) => {
                 <form onSubmit={handleSubmit}>
                     <input
                         type="text"
-                        name="universityName"
-                        value={education.universityName}
+                        name="schoolName"
+                        id="schoolName"
+                        value={education.schoolName}
                         onChange={inputHandler}
                         placeholder="University Name"
                     />
-                    {errors.universityName && <p>{errors.universityName}</p>}
+                    {errors.schoolName && <p>{errors.schoolName}</p>}
 
                     <input
                         type="text"
                         name="degree"
+                        id="degree"
                         value={education.degree}
                         onChange={inputHandler}
                         placeholder="Degree"

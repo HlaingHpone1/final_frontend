@@ -1,16 +1,19 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import Modal from "react-modal";
 
 import { images } from "../images";
 
-import { useCreateSkill } from "../Store";
-import { useParams } from "react-router-dom";
+import { useCreateSkill, useUpdateSkill } from "../Store";
+import { useParams, useNavigate } from "react-router-dom";
 
 Modal.setAppElement("#root");
 
-const CreateSkillModel = ({ modalIsOpen, setModalIsOpen }) => {
-    const { id } = useParams();
-    const { apiCall, success } = useCreateSkill();
+const CreateSkillModel = ({ modalIsOpen, setModalIsOpen, data }) => {
+    const navigate = useNavigate();
+
+    const { id, skillID } = useParams();
+    const { apiCall: createSkill, success } = useCreateSkill();
+    const { apiCall: updateSkill } = useUpdateSkill();
 
     const [skill, setSkill] = useState({
         skillName: "",
@@ -26,9 +29,17 @@ const CreateSkillModel = ({ modalIsOpen, setModalIsOpen }) => {
         const { name, value } = e.target;
         setSkill({
             ...skill,
-            [name]: value.trim(),
+            [name]: value,
         });
     };
+
+    useEffect(() => {
+        if (data) {
+            setSkill({
+                ...data,
+            });
+        }
+    }, [data]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -44,8 +55,12 @@ const CreateSkillModel = ({ modalIsOpen, setModalIsOpen }) => {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
-            await apiCall(id, postData);
-            console.log("success");
+            if (skillID === undefined) {
+                await createSkill(id, postData);
+            } else {
+                await updateSkill(skillID, postData);
+                window.location.href = `/profile/${id}/skill`;
+            }
         }
     };
 
@@ -81,6 +96,7 @@ const CreateSkillModel = ({ modalIsOpen, setModalIsOpen }) => {
                         className="absolute top-5 right-5 bg-slate-300 p-2 rounded-full"
                         onClick={() => {
                             setModalIsOpen(false);
+                            navigate(`/profile/${id}/skill`);
                         }}
                     >
                         <img

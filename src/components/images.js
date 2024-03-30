@@ -25,6 +25,8 @@ import imageIcon from "../assets/myicon/image.png"
 import group1 from "../assets/myicon/group1.png"
 import backArrow from "../assets/myicon/backArrow.png"
 import sent1 from "../assets/myicon/send1.png"
+import edit from "../assets/myicon/edit.png"
+import delete1 from "../assets/myicon/delete.png"
 
 
 
@@ -56,5 +58,7 @@ export const images = {
     group1,
     backArrow,
     sent1,
+    edit,
+    delete1,
 };
 
