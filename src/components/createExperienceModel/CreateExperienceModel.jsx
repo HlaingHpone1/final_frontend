@@ -1,15 +1,17 @@
 import { React, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 
-import { useCreateWorkExp } from "../Store";
+import { useCreateWorkExp, useUpdateWorkExp } from "../Store";
 import { images } from "../images";
 
 Modal.setAppElement("#root");
 
-const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen }) => {
-    const { id } = useParams();
-    const { apiCall, success } = useCreateWorkExp();
+const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen, data }) => {
+    const navigate = useNavigate();
+    const { id, expID } = useParams();
+    const { apiCall: createWork, success } = useCreateWorkExp();
+    const { apiCall: updateWork } = useUpdateWorkExp();
 
     const [experience, setExperience] = useState({
         companyName: "",
@@ -33,9 +35,17 @@ const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen }) => {
         const { name, value } = e.target;
         setExperience({
             ...experience,
-            [name]: value.trim(),
+            [name]: value,
         });
     };
+
+    useEffect(() => {
+        if (data) {
+            setExperience({
+                ...data,
+            });
+        }
+    }, [data]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -51,7 +61,14 @@ const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen }) => {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
-            await apiCall(id, postData);
+            if (expID === undefined) {
+                await createWork(id, postData);
+                console.log("create");
+            } else {
+                await updateWork(expID, postData);
+                // window.location.href = `/profile/${id}/experience`;
+                console.log("update");
+            }
         }
     };
 
@@ -87,6 +104,7 @@ const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen }) => {
                         className="absolute top-5 right-5 bg-slate-300 p-2 rounded-full"
                         onClick={() => {
                             setModalIsOpen(false);
+                            navigate(`/profile/${id}/experience`);
                         }}
                     >
                         <img

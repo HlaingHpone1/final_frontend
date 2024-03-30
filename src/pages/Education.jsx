@@ -78,6 +78,7 @@ const Education = () => {
                             <ProfileEducationContent
                                 key={index}
                                 data={item}
+                                isOwnProfile={isOwnProfile}
                                 noBorder={index === educationData.length - 1}
                             />
                         ))

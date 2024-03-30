@@ -74,6 +74,7 @@ const Experience = () => {
                             <ProfileExperienceContent
                                 key={index}
                                 data={item}
+                                isOwnProfile={isOwnProfile}
                                 noBorder={index === experienceData.length - 1}
                             />
                         ))

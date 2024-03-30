@@ -17,7 +17,7 @@ const Skill = () => {
 
     const [skillData, setSkillData] = useState([]);
 
-    const { id } = useParams();
+    const { id, skillID } = useParams();
 
     const isOwnProfile = id === localUser.data.id;
 
@@ -74,6 +74,7 @@ const Skill = () => {
                             <ProfileSkillContent
                                 key={index}
                                 data={item}
+                                isOwnProfile={isOwnProfile}
                                 noBorder={index === skillData.length - 1}
                             />
                         ))

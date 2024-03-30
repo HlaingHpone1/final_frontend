@@ -1,4 +1,5 @@
 import { React } from "react";
+import { Link } from "react-router-dom";
 
 import { MessageButton, ProfileFollowButton } from "../button/Button";
 
@@ -66,6 +67,11 @@ const ProfileInfo = ({ data, edu, isOwnProfile }) => {
                             <p className=" text-xl lg:text-2xl font-bold font-Roboto-Slab">
                                 {edu ? edu.schoolName : ""}
                             </p>
+                        </div>
+                        <div className="">
+                            <Link to={`/profile/${data.id}/updateprofile`}>
+                                Update Profile
+                            </Link>
                         </div>
                     </div>
                 </div>

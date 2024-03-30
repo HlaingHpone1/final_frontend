@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import moment from "moment";
+import { Link, useParams } from "react-router-dom";
 
 import { images } from "../images";
 import { CommentContent } from "../comment/CommentContent";
 import { useDeletePost } from "../Store";
+import CreatePostModal from "../createPostModel/CreatePostModel";
 
 const Post = ({ data, isOwner }) => {
+    const { id } = useParams();
+
     const [showFullDes, setShowFullDes] = useState(false);
     const [showCommentBox, setShowCommentBox] = useState(false);
     const [input, setInput] = useState({ comment: "" });
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const { apiCall: deletePost } = useDeletePost();
 
@@ -48,10 +53,13 @@ const Post = ({ data, isOwner }) => {
         setIsDropdownOpen(!isDropdownOpen);
     };
 
-    const handleEdit = (id) => {};
+    const handleEdit = (postID) => {
+        console.log(postID);
+        console.log(id);
+    };
 
-    const handleDelete = async (id) => {
-        await deletePost(id);
+    const handleDelete = async (postID) => {
+        await deletePost(postID);
         window.location.reload();
     };
 
@@ -97,7 +105,9 @@ const Post = ({ data, isOwner }) => {
                         </div>
                         <div>
                             <h2 className="text-base font-bold font-Roboto-Slab">
-                                {data.accountName}
+                                <Link to={`/profile/${data.userId}`}>
+                                    {data.accountName}
+                                </Link>
                             </h2>
                             <p className="text-xs text-[#818181]">
                                 {followers} Followers
@@ -112,19 +122,27 @@ const Post = ({ data, isOwner }) => {
                             <img src={images.dot} className="size-5 mr-2" />
                         </button>
                         {isDropdownOpen && isOwner && (
-                            <div className="dropdown-menu absolute top-5 right-0 z-30 shadow-md bg-white rounded-md py-2">
-                                <button
+                            <div className="dropdown-menu absolute top-5 right-0 z-20 shadow-md bg-white rounded-md py-2">
+                                <Link
+                                    to={`/profile/${id}/posts/${data.id}/edit`}
                                     className="block px-4 py-2 w-full text-base text-gray-700 hover:bg-gray-100"
-                                    onClick={() => handleEdit(data.postId)}
+                                    onClick={() => {
+                                        handleEdit(data.id);
+                                        setModalIsOpen(true);
+                                    }}
                                 >
                                     Edit
-                                </button>
-                                <button
+                                </Link>
+                                <CreatePostModal
+                                    modalIsOpen={modalIsOpen}
+                                    setModalIsOpen={setModalIsOpen}
+                                />
+                                <Link
                                     className="block px-4 py-2 w-full text-base text-gray-700 hover:bg-gray-100"
-                                    onClick={() => handleDelete(data.postId)}
+                                    onClick={() => handleDelete(data.id)}
                                 >
                                     Delete
-                                </button>
+                                </Link>
                             </div>
                         )}
                         <button>

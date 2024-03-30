@@ -21,6 +21,7 @@ import OldPswReset from "../../pages/OldPswReset";
 import ChangePsw from "../../pages/ChangePsw";
 
 import UserPosts from "../userPosts/UserPosts";
+import UpdateProfile from "../userProfile/UpdateProfile";
 
 const Router = () => {
     const data = sessionStorage.getItem("userData");
@@ -47,6 +48,10 @@ const Router = () => {
                         <Route
                             path="/profile/:id"
                             element={<Profile />}
+                        ></Route>
+                        <Route
+                            path="/profile/:id/updateprofile"
+                            element={<UpdateProfile />}
                         ></Route>
                         <Route
                             path="/profile/:id/edit"
