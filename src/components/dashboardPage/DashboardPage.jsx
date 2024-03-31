@@ -1,9 +1,10 @@
 import React from 'react'
+import DashboardNav from '../dashboardNavbar/DashboardNav'
 
 const DashboardPage = () => {
   return (
-    <div className='flex-1'>
-
+    <div>
+      <DashboardNav/>
     </div>
   )
 }
