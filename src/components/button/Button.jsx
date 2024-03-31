@@ -1,6 +1,7 @@
 import React from "react";
 
 import { images } from "../images";
+import { useLocalSessionStore } from "../Store";
 
 export const FollowButton = () => {
     return (
@@ -25,9 +26,16 @@ export const FollowingButton = () => {
 };
 
 export const MessageButton = () => {
+    const { userData } = useLocalSessionStore();
+
+    const clickHandler = () => {};
+
     return (
         <div>
-            <button className="flex items-center justify-center space-x-3 py-2 px-5 bg-primary text-white rounded-2xl">
+            <button
+                className="flex items-center justify-center space-x-3 py-2 px-5 bg-primary text-white rounded-2xl"
+                onClick={clickHandler}
+            >
                 <p>Message</p>
             </button>
         </div>

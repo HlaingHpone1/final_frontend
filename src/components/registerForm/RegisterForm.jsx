@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useUserStorage } from "../Store";
 import { Loading } from "../loading/Loading";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebaseConfig";
+// import { createUserWithEmailAndPassword } from "firebase/auth";
+// import { auth, db } from "../../firebaseConfig";
+// import { doc, setDoc } from "firebase/firestore";
 
 const RegisterForm = () => {
     const navigate = useNavigate();
@@ -43,6 +44,7 @@ const RegisterForm = () => {
     } = useUserStorage();
 
     const [errors, setErrors] = useState({});
+    const [firebaseError, setFirebaseError] = useState(false);
 
     const inputHandler = (e) => {
         const { name, value } = e.target;
@@ -58,6 +60,10 @@ const RegisterForm = () => {
             [field]: !showPassword[field],
         });
     };
+
+    const userName = data.firstName + " " + data.lastName;
+    const email = data.email;
+    const password = data.password;
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -78,6 +84,22 @@ const RegisterForm = () => {
 
         if (Object.keys(newErrors).length === 0) {
             await apiCall(postData);
+
+            // try {
+            //     const res = await createUserWithEmailAndPassword(
+            //         auth,
+            //         email,
+            //         password
+            //     );
+            //     await setDoc(doc(db, "users", res.user.uid), {
+            //         uid: res.user.uid,
+            //         userName,
+            //         email,
+            //     });
+            // } catch (err) {
+            //     setFirebaseError(true);
+            //     console.log(err);
+            // }
         }
     };
 
@@ -88,6 +110,11 @@ const RegisterForm = () => {
     return (
         <section>
             <Loading isLoading={isLoading} />
+            {firebaseError && (
+                <p className="text-red-500 text-xl font-semibold text-center">
+                    {errorMessage}
+                </p>
+            )}
             {error && errorMessage && (
                 <p className="text-red-500 text-xl font-semibold text-center">
                     {errorMessage}

@@ -55,34 +55,6 @@ const Post = ({ data, isOwner }) => {
         window.location.reload();
     };
 
-    // DEMO DATA
-    const comments = [
-        {
-            id: 1,
-            text: "This is the first comment commentcommentcommentcommentcommentcommentcomment commentcommentcommentcomment comment commentcomment comment",
-            author: "User1",
-            time: "2022-01-01 10:00:00",
-            profileImg:
-                "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        },
-        {
-            id: 2,
-            text: "This is the second comment",
-            author: "User2",
-            time: "2022-01-02 11:00:00",
-            profileImg:
-                "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        },
-        {
-            id: 3,
-            text: "This is the third comment",
-            author: "User3",
-            time: "2022-01-03 12:00:00",
-            profileImg:
-                "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        },
-    ];
-
     return (
         <section className="bg-white text-black  rounded-2xl shadow-custom mb-5 overflow-hidden">
             <div className="">
@@ -247,3 +219,31 @@ const Post = ({ data, isOwner }) => {
 };
 
 export default Post;
+
+// // DEMO DATA
+// const comments = [
+//     {
+//         id: 1,
+//         text: "This is the first comment commentcommentcommentcommentcommentcommentcomment commentcommentcommentcomment comment commentcomment comment",
+//         author: "User1",
+//         time: "2022-01-01 10:00:00",
+//         profileImg:
+//             "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+//     },
+//     {
+//         id: 2,
+//         text: "This is the second comment",
+//         author: "User2",
+//         time: "2022-01-02 11:00:00",
+//         profileImg:
+//             "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+//     },
+//     {
+//         id: 3,
+//         text: "This is the third comment",
+//         author: "User3",
+//         time: "2022-01-03 12:00:00",
+//         profileImg:
+//             "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+//     },
+// ];
