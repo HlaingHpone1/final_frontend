@@ -106,17 +106,30 @@ const CreateSkillModel = ({ modalIsOpen, setModalIsOpen, data }) => {
                         />
                     </button>
                 </div>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        name="skillName"
-                        value={skill.skillName}
-                        onChange={inputHandler}
-                        placeholder="Skill "
-                    />
-                    {errors.skillName && <p>{errors.skillName}</p>}
-
-                    <button type="submit">Submit</button>
+                <form
+                    className="mt-8"
+                    onSubmit={handleSubmit}>
+                    <div className="input-box mb-8">
+                        <input
+                            type="text"
+                            name="skillName"
+                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-900 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                            value={skill.skillName}
+                            onChange={inputHandler}
+                            placeholder="Skill "
+                        />
+                        {errors.skillName &&
+                            <p className="text-red-700 rounded-lg mt-2">
+                                {errors.skillName}
+                            </p>}
+                    </div>
+                    <div className="flex justify-end">
+                        <button
+                            type="submit"
+                            className="bg-primary text-white px-5 py-2 rounded-md text-lg">
+                            Submit
+                        </button>
+                    </div>
                 </form>
             </Modal>
         </div>
