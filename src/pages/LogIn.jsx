@@ -20,11 +20,6 @@ const LogIn = () => {
                             <Link className=" font-medium" to="/reset">
                                 Forgot Password?
                             </Link>
-                            <div>
-                                <Link className="font-medium" to="/reset">
-                                    Reset password with OTP
-                                </Link>
-                            </div>
                         </div>
                     </div>
                 </div>

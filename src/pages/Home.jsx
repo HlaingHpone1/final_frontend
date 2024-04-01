@@ -14,7 +14,6 @@ import {
     useLocalSessionStore,
 } from "../components/Store";
 import { PostLoading } from "../components/loading/Loading";
-import { useLocalSessionStore } from "../components/Store";
 
 const Home = () => {
     const [data, setData] = useState([]);
