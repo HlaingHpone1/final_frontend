@@ -3,28 +3,32 @@ import React from "react";
 import { img } from "../img";
 import { Link } from "react-router-dom";
 
-export const ShortAds = () => {
+export const Ads = () => {
     return (
         <div>
-            <img
-                src={img.ads}
-                className="rounded-2xl w-full object-contain mx-auto h-64 mb-4"
-            />
+            <img src={img.ads} className="rounded-2xl w-80 h-64 mb-4" />
         </div>
     );
 };
 
 export const SubscriptionAds = () => {
     return (
-        <div className="w-full bg-gray-600 rounded-xl">
+        <div className=" w-80 bg-gray-600 rounded-xl">
             <div className="p-4 text-white">
                 <p className="font-medium text-lg">
                     Grow Your Network with Premium
                 </p>
-                <p className="text-sm py-4">
+                <p className="text-sm py-2">
                     Premium InMail is 4.6x more effective in hearing back than
                     cold email.
                 </p>
+
+                <div className="flex pb-4">
+                    <img src={img.users} className=" size-10 mr-2" />
+                    <p className=" text-sm my-auto text-gray-300">
+                        Millions of members use Premium
+                    </p>
+                </div>
 
                 <Link
                     to={"/subscription"}
@@ -33,7 +37,7 @@ export const SubscriptionAds = () => {
                     Try Premium for free
                 </Link>
 
-                <p className="text-sm text-gray-200 pt-4">
+                <p className="text-sm text-gray-300 pt-4">
                     1-month free trial. We'll send you a reminder 7 days before
                     your trial ends.
                 </p>
