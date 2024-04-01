@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "firebase": "^10.10.0",
     "axios": "^1.6.8",
+    "firebase": "^10.10.0",
     "moment": "^2.30.1",
     "moment-timezone": "^0.5.45",
     "react": "^18.2.0",
