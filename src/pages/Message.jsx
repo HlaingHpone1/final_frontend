@@ -9,7 +9,7 @@ import { images } from "../components/images";
 
 const Message = () => {
     return (
-        <div className="bg-background h-screen">
+        <div className=" h-screen">
             <div className="inner max-w-1240px mx-auto px-5 xl:px-0 pt-8">
                 <div className="grid grid-cols-4 bg-white  shadow-custom rounded-lg overflow-hidden">
                     <div className="col-span-3 ">

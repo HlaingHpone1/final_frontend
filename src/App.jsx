@@ -7,7 +7,7 @@ import Footer from "./components/footer/Footer";
 function App() {
     const data = sessionStorage.getItem("userData");
     return (
-        <div className="font-Roboto bg-background">
+        <div className="font-Roboto ">
             <BrowserRouter>
                 {data != null && (
                     <div className="">
