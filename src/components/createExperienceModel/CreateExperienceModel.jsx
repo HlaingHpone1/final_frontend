@@ -162,33 +162,36 @@ const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen, data }) => {
                             </p>}
                     </div>
 
-                    <div className="input-box mb-3">
-                        <input
-                            type="date"
-                            name="startDate"
-                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
-                            value={experience.startDate}
-                            onChange={inputHandler}
-                        />
-                        {errors.startDate &&
-                            <p className="text-red-700 rounded-lg mt-2">
-                                {errors.startDate}
-                            </p>}
+                    <div className="flex justify-center space-x-5 mt-3">
+                        <div className="input-box mb-3 w-full">
+                            <input
+                                type="date"
+                                name="startDate"
+                                className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                                value={experience.startDate}
+                                onChange={inputHandler}
+                            />
+                            {errors.startDate &&
+                                <p className="text-red-700 mt-2">
+                                    {errors.startDate}
+                                </p>}
+                        </div>
+
+                        <div className="input-box mb-8 w-full">
+                            <input
+                                type="date"
+                                name="endDate"
+                                className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                                value={experience.endDate}
+                                onChange={inputHandler}
+                            />
+                            {errors.endDate &&
+                                <p className="text-red-700 mt-2">
+                                    {errors.endDate}
+                                </p>}
+                        </div>
                     </div>
 
-                    <div className="input-box mb-8">
-                        <input
-                            type="date"
-                            name="endDate"
-                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
-                            value={experience.endDate}
-                            onChange={inputHandler}
-                        />
-                        {errors.endDate &&
-                            <p className="text-red-700 rounded-lg mt-2">
-                                {errors.endDate}
-                            </p>}
-                    </div>
                     <div className="flex justify-end">
                         <button
                             type="submit"
