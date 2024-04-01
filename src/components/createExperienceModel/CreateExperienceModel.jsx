@@ -114,51 +114,88 @@ const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen, data }) => {
                         />
                     </button>
                 </div>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        name="companyName"
-                        value={experience.companyName}
-                        onChange={inputHandler}
-                        placeholder="Company Name"
-                    />
-                    {errors.companyName && <p>{errors.companyName}</p>}
+                <form
+                    className="mt-8"
+                    onSubmit={handleSubmit}>
+                    <div className="input-box mb-3">
+                        <input
+                            type="text"
+                            name="companyName"
+                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                            value={experience.companyName}
+                            onChange={inputHandler}
+                            placeholder="Company Name"
+                        />
+                        {errors.companyName &&
+                            <p className="text-red-700 rounded-lg mt-2">
+                                {errors.companyName}
+                            </p>}
+                    </div>
 
-                    <input
-                        type="text"
-                        name="position"
-                        value={experience.position}
-                        onChange={inputHandler}
-                        placeholder="Position"
-                    />
-                    {errors.position && <p>{errors.position}</p>}
+                    <div className="input-box mb-3">
+                        <input
+                            type="text"
+                            name="position"
+                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                            value={experience.position}
+                            onChange={inputHandler}
+                            placeholder="Position"
+                        />
+                        {errors.position &&
+                            <p className="text-red-700 rounded-lg mt-2">
+                                {errors.position}
+                            </p>}
+                    </div>
 
-                    <input
-                        type="text"
-                        name="type"
-                        value={experience.type}
-                        onChange={inputHandler}
-                        placeholder="Type"
-                    />
-                    {errors.type && <p>{errors.type}</p>}
+                    <div className="input-box mb-3">
+                        <input
+                            type="text"
+                            name="type"
+                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                            value={experience.type}
+                            onChange={inputHandler}
+                            placeholder="Type"
+                        />
+                        {errors.type &&
+                            <p className="text-red-700 rounded-lg mt-2">
+                                {errors.type}
+                            </p>}
+                    </div>
 
-                    <input
-                        type="date"
-                        name="startDate"
-                        value={experience.startDate}
-                        onChange={inputHandler}
-                    />
-                    {errors.startDate && <p>{errors.startDate}</p>}
+                    <div className="input-box mb-3">
+                        <input
+                            type="date"
+                            name="startDate"
+                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                            value={experience.startDate}
+                            onChange={inputHandler}
+                        />
+                        {errors.startDate &&
+                            <p className="text-red-700 rounded-lg mt-2">
+                                {errors.startDate}
+                            </p>}
+                    </div>
 
-                    <input
-                        type="date"
-                        name="endDate"
-                        value={experience.endDate}
-                        onChange={inputHandler}
-                    />
-                    {errors.endDate && <p>{errors.endDate}</p>}
-
-                    <button type="submit">Submit</button>
+                    <div className="input-box mb-8">
+                        <input
+                            type="date"
+                            name="endDate"
+                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                            value={experience.endDate}
+                            onChange={inputHandler}
+                        />
+                        {errors.endDate &&
+                            <p className="text-red-700 rounded-lg mt-2">
+                                {errors.endDate}
+                            </p>}
+                    </div>
+                    <div className="flex justify-end">
+                        <button
+                            type="submit"
+                            className="bg-primary text-white px-5 py-2 rounded-md text-lg">
+                            Submit
+                        </button>
+                    </div>
                 </form>
             </Modal>
         </div>

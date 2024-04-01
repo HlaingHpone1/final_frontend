@@ -5,7 +5,7 @@ import { images } from "../images";
 const Footer = () => {
     return (
         <section className=" px-3">
-            <div className="flex space-x-3 text-xs mb-7">
+            <div className="flex space-x-5 text-xs mb-7">
                 <p>About</p>
                 <p>FAQs</p>
                 <p>Privacy & Terms</p>

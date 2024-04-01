@@ -119,53 +119,93 @@ const CreateEducationModel = ({ modalIsOpen, setModalIsOpen, data }) => {
                         />
                     </button>
                 </div>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        name="schoolName"
-                        id="schoolName"
-                        value={education.schoolName}
-                        onChange={inputHandler}
-                        placeholder="University Name"
-                    />
-                    {errors.schoolName && <p>{errors.schoolName}</p>}
+                <form
+                    className="mt-8"
+                    onSubmit={handleSubmit}>
+                    <div className="input-box mb-3">
+                        <input
+                            type="text"
+                            name="schoolName"
+                            id="schoolName"
+                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                            value={education.schoolName}
+                            onChange={inputHandler}
+                            placeholder="University Name"
+                        />
+                        {errors.schoolName &&
+                            <p className="text-red-700 rounded-lg mt-2">
+                                {errors.schoolName}
+                            </p>}
+                    </div>
 
-                    <input
-                        type="text"
-                        name="degree"
-                        id="degree"
-                        value={education.degree}
-                        onChange={inputHandler}
-                        placeholder="Degree"
-                    />
-                    {errors.degree && <p>{errors.degree}</p>}
+                    <div className="input-box mb-3">
+                        <input
+                            type="text"
+                            name="degree"
+                            id="degree"
+                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                            value={education.degree}
+                            onChange={inputHandler}
+                            placeholder="Degree"
+                        />
+                        {errors.degree &&
+                            <p className="text-red-700 rounded-lg mt-2">
+                                {errors.degree}
+                            </p>}
+                    </div>
 
-                    <input
-                        type="text"
-                        name="fieldOfStudy"
-                        value={education.fieldOfStudy}
-                        onChange={inputHandler}
-                        placeholder="Field of Study"
-                    />
-                    {errors.fieldOfStudy && <p>{errors.fieldOfStudy}</p>}
+                    <div className="input-box mb-3">
+                        <input
+                            type="text"
+                            name="fieldOfStudy"
+                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                            value={education.fieldOfStudy}
+                            onChange={inputHandler}
+                            placeholder="Field of Study"
+                        />
+                        {errors.fieldOfStudy &&
+                            <p className="text-red-700 rounded-lg mt-2">
+                                {errors.fieldOfStudy}
+                            </p>}
+                    </div>
 
-                    <input
-                        type="date"
-                        name="startDate"
-                        value={education.startDate}
-                        onChange={inputHandler}
-                    />
-                    {errors.startDate && <p>{errors.startDate}</p>}
+                    <div className="flex justify-center space-x-5 mt-5">
+                        <div className="input-box mb-3 w-full">
+                            <input
+                                type="date"
+                                name="startDate"
+                                className={`focus:outline-none bg-transparent border-b-2 rounded  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                                value={education.startDate}
+                                onChange={inputHandler}
+                            />
+                            {errors.startDate &&
+                                <p className="text-red-700 rounded-lg mt-2">
+                                    {errors.startDate}
+                                </p>}
+                        </div>
 
-                    <input
-                        type="date"
-                        name="endDate"
-                        value={education.endDate}
-                        onChange={inputHandler}
-                    />
-                    {errors.endDate && <p>{errors.endDate}</p>}
+                        <div className="input-box mb-5 w-full">
+                            <input
+                                type="date"
+                                name="endDate"
+                                className={`focus:outline-none bg-transparent border-b-2 rounded focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                                value={education.endDate}
+                                onChange={inputHandler}
+                            />
+                            {errors.endDate &&
+                                <p className="text-red-700 rounded-lg mt-2">
+                                    {errors.endDate}
+                                </p>}
+                        </div>
+                    </div>
 
-                    <button type="submit">Submit</button>
+                    <div className="flex justify-end">
+                        <button
+                            type="submit"
+                            className="bg-primary text-white px-5 py-2 rounded-md text-lg">
+                            Submit
+                        </button>
+                    </div>
                 </form>
             </Modal>
         </div>
