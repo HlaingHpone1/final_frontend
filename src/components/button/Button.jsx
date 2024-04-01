@@ -1,7 +1,7 @@
 import React from "react";
 
 import { images } from "../images";
-import { useLocalSessionStore } from "../Store";
+import { useLocalSessionStore, useMessage } from "../Store";
 
 export const FollowButton = () => {
     return (
@@ -25,10 +25,20 @@ export const FollowingButton = () => {
     );
 };
 
-export const MessageButton = () => {
+export const MessageButton = ({ userID }) => {
     const { userData } = useLocalSessionStore();
+    const { apiCall } = useMessage();
 
-    const clickHandler = () => {};
+    const postData = {
+        chatId: userID + userData.data.id,
+        senderId: userData.data.id,
+        recipientId: userID,
+        content: "This is content",
+    };
+
+    const clickHandler = async () => {
+        await apiCall(postData);
+    };
 
     return (
         <div>

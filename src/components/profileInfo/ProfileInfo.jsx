@@ -50,7 +50,7 @@ const ProfileInfo = ({ data, edu, isOwnProfile }) => {
                                 {!isOwnProfile ? (
                                     <div className="flex items-center space-x-4">
                                         <ProfileFollowButton />
-                                        <MessageButton />
+                                        <MessageButton userID={data.id} />
                                     </div>
                                 ) : (
                                     ""

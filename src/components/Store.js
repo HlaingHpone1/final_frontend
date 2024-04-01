@@ -22,6 +22,10 @@ const apiPostWorkExp = `${import.meta.env.VITE_API_WORK_EXP_URL}`;
 const apiGetSkillByUser = `${import.meta.env.VITE_API_SKILL_URL}/all`;
 const apiPostSkill = `${import.meta.env.VITE_API_SKILL_URL}`;
 
+const apiMessage = `${import.meta.env.VITE_API_MESSAGE_URL}`;
+
+const apiComment = `${import.meta.env.VITE_API_COMMENT_URL}`;
+
 // API_NewUserRegister
 export const useUserStorage = create(
     (set, get) => ({
@@ -509,6 +513,76 @@ export const useDeletePost = create(devtools(
                 }))
                 return res.data;
                 // }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+))
+
+// API_MESSAGE
+export const useMessage = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        messageData: null,
+        apiCall: async (postData) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.post(apiMessage, postData);
+                if (res.data.httpStatusCode === 201) {
+                    set(() => ({
+                        messageData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+                    return res.data;
+                }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+))
+
+// API_POST_MESSAGE
+export const usePostMessage = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        commentData: null,
+        apiCall: async (userID, postID, postData) => {
+            set({ isLoading: true });
+
+            try {
+                const res = await axios.post(`${apiComment}?user_id=${userID}&post_id=${postID}`, postData);
+
+                if (res.data.httpStatusCode === 201) {
+                    set(() => ({
+                        commentData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+                    return res.data;
+                }
 
             } catch (err) {
                 if (err.response) {
