@@ -53,11 +53,6 @@ const Post = ({ data, isOwner }) => {
         setIsDropdownOpen(!isDropdownOpen);
     };
 
-    const handleEdit = (postID) => {
-        console.log(postID);
-        console.log(id);
-    };
-
     const handleDelete = async (postID) => {
         await deletePost(postID);
         window.location.reload();
@@ -127,7 +122,6 @@ const Post = ({ data, isOwner }) => {
                                     to={`/profile/${id}/posts/${data.id}/edit`}
                                     className="block px-4 py-2 w-full text-base text-gray-700 hover:bg-gray-100"
                                     onClick={() => {
-                                        handleEdit(data.id);
                                         setModalIsOpen(true);
                                     }}
                                 >

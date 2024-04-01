@@ -3,7 +3,7 @@ import React from "react";
 import { img } from "../img";
 import { Link } from "react-router-dom";
 
-export const ShortAds = () => {
+export const Ads = () => {
     return (
         <div>
             <img
@@ -33,4 +33,19 @@ export const SubscriptionAds = () => {
     )
 }
 
+export const LongAds = ()=>{
+    return (
+        <div className="">
+            <img src={img.longads2} className=" rounded-2xl mb-5 h-[500px]" />
+        </div>
+    )
+}
+
+export const MediumAds = ()=>{
+    return (
+        <div className="">
+            <img src={img.mediumads} className=" rounded-2xl mb-5 h-[400px]" />
+        </div>
+    )
+}
 
