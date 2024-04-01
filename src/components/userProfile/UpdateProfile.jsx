@@ -100,13 +100,13 @@ const UpdateProfile = () => {
                                     </div>
 
                                     <div className="input-box mb-3">
-                                        <div class="mt-2 flex">
+                                        <div className="mt-2 flex">
                                             <select
                                                 id="gender"
                                                 name="gender"
                                                 value={data.gender}
                                                 onChange={inputHandler}
-                                                class="focus:outline-none bg-transparent border-b-2 rounded-md  focus:border-slate-600 transition-colors duration-200 ease-linear w-32  mx-auto block text-lg px-2 py-2.5"
+                                                className="focus:outline-none bg-transparent border-b-2 rounded-md  focus:border-slate-600 transition-colors duration-200 ease-linear w-32  mx-auto block text-lg px-2 py-2.5"
                                             >
                                                 <option>Male</option>
                                                 <option>Female</option>

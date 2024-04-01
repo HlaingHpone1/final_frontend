@@ -117,9 +117,7 @@ const Post = ({ data, isOwner }) => {
         (comment) => comment.postId === data.id
     );
 
-    // console.log("====================================");
-    // console.log(filteredComments);
-    // console.log("====================================");
+    // console.log(data);
 
     return (
         <>
@@ -136,7 +134,9 @@ const Post = ({ data, isOwner }) => {
                             </div>
                             <div>
                                 <h2 className="text-base font-bold font-Roboto-Slab">
-                                    {data.accountName}
+                                    <Link to={`/profile/${data.userId}`}>
+                                        {data.accountName}
+                                    </Link>
                                 </h2>
                                 <p className="text-xs text-[#818181]">
                                     {followers} Followers
