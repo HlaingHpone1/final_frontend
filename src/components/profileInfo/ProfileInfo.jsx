@@ -72,7 +72,7 @@ const ProfileInfo = ({ data, edu, isOwnProfile }) => {
                                 </div>
                             )}
                         </div>
-                        <div className="">
+                        <div className="col-span-4 text-center md:text-left">
                             <Link to={`/profile/${data.id}/updateprofile`}>
                                 Update Profile
                             </Link>

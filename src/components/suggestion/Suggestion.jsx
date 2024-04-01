@@ -50,17 +50,11 @@ const Suggestion = () => {
                     {isLoading && <PostLoading isLoading={isLoading} />}
                     {data &&
                         data
-                            .slice(0, 4)
                             .filter((item) => item.id !== userData.data.id)
+                            .slice(0, 4)
                             .map((item, index) => (
                                 <CompanyPage key={index} data={item} />
                             ))}
-                    {/* {data &&
-                        data
-                            .slice(0, 4)
-                            .map((item, index) => (
-                                <CompanyPage key={index} data={item} />
-                            ))} */}
                 </div>
                 <div className="view-all">
                     <Link to="/network" className="text-sm font-semibold">

@@ -15,7 +15,7 @@ import ProfilePosts from "../components/profilePosts/ProfilePosts";
 import ProfileEducation from "../components/profileEducation/ProfileEducation";
 import ProfileExperience from "../components/profileExperience/ProfileExperience";
 import ProfileSkill from "../components/profileSkill/ProfileSkill";
-import { SubscriptionAds } from "../components/ads/Ads";
+import { LongAds } from "../components/ads/Ads";
 import Footer from "../components/footer/Footer";
 
 import { Loading } from "../components/loading/Loading";
@@ -110,7 +110,7 @@ const Profile = () => {
                             />
                         </div>
                         <div className="lg:col-span-1 lg:block hidden">
-                            <SubscriptionAds />
+                            <LongAds />
                             <Footer />
                         </div>
                     </div>

@@ -3,7 +3,7 @@ import React from "react";
 import { img } from "../img";
 import { Link } from "react-router-dom";
 
-export const Ads = () => {
+export const ShortAds = () => {
     return (
         <div>
             <img src={img.ads} className="rounded-2xl w-80 h-64 mb-4" />

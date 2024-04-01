@@ -25,7 +25,7 @@ const UpdateProfile = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-    }
+    };
 
     return (
         <div className="bg-background">
@@ -36,9 +36,7 @@ const UpdateProfile = () => {
                     </h1>
 
                     <div className="grid grid-cols-3">
-                        <form
-                            className="col-span-2"
-                            onSubmit={submitHandler}>
+                        <form className="col-span-2" onSubmit={submitHandler}>
                             <div className="flex justify-between">
                                 <div className="input-box mb-3">
                                     <input
@@ -85,11 +83,11 @@ const UpdateProfile = () => {
                                         name="phNumber"
                                         value={data.phNumber}
                                         onChange={inputHandler}
-                                        placeholder="Enter your Phone Number" />
+                                        placeholder="Enter your Phone Number"
+                                    />
                                 </div>
 
                                 <div className="flex space-x-4">
-
                                     <div className="input-box mb-3">
                                         <input
                                             className={`focus:outline-none bg-transparent border-b-2 rounded-md  focus:border-slate-700 transition-colors duration-200 ease-linear w-60  mx-auto block text-lg px-2 py-2.5 `}
@@ -108,16 +106,15 @@ const UpdateProfile = () => {
                                                 name="gender"
                                                 value={data.gender}
                                                 onChange={inputHandler}
-                                                class="focus:outline-none bg-transparent border-b-2 rounded-md  focus:border-slate-600 transition-colors duration-200 ease-linear w-32  mx-auto block text-lg px-2 py-2.5">
+                                                class="focus:outline-none bg-transparent border-b-2 rounded-md  focus:border-slate-600 transition-colors duration-200 ease-linear w-32  mx-auto block text-lg px-2 py-2.5"
+                                            >
                                                 <option>Male</option>
                                                 <option>Female</option>
                                                 <option>Other</option>
                                             </select>
                                         </div>
                                     </div>
-
                                 </div>
-
                             </div>
 
                             <div className="input-box mb-3">
@@ -153,7 +150,7 @@ const UpdateProfile = () => {
 
                         <div className=" col-span-1 mx-auto">
                             <ShortAds />
-                            <Footer/>
+                            <Footer />
                         </div>
                     </div>
                 </div>

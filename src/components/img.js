@@ -10,6 +10,10 @@ import basic from "../assets/img/basic.png";
 import standard from "../assets/img/standard.png";
 import premium from "../assets/img/premium.png";
 import check from "../assets/img/check.png";
+import longads from "../assets/img/longads.jpg";
+import longads2 from "../assets/img/longads2.jpg";
+import mediumads from "../assets/img/mediumads.jpg";
+import users from "../assets/img/users.png";
 
 export const img = {
     twopeople,
@@ -24,5 +28,9 @@ export const img = {
     standard,
     premium,
     check,
+    longads,
+    longads2,
+    mediumads,
+    users,
 };
 
