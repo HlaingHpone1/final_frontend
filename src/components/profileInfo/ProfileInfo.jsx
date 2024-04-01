@@ -58,9 +58,9 @@ const ProfileInfo = ({ data, edu, isOwnProfile }) => {
                                 )}
                             </div>
                         </div>
-                        <div className="education hidden md:flex space-x-2 col-span-1  items-center">
+                        <div className="">
                             {edu && (
-                                <div className="">
+                                <div className="education hidden md:flex space-x-2 col-span-1  items-center">
                                     <img
                                         className="block size-12 p-1 bg-slate-300 object-cover rounded-xl aspect-square"
                                         src="https://cdn-icons-png.freepik.com/512/6570/6570884.png"

@@ -16,7 +16,7 @@ export const ShortAds = () => {
 
 export const SubscriptionAds = () => {
     return (
-        <div className=" w-80 bg-gray-600 rounded-xl">
+        <div className="w-full bg-gray-600 rounded-xl">
             <div className="p-4 text-white">
                 <p className="font-medium text-lg">
                     Grow Your Network with Premium
