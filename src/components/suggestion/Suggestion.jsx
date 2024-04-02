@@ -5,7 +5,6 @@ import CompanyPage from "../companyPage/CompanyPage";
 import { Link } from "react-router-dom";
 import { useGetAllUsers } from "../Store";
 import { PostLoading } from "../loading/Loading";
-import axios from "axios";
 
 const Suggestion = () => {
     const {
@@ -22,8 +21,6 @@ const Suggestion = () => {
 
     const [data, setData] = useState([]);
     const [page, setPage] = useState(0);
-    const [isFollowed, setIsFollowed] = useState(false);
-    const [followStatuses, setFollowStatuses] = useState([]);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -37,35 +34,7 @@ const Suggestion = () => {
 
         return () => controller.abort();
     }, []);
-    
-    function checkFollowStatus(following, follower) {
-        return axios.get(`http://localhost:8080/follower/${following}/hasFollowedBack/${follower}`)
-            .then(response => response.data)
-            .catch(error => {
-                console.error("Error on check follow status:", error);
-                // Handle the error
-            });
-    }
 
-    console.log(userData.data.id)
-    
-
-
-    useEffect(() => {
-        Promise.all(
-            data
-                .filter((item) => item.id !== userData.data.id)
-                .slice(0, 4)
-                .map((item) => checkFollowStatus(userData.data.id, item.id))
-        )
-            .then((statuses) => setFollowStatuses(statuses))
-            .catch((error) => {
-                console.error(error);
-                setFollowStatuses(data.slice(0, 4).map(() => false));
-            });
-    }, [data, userData]);
-
-    console.log(followStatuses)
     return (
         <div className="mb-5 bg-white shadow-custom rounded-2xl">
             <div className="inner-card px-3 py-4">
@@ -84,8 +53,8 @@ const Suggestion = () => {
                             .filter((item) => item.id !== userData.data.id)
                             .slice(0, 4)
                             .map((item, index) => (
-                                <CompanyPage key={index} data={item} followStatus={followStatuses[index]} />
-                ))}
+                                <CompanyPage key={index} data={item} />
+                            ))}
                 </div>
                 <div className="view-all">
                     <Link to="/network" className="text-sm font-semibold">
