@@ -1,25 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ShortAds } from "../ads/Ads";
 import Footer from "../footer/Footer";
 
-import { useGetUser, useLocalSessionStore } from "../Store";
-import { useParams } from "react-router-dom";
-
 const UpdateProfile = () => {
-    const { isLoading, apiCall: userInfoAPI } = useGetUser();
-
-    const { userData: localUser } = useLocalSessionStore();
-
-    const { id } = useParams();
-    const isOwnProfile = id === localUser.data.id;
-
-    const [userData, setUserData] = useState([]);
-
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
-        mail: "",
-        phoneNumber: "",
+        username: "",
+        email: "",
+        phNumber: "",
         gender: "",
         dob: "",
         address: "",
@@ -30,44 +19,13 @@ const UpdateProfile = () => {
         const { name, value } = e.target;
         setData({
             ...data,
-            [name]: value,
+            [name]: value.trim(),
         });
     };
 
     const submitHandler = async (e) => {
         e.preventDefault();
     };
-
-    let keys = [
-        "firstName",
-        "lastName",
-        "mail",
-        "phoneNumber",
-        "gender",
-        "dob",
-        "address",
-        "bio",
-    ];
-
-    useEffect(() => {
-        const controller = new AbortController();
-
-        const fetchUser = async () => {
-            const result = await userInfoAPI(id, controller.signal);
-
-            keys.forEach((key) => {
-                data[key] = result.data[key] == null ? "" : result.data[key];
-            });
-
-            setData({
-                ...data,
-            });
-        };
-
-        fetchUser();
-
-        return () => controller.abort();
-    }, []);
 
     return (
         <div className="bg-background">
@@ -79,10 +37,10 @@ const UpdateProfile = () => {
 
                     <div className="grid grid-cols-3">
                         <form className="col-span-2" onSubmit={submitHandler}>
-                            <div className="flex justify-center space-x-5">
-                                <div className="input-box w-full mb-3">
+                            <div className="flex justify-between">
+                                <div className="input-box mb-3">
                                     <input
-                                        className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                                        className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-96 block text-lg px-2 py-2.5 `}
                                         type="text"
                                         name="firstName"
                                         value={data.firstName}
@@ -92,11 +50,11 @@ const UpdateProfile = () => {
                                     />
                                 </div>
 
-                                <div className="input-box w-full mb-3">
+                                <div className="input-box mb-3">
                                     <input
-                                        className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full  mx-auto block text-lg px-2 py-2.5 `}
+                                        className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-96  mx-auto block text-lg px-2 py-2.5 `}
                                         type="text"
-                                        name="lastName"
+                                        name="lastname"
                                         value={data.lastName}
                                         onChange={inputHandler}
                                         placeholder="Last Name"
@@ -109,51 +67,52 @@ const UpdateProfile = () => {
                                 <input
                                     className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full mx-auto block text-lg px-2 py-2.5 `}
                                     type="email"
-                                    name="mail"
-                                    value={data.mail}
+                                    name="email"
+                                    value={data.email}
                                     onChange={inputHandler}
                                     placeholder="Enter your Email"
                                     autoComplete="off"
                                 />
                             </div>
 
-                            <div className="flex justify-between space-x-5">
-                                <div className="input-box mb-3 w-full">
+                            <div className="flex justify-between">
+                                <div className="input-box mb-3">
                                     <input
-                                        className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full  mx-auto block text-lg px-2 py-2.5 `}
+                                        className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-96  mx-auto block text-lg px-2 py-2.5 `}
                                         type="text"
-                                        name="phoneNumber"
-                                        value={data.phoneNumber}
+                                        name="phNumber"
+                                        value={data.phNumber}
                                         onChange={inputHandler}
                                         placeholder="Enter your Phone Number"
                                     />
                                 </div>
 
-                                <div className="input-box mb-3 w-full">
-                                    <input
-                                        className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full  mx-auto block text-lg px-2 py-2.5 `}
-                                        type="date"
-                                        name="dob"
-                                        value={data.dob}
-                                        onChange={inputHandler}
-                                        autoComplete="off"
-                                    />
-                                </div>
-                                <div className="input-box mb-3 w-full">
-                                    <div className="mt-2 flex w-full">
-                                        <select
-                                            id="gender"
-                                            name="gender"
-                                            value={data.gender}
+                                <div className="flex space-x-4">
+                                    <div className="input-box mb-3">
+                                        <input
+                                            className={`focus:outline-none bg-transparent border-b-2 rounded-md  focus:border-slate-700 transition-colors duration-200 ease-linear w-60  mx-auto block text-lg px-2 py-2.5 `}
+                                            type="date"
+                                            name="dateofbirth"
+                                            value={data.dob}
                                             onChange={inputHandler}
-                                            className="focus:outline-none bg-transparent border-b-2  focus:border-slate-600 transition-colors duration-200 ease-linear w-full  mx-auto block text-lg px-2 py-2.5"
-                                        >
-                                            <option value="Male">Male</option>
-                                            <option value="Female">
-                                                Female
-                                            </option>
-                                            <option value="Other">Other</option>
-                                        </select>
+                                            autoComplete="off"
+                                        />
+                                    </div>
+
+                                    <div className="input-box mb-3">
+                                        <div className="mt-2 flex">
+                                            <select
+                                                id="gender"
+                                                name="gender"
+                                                value={data.gender}
+                                                onChange={inputHandler}
+                                                className="focus:outline-none bg-transparent border-b-2 rounded-md  focus:border-slate-600 transition-colors duration-200 ease-linear w-32  mx-auto block text-lg px-2 py-2.5"
+                                            >
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                                <option>Other</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +141,7 @@ const UpdateProfile = () => {
                             </div>
 
                             <button
-                                className="bg-primary text-white px-5 py-2 text-lg"
+                                className="bg-primary text-white px-5 py-2 rounded-md text-lg"
                                 type="submit"
                             >
                                 Submit

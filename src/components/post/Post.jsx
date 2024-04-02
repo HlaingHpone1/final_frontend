@@ -107,15 +107,9 @@ const Post = ({ data, isOwner }) => {
         setIsDropdownOpen(!isDropdownOpen);
     };
 
-    const handleEdit = (id) => {
-        console.log("====================================");
-        console.log("Edit post", id);
-        console.log("====================================");
-    };
-
-    const handleDelete = async (id) => {
-        await deletePost(id);
-        // window.location.reload();
+    const handleDelete = async (postID) => {
+        await deletePost(postID);
+        window.location.reload();
     };
 
     const filteredComments = dataComments.filter(
@@ -159,13 +153,15 @@ const Post = ({ data, isOwner }) => {
                                 <div className="dropdown-menu absolute top-5 right-0 z-30 shadow-md bg-white rounded-md py-2">
                                     <button
                                         className="block px-4 py-2 w-full text-base text-gray-700 hover:bg-gray-100"
-                                        onClick={() => handleEdit(data.id)}
+                                        onClick={() => handleEdit(data.postId)}
                                     >
                                         Edit
                                     </button>
                                     <button
                                         className="block px-4 py-2 w-full text-base text-gray-700 hover:bg-gray-100"
-                                        onClick={() => handleDelete(data.id)}
+                                        onClick={() =>
+                                            handleDelete(data.postId)
+                                        }
                                     >
                                         Delete
                                     </button>
