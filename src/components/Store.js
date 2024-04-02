@@ -22,6 +22,10 @@ const apiPostWorkExp = `${import.meta.env.VITE_API_WORK_EXP_URL}`;
 const apiGetSkillByUser = `${import.meta.env.VITE_API_SKILL_URL}/all`;
 const apiPostSkill = `${import.meta.env.VITE_API_SKILL_URL}`;
 
+const apiMessage = `${import.meta.env.VITE_API_MESSAGE_URL}`;
+
+const apiComment = `${import.meta.env.VITE_API_COMMENT_URL}`;
+
 // API_NewUserRegister
 export const useUserStorage = create(
     (set, get) => ({
@@ -470,6 +474,345 @@ export const useCreateSkill = create(devtools(
             try {
                 const res = await axios.post(`${apiPostSkill}/${id}`, postData);
                 if (res.data.httpStatusCode === 201) {
+                    set(() => ({
+                        skillData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+                    return res.data;
+                }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+))
+
+// API_DELETE_POST
+export const useDeletePost = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        apiCall: async (id) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.delete(`${apiPostNewPost}/${id}`);
+                // if (res.data.httpStatusCode === 200) {
+                set(() => ({
+                    success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                }))
+                return res.data;
+                // }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+))
+
+// API_DELETE_EDUCATION
+export const useDeleteEducation = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        apiCall: async (id) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.delete(`${apiPostEducation}/${id}`);
+                // if (res.data.httpStatusCode === 200) {
+                set(() => ({
+                    success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                }))
+                // return res.data;
+                // }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+))
+
+// API_DELETE_WORK_EXP
+export const useDeleteWorkExp = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        apiCall: async (id) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.delete(`${apiPostWorkExp}/${id}`);
+                // if (res.data.httpStatusCode === 200) {
+                set(() => ({
+                    success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                }))
+                // return res.data;
+                // }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+))
+
+// API_DELETE_SKILL
+export const useDeleteSkill = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        apiCall: async (id) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.delete(`${apiPostSkill}/${id}`);
+                // if (res.data.httpStatusCode === 200) {
+                set(() => ({
+                    success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                }))
+                // return res.data;
+                // }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+))
+// API_GET_EDUCATION_BY_ID
+export const useGetEducationById = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        educationData: null,
+        apiCall: async (id) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.get(`${apiPostEducation}/${id}`);
+                if (res.data.httpStatusCode === 200) {
+                    set(() => ({
+                        educationData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+                    return res.data;
+                }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        }
+    })
+))
+
+// API_UPDATE_EDUCATION
+export const useUpdateEducation = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        educationData: null,
+        apiCall: async (id, postData) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.put(`${apiPostEducation}/${id}`, postData);
+                if (res.data.httpStatusCode === 200) {
+                    set(() => ({
+                        educationData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+                    return res.data;
+                }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+))
+
+// API_GET_WORK_EXP_BY_ID
+export const useGetWorkExpById = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        workExpData: null,
+        apiCall: async (id, signal) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.get(`${apiPostWorkExp}/${id}`, {
+                    signal
+                });
+                if (res.data.httpStatusCode === 200) {
+                    set(() => ({
+                        workExpData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+                    return res.data;
+                }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        }
+    })
+))
+
+// API_UPDATE_WORK_EXP
+export const useUpdateWorkExp = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        workExpData: null,
+        apiCall: async (id, postData) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.put(`${apiPostWorkExp}/${id}`, postData);
+                if (res.data.httpStatusCode === 200) {
+                    set(() => ({
+                        workExpData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+                    return res.data;
+                }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+))
+
+// API_GET_SKILL_BY_ID
+export const useGetSkillById = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        skillData: null,
+        apiCall: async (id, signal) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.get(`${apiPostSkill}/${id}`, {
+                    signal
+                });
+                if (res.data.httpStatusCode === 200) {
+                    set(() => ({
+                        skillData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+                    return res.data;
+                }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                // abortController.abort();
+                set({ isLoading: false })
+            }
+        }
+    })
+))
+
+// API_UPDATE_SKILL
+export const useUpdateSkill = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        skillData: null,
+        apiCall: async (id, postData) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.put(`${apiPostSkill}/${id}`, postData);
+                if (res.data.httpStatusCode === 200) {
                     set(() => ({
                         skillData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
                     }))

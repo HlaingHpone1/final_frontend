@@ -15,6 +15,11 @@ import ProfilePosts from "../components/profilePosts/ProfilePosts";
 import ProfileEducation from "../components/profileEducation/ProfileEducation";
 import ProfileExperience from "../components/profileExperience/ProfileExperience";
 import ProfileSkill from "../components/profileSkill/ProfileSkill";
+<<<<<<< HEAD
+=======
+import { LongAds } from "../components/ads/Ads";
+import Footer from "../components/footer/Footer";
+>>>>>>> 2fe06b3018e33656eb22b515b71cb70a714295f9
 
 import { Loading } from "../components/loading/Loading";
 
@@ -82,6 +87,7 @@ const Profile = () => {
         <>
             <Loading isLoading={isLoading} />
             <div className="bg-background">
+<<<<<<< HEAD
                 <ProfileInfo
                     isOwnProfile={isOwnProfile}
                     edu={educationData[0]}
@@ -97,6 +103,39 @@ const Profile = () => {
                     data={experienceData}
                 />
                 <ProfileSkill isOwnProfile={isOwnProfile} data={skillData} />
+=======
+                <div className="inner max-w-1240px mx-auto px-5 xl:p-0">
+                    <div className="grid grid-cols-3 lg:grid-cols-4 gap-5 py-5">
+                        <div className="col-span-3">
+                            <ProfileInfo
+                                isOwnProfile={isOwnProfile}
+                                edu={educationData[0]}
+                                data={userData}
+                            />
+                            <ProfilePosts
+                                isOwnProfile={isOwnProfile}
+                                data={postData}
+                            />
+                            <ProfileEducation
+                                isOwnProfile={isOwnProfile}
+                                data={educationData}
+                            />
+                            <ProfileExperience
+                                isOwnProfile={isOwnProfile}
+                                data={experienceData}
+                            />
+                            <ProfileSkill
+                                isOwnProfile={isOwnProfile}
+                                data={skillData}
+                            />
+                        </div>
+                        <div className="lg:col-span-1 lg:block hidden">
+                            <LongAds />
+                            <Footer />
+                        </div>
+                    </div>
+                </div>
+>>>>>>> 2fe06b3018e33656eb22b515b71cb70a714295f9
             </div>
         </>
     );

@@ -21,6 +21,12 @@ import OldPswReset from "../../pages/OldPswReset";
 import ChangePsw from "../../pages/ChangePsw";
 
 import UserPosts from "../userPosts/UserPosts";
+<<<<<<< HEAD
+=======
+import UpdateProfile from "../userProfile/UpdateProfile";
+import Subscription from "../../pages/Subscription";
+import Search from "../../pages/Search";
+>>>>>>> 2fe06b3018e33656eb22b515b71cb70a714295f9
 
 const Router = () => {
     const data = sessionStorage.getItem("userData");
@@ -44,6 +50,10 @@ const Router = () => {
                         <Route path="/" element={<Home />}></Route>
                         <Route path="/contact" element={<ContactUs />}></Route>
                         <Route path="/network" element={<Network />}></Route>
+                        <Route
+                            path="/subscription"
+                            element={<Subscription />}
+                        ></Route>
                         <Route
                             path="/profile/:id"
                             element={<Profile />}
@@ -71,6 +81,7 @@ const Router = () => {
                             element={<Experience />}
                         ></Route>
 
+                        <Route path="/search" element={<Search />}></Route>
                         <Route path="/message" element={<Message />}></Route>
                         <Route path="/settings" element={<Settings />}></Route>
                         <Route path="/about" element={<About />}></Route>

@@ -54,13 +54,14 @@ const ProfileInfo = ({ data, edu, isOwnProfile }) => {
                                 {!isOwnProfile ? (
                                     <div className="flex items-center space-x-4">
                                         <ProfileFollowButton />
-                                        <MessageButton />
+                                        <MessageButton userID={data.id} />
                                     </div>
                                 ) : (
                                     ""
                                 )}
                             </div>
                         </div>
+<<<<<<< HEAD
                         <div className="education hidden md:flex space-x-2 col-span-1  items-center">
                             <img
                                 className="block size-12 p-1 bg-slate-300 object-cover rounded-xl aspect-square"
@@ -71,6 +72,29 @@ const ProfileInfo = ({ data, edu, isOwnProfile }) => {
                                 {edu ? edu.schoolName : ""}
                             </p>
                         </div>
+=======
+                        <div className="">
+                            {edu && (
+                                <div className="education hidden md:flex space-x-2 col-span-1  items-center">
+                                    <img
+                                        className="block size-12 p-1 bg-slate-300 object-cover rounded-xl aspect-square"
+                                        src="https://cdn-icons-png.freepik.com/512/6570/6570884.png"
+                                        alt="this is icon"
+                                    />
+                                    <p className=" text-xl lg:text-2xl font-bold font-Roboto-Slab">
+                                        {edu ? edu.schoolName : ""}
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+                        {isOwnProfile && (
+                            <div className="col-span-4 text-center md:text-left">
+                                <Link to={`/profile/${data.id}/updateprofile`}>
+                                    Update Profile
+                                </Link>
+                            </div>
+                        )}
+>>>>>>> 2fe06b3018e33656eb22b515b71cb70a714295f9
                     </div>
                 </div>
             </div>

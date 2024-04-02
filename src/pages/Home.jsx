@@ -10,7 +10,6 @@ import Suggestion from "../components/suggestion/Suggestion";
 
 import { useGetPostPagination } from "../components/Store";
 import { PostLoading } from "../components/loading/Loading";
-import { useLocalSessionStore } from "../components/Store";
 
 const Home = () => {
     const [data, setData] = useState([]);
@@ -18,7 +17,12 @@ const Home = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [postLoad, setPostLoad] = useState(true);
 
+<<<<<<< HEAD
     const {userData} = useLocalSessionStore();
+=======
+    const { id } = useParams();
+    const { userData: localUser } = useLocalSessionStore();
+>>>>>>> 2fe06b3018e33656eb22b515b71cb70a714295f9
 
     const { error, errorMessage, errorCode, postsAllData, success, apiCall } =
         useGetPostPagination();
@@ -65,7 +69,6 @@ const Home = () => {
     // console.log("Github error",data);
     // console.log(data[0]);
 
-
     return (
         <>
             {error && errorMessage && (
@@ -73,12 +76,11 @@ const Home = () => {
                     {errorMessage}
                 </p>
             )}
-            <main className="bg-secondary ">
+            <main className="">
                 <div className=" max-w-1240px  mx-auto font-Roboto">
                     <div className="grid grid-cols-home1 md:grid-cols-home2 lg:grid-cols-home3 justify-between  pt-6 gap-x-6 px-10 xl:px-0">
                         <section className="col-span-2 md:col-span-1 mb-5 md:m-0">
-                            {<UserProfile show={true} data={userData} />}
-                            
+                            {<UserProfile show={true} data={localUser} />}
                         </section>
                         <section className="col-span-2 ">
                             <CreatePost />

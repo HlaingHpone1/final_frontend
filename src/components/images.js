@@ -24,10 +24,25 @@ import plus from "../assets/myicon/plus.png"
 import imageIcon from "../assets/myicon/image.png"
 import group1 from "../assets/myicon/group1.png"
 import backArrow from "../assets/myicon/backArrow.png"
+import sent1 from "../assets/myicon/send1.png"
+import edit from "../assets/myicon/edit.png"
+import delete1 from "../assets/myicon/delete.png"
+import add from "../assets/myicon/add.png"
+import addAvatar from "../assets/myicon/addAvatar.png"
+import attach from "../assets/myicon/attach.png"
+import cam from "../assets/myicon/cam.png"
+import img from "../assets/myicon/img.png"
+import more from "../assets/myicon/more.png"
 
 
 
 export const images = {
+    add,
+    addAvatar,
+    attach,
+    cam,
+    img,
+    more,
     logo,
     logo1,
     logoWhite,

@@ -48,6 +48,10 @@ const Suggestion = () => {
                     {isLoading && <PostLoading isLoading={isLoading} />}
                     {data &&
                         data
+<<<<<<< HEAD
+=======
+                            .filter((item) => item.id !== userData.data.id)
+>>>>>>> 2fe06b3018e33656eb22b515b71cb70a714295f9
                             .slice(0, 4)
                             .map((item, index) => (
                                 <CompanyPage key={index} data={item} />
