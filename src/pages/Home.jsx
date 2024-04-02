@@ -17,12 +17,8 @@ const Home = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [postLoad, setPostLoad] = useState(true);
 
-<<<<<<< HEAD
-    const {userData} = useLocalSessionStore();
-=======
     const { id } = useParams();
     const { userData: localUser } = useLocalSessionStore();
->>>>>>> 2fe06b3018e33656eb22b515b71cb70a714295f9
 
     const { error, errorMessage, errorCode, postsAllData, success, apiCall } =
         useGetPostPagination();

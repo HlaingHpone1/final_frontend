@@ -61,18 +61,6 @@ const ProfileInfo = ({ data, edu, isOwnProfile }) => {
                                 )}
                             </div>
                         </div>
-<<<<<<< HEAD
-                        <div className="education hidden md:flex space-x-2 col-span-1  items-center">
-                            <img
-                                className="block size-12 p-1 bg-slate-300 object-cover rounded-xl aspect-square"
-                                src="https://cdn-icons-png.freepik.com/512/6570/6570884.png"
-                                alt="this is icon"
-                            />
-                            <p className=" text-xl lg:text-2xl font-bold font-Roboto-Slab">
-                                {edu ? edu.schoolName : ""}
-                            </p>
-                        </div>
-=======
                         <div className="">
                             {edu && (
                                 <div className="education hidden md:flex space-x-2 col-span-1  items-center">
@@ -94,7 +82,6 @@ const ProfileInfo = ({ data, edu, isOwnProfile }) => {
                                 </Link>
                             </div>
                         )}
->>>>>>> 2fe06b3018e33656eb22b515b71cb70a714295f9
                     </div>
                 </div>
             </div>

@@ -2,21 +2,14 @@ import React from "react";
 
 import { img } from "../img";
 
-const Ads = () => {
+const ShortAds = () => {
     return (
         <div>
-<<<<<<< HEAD
-            <img src={img.ads} className="rounded-2xl w-[335px] h-64 mb-4" />
-=======
             <img src={img.ads} className="rounded-2xl w-80 h-64 mb-4" />
->>>>>>> 2fe06b3018e33656eb22b515b71cb70a714295f9
         </div>
     );
 };
 
-<<<<<<< HEAD
-export default Ads;
-=======
 export const SubscriptionAds = () => {
     return (
         <div className=" w-80 bg-gray-600 rounded-xl">
@@ -67,4 +60,3 @@ export const MediumAds = () => {
         </div>
     );
 };
->>>>>>> 2fe06b3018e33656eb22b515b71cb70a714295f9

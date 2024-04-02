@@ -124,25 +124,6 @@ const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen }) => {
                     />
                     {errors.type && <p>{errors.type}</p>}
 
-<<<<<<< HEAD
-                    <input
-                        type="date"
-                        name="startDate"
-                        value={experience.startDate}
-                        onChange={inputHandler}
-                    />
-                    {errors.startDate && <p>{errors.startDate}</p>}
-
-                    <input
-                        type="date"
-                        name="endDate"
-                        value={experience.endDate}
-                        onChange={inputHandler}
-                    />
-                    {errors.endDate && <p>{errors.endDate}</p>}
-
-                    <button type="submit">Submit</button>
-=======
                     <div className="flex justify-center space-x-5 mt-3">
                         <div className="input-box mb-3 w-full">
                             <input
@@ -152,10 +133,11 @@ const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen }) => {
                                 value={experience.startDate}
                                 onChange={inputHandler}
                             />
-                            {errors.startDate &&
+                            {errors.startDate && (
                                 <p className="text-red-700 mt-2">
                                     {errors.startDate}
-                                </p>}
+                                </p>
+                            )}
                         </div>
 
                         <div className="input-box mb-8 w-full">
@@ -166,21 +148,22 @@ const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen }) => {
                                 value={experience.endDate}
                                 onChange={inputHandler}
                             />
-                            {errors.endDate &&
+                            {errors.endDate && (
                                 <p className="text-red-700 mt-2">
                                     {errors.endDate}
-                                </p>}
+                                </p>
+                            )}
                         </div>
                     </div>
 
                     <div className="flex justify-end">
                         <button
                             type="submit"
-                            className="bg-primary text-white px-5 py-2 rounded-md text-lg">
+                            className="bg-primary text-white px-5 py-2 rounded-md text-lg"
+                        >
                             Submit
                         </button>
                     </div>
->>>>>>> 2fe06b3018e33656eb22b515b71cb70a714295f9
                 </form>
             </Modal>
         </div>

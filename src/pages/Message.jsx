@@ -1,9 +1,6 @@
 import React from "react";
 
 const Message = () => {
-<<<<<<< HEAD
-    return <div></div>;
-=======
     return (
         <div className=" h-screen">
             <div className="inner max-w-1240px mx-auto px-5 xl:px-0 pt-8">
@@ -66,7 +63,6 @@ const Message = () => {
             </div>
         </div>
     );
->>>>>>> 2fe06b3018e33656eb22b515b71cb70a714295f9
 };
 
 export default Message;

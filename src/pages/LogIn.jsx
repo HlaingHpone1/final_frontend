@@ -17,16 +17,9 @@ const LogIn = () => {
                             Create Acc ?
                         </Link>
                         <div className=" text-right">
-<<<<<<< HEAD
-                            <Link className=" font-medium" to="/reset">Forgot Password?</Link>
-                            <div>
-                                <Link className="font-medium" to="/reset">Reset password with OTP</Link>
-                            </div>
-=======
                             <Link className=" font-medium" to="/reset">
                                 Forgot Password?
                             </Link>
->>>>>>> 2fe06b3018e33656eb22b515b71cb70a714295f9
                         </div>
                     </div>
                 </div>
