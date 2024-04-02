@@ -6,6 +6,7 @@ import cancelBlack from "../assets/img/cancelBlack.png";
 import ads from "../assets/img/ads.png";
 import userBg from "../assets/img/userbg.jpg";
 import userProfile from "../assets/img/userProfile.jpg";
+import error from "../assets/img/error.jpg";
 
 export const img = {
     twopeople,
@@ -16,6 +17,6 @@ export const img = {
     ads,
     userBg,
     userProfile,
-
+    error,
 };
 
