@@ -21,12 +21,9 @@ import OldPswReset from "../../pages/OldPswReset";
 import ChangePsw from "../../pages/ChangePsw";
 
 import UserPosts from "../userPosts/UserPosts";
-<<<<<<< HEAD
-=======
 import UpdateProfile from "../userProfile/UpdateProfile";
 import Subscription from "../../pages/Subscription";
 import Search from "../../pages/Search";
->>>>>>> 2fe06b3018e33656eb22b515b71cb70a714295f9
 
 const Router = () => {
     const data = sessionStorage.getItem("userData");
