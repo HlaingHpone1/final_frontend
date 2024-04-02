@@ -5,6 +5,8 @@ import { images } from "../images";
 import { CommentContent } from "../comment/CommentContent";
 import { useDeletePost, usePostMessage, useLocalSessionStore } from "../Store";
 
+import { Link, useParams } from "react-router-dom";
+
 import {
     collection,
     doc,

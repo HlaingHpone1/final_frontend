@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import Ads from "../components/ads/Ads";
+import { ShortAds } from "../components/ads/Ads";
 import Footer from "../components/footer/Footer";
 import UserProfile from "../components/userProfile/UserProfile";
 import Post from "../components/post/Post";
@@ -8,7 +8,12 @@ import CreatePost from "../components/createPost/CreatePost";
 import FilterPost from "../components/filterPost/FilterPost";
 import Suggestion from "../components/suggestion/Suggestion";
 
-import { useGetPostPagination } from "../components/Store";
+import { useParams } from "react-router-dom";
+
+import {
+    useGetPostPagination,
+    useLocalSessionStore,
+} from "../components/Store";
 import { PostLoading } from "../components/loading/Loading";
 
 const Home = () => {
@@ -100,7 +105,7 @@ const Home = () => {
 
                         <section className="col-span-1 hidden lg:block">
                             <Suggestion />
-                            <Ads />
+                            <ShortAds />
                             <Footer />
                         </section>
                     </div>

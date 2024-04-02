@@ -1,8 +1,15 @@
 import React from "react";
 
+import { ShortAds } from "../components/ads/Ads";
+import Footer from "../components/footer/Footer";
+import UserChat from "../components/message/UserChat";
+import Chat from "../components/message/Chat";
+
+import { images } from "../components/images";
+
 const Message = () => {
     return (
-        <div className=" h-screen">
+        <div className="bg-background h-screen">
             <div className="inner max-w-1240px mx-auto px-5 xl:px-0 pt-8">
                 <div className="grid grid-cols-4 bg-white  shadow-custom rounded-lg overflow-hidden">
                     <div className="col-span-3 ">
@@ -11,7 +18,6 @@ const Message = () => {
                                 <div className="title px-4 py-2 text-2xl font-bold font-Roboto-Slab">
                                     Messaging
                                 </div>
-                                <UserChat />
                                 <UserChat />
                             </div>
                             <div className="col-span-3 flex justify-between flex-col relative">
@@ -66,3 +72,21 @@ const Message = () => {
 };
 
 export default Message;
+
+{
+    /* <div className="user-info px-4 py-2 flex space-x-3 ">
+                                    <img
+                                        className="block rounded-full size-20"
+                                        src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                        alt=""
+                                    />
+                                    <div className="content">
+                                        <div className="title text-xl font-semibold">
+                                            Hlaing Hpone
+                                        </div>
+                                        <div className="text-sm">
+                                            Lorem ipsum dolor sit amet.
+                                        </div>
+                                    </div>
+                                </div> */
+}

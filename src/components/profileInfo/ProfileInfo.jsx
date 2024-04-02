@@ -1,5 +1,5 @@
 import { React } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import { MessageButton, ProfileFollowButton } from "../button/Button";
 import { useLocalSessionStore } from "../Store";

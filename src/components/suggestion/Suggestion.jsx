@@ -3,7 +3,7 @@ import { images } from "../images";
 import CompanyPage from "../companyPage/CompanyPage";
 
 import { Link } from "react-router-dom";
-import { useGetAllUsers } from "../Store";
+import { useGetAllUsers, useLocalSessionStore } from "../Store";
 import { PostLoading } from "../loading/Loading";
 
 const Suggestion = () => {

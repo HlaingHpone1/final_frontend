@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import Ads from "../components/ads/Ads";
+import { ShortAds } from "../components/ads/Ads";
 import Footer from "../components/footer/Footer";
 import ManageNw from "../components/network/ManageNw";
 import UserCard from "../components/userCard/UserCard";
 import Group from "../components/group/Group";
 
-import { useGetAllUsers } from "../components/Store";
+import { useGetAllUsers, useLocalSessionStore } from "../components/Store";
 import { NetworkLoading } from "../components/loading/Loading";
 
 const Network = () => {
@@ -19,6 +19,8 @@ const Network = () => {
         allUsersData,
         apiCall,
     } = useGetAllUsers();
+
+    const { userData } = useLocalSessionStore();
 
     const [data, setData] = useState([]);
     const [page, setPage] = useState(0);
@@ -54,7 +56,7 @@ const Network = () => {
                     <section className="col-span-1 md:col-span-2 lg:col-span-1 bg-white shadow-custom rounded-lg text-black h-fit">
                         <ManageNw />
                         <div className=" pt-28 pb-7 hidden md:block">
-                            <Ads />
+                            <ShortAds />
                             <Footer />
                         </div>
                     </section>
@@ -76,9 +78,17 @@ const Network = () => {
                                 </div>
                                 <div className=" grid grid-cols-1 sm:max-lg:grid-cols-2 lg:grid-cols-3 gap-5 ">
                                     {data &&
-                                        data.map((item, index) => (
-                                            <UserCard key={index} data={item} />
-                                        ))}
+                                        data
+                                            .filter(
+                                                (item) =>
+                                                    item.id !== userData.data.id
+                                            )
+                                            .map((item, index) => (
+                                                <UserCard
+                                                    key={index}
+                                                    data={item}
+                                                />
+                                            ))}
                                     {loading && (
                                         <NetworkLoading isLoading={loading} />
                                     )}
