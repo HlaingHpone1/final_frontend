@@ -89,8 +89,10 @@ const Router = () => {
                         ></Route>
                         <Route path="/reset" element={<PswReset />}></Route>
                         <Route path="/otp" element={<OtpReset />}></Route>
-                        <Route 
-                        path="/reset/:id/changepsw" element={<ChangePsw />}></Route>
+                        <Route
+                            path="/reset/:id/changepsw"
+                            element={<ChangePsw />}
+                        ></Route>
                     </>
                 )}
             </Routes>
