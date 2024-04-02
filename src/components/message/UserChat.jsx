@@ -6,7 +6,7 @@ const UserChat = () => {
     return (
         <button
             className={`message-users px-4 py-2 flex w-full justify-between hover:bg-slate-200 ${
-                active ? "bg-cyan-100" : ""
+                active ? "" : ""
             }`}
             onClick={() => setActive(!active)}
         >

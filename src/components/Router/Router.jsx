@@ -23,7 +23,6 @@ import ChangePsw from "../../pages/ChangePsw";
 import UserPosts from "../userPosts/UserPosts";
 import UpdateProfile from "../userProfile/UpdateProfile";
 import Subscription from "../../pages/Subscription";
-import Search from "../../pages/Search";
 
 const Router = () => {
     const data = sessionStorage.getItem("userData");
@@ -56,12 +55,27 @@ const Router = () => {
                             element={<Profile />}
                         ></Route>
                         <Route
+                            path="/profile/:id/updateprofile"
+                            element={<UpdateProfile />}
+                        ></Route>
+                        <Route
+                            path="/profile/:id/edit"
+                            element={<Profile />}
+                        ></Route>
+                        <Route
                             path="/profile/:id/posts"
                             element={<UserPosts />}
                         ></Route>
-
+                        <Route
+                            path="/profile/:id/posts/:postID/edit"
+                            element={<UserPosts />}
+                        ></Route>
                         <Route
                             path="/profile/:id/skill"
+                            element={<Skill />}
+                        ></Route>
+                        <Route
+                            path="/profile/:id/skill/:skillID/edit"
                             element={<Skill />}
                         ></Route>
                         <Route
@@ -69,16 +83,18 @@ const Router = () => {
                             element={<Education />}
                         ></Route>
                         <Route
+                            path="/profile/:id/education/:eduID/edit"
+                            element={<Education />}
+                        ></Route>
+                        <Route
                             path="/profile/:id/experience"
                             element={<Experience />}
                         ></Route>
-
                         <Route
                             path="/profile/:id/experience/:expID/edit"
                             element={<Experience />}
                         ></Route>
 
-                        <Route path="/search" element={<Search />}></Route>
                         <Route path="/message" element={<Message />}></Route>
                         <Route path="/settings" element={<Settings />}></Route>
                         <Route path="/about" element={<About />}></Route>
@@ -90,7 +106,7 @@ const Router = () => {
                         <Route path="/reset" element={<PswReset />}></Route>
                         <Route path="/otp" element={<OtpReset />}></Route>
                         <Route
-                            path="/reset/:id/changepsw"
+                            path="/changepsw"
                             element={<ChangePsw />}
                         ></Route>
                     </>

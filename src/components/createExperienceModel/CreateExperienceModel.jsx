@@ -1,15 +1,17 @@
 import { React, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 
-import { useCreateWorkExp } from "../Store";
+import { useCreateWorkExp, useUpdateWorkExp } from "../Store";
 import { images } from "../images";
 
 Modal.setAppElement("#root");
 
-const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen }) => {
-    const { id } = useParams();
-    const { apiCall, success } = useCreateWorkExp();
+const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen, data }) => {
+    const navigate = useNavigate();
+    const { id, expID } = useParams();
+    const { apiCall: createWork, success } = useCreateWorkExp();
+    const { apiCall: updateWork } = useUpdateWorkExp();
 
     const [experience, setExperience] = useState({
         companyName: "",
@@ -33,9 +35,17 @@ const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen }) => {
         const { name, value } = e.target;
         setExperience({
             ...experience,
-            [name]: value.trim(),
+            [name]: value,
         });
     };
+
+    useEffect(() => {
+        if (data) {
+            setExperience({
+                ...data,
+            });
+        }
+    }, [data]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -51,7 +61,14 @@ const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen }) => {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
-            await apiCall(id, postData);
+            if (expID === undefined) {
+                await createWork(id, postData);
+                console.log("create");
+            } else {
+                await updateWork(expID, postData);
+                // window.location.href = `/profile/${id}/experience`;
+                console.log("update");
+            }
         }
     };
 
@@ -87,6 +104,7 @@ const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen }) => {
                         className="absolute top-5 right-5 bg-slate-300 p-2 rounded-full"
                         onClick={() => {
                             setModalIsOpen(false);
+                            navigate(`/profile/${id}/experience`);
                         }}
                     >
                         <img
@@ -96,33 +114,53 @@ const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen }) => {
                         />
                     </button>
                 </div>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        name="companyName"
-                        value={experience.companyName}
-                        onChange={inputHandler}
-                        placeholder="Company Name"
-                    />
-                    {errors.companyName && <p>{errors.companyName}</p>}
+                <form
+                    className="mt-8"
+                    onSubmit={handleSubmit}>
+                    <div className="input-box mb-3">
+                        <input
+                            type="text"
+                            name="companyName"
+                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                            value={experience.companyName}
+                            onChange={inputHandler}
+                            placeholder="Company Name"
+                        />
+                        {errors.companyName &&
+                            <p className="text-red-700 rounded-lg mt-2">
+                                {errors.companyName}
+                            </p>}
+                    </div>
 
-                    <input
-                        type="text"
-                        name="position"
-                        value={experience.position}
-                        onChange={inputHandler}
-                        placeholder="Position"
-                    />
-                    {errors.position && <p>{errors.position}</p>}
+                    <div className="input-box mb-3">
+                        <input
+                            type="text"
+                            name="position"
+                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                            value={experience.position}
+                            onChange={inputHandler}
+                            placeholder="Position"
+                        />
+                        {errors.position &&
+                            <p className="text-red-700 rounded-lg mt-2">
+                                {errors.position}
+                            </p>}
+                    </div>
 
-                    <input
-                        type="text"
-                        name="type"
-                        value={experience.type}
-                        onChange={inputHandler}
-                        placeholder="Type"
-                    />
-                    {errors.type && <p>{errors.type}</p>}
+                    <div className="input-box mb-3">
+                        <input
+                            type="text"
+                            name="type"
+                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                            value={experience.type}
+                            onChange={inputHandler}
+                            placeholder="Type"
+                        />
+                        {errors.type &&
+                            <p className="text-red-700 rounded-lg mt-2">
+                                {errors.type}
+                            </p>}
+                    </div>
 
                     <div className="flex justify-center space-x-5 mt-3">
                         <div className="input-box mb-3 w-full">
@@ -133,11 +171,10 @@ const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen }) => {
                                 value={experience.startDate}
                                 onChange={inputHandler}
                             />
-                            {errors.startDate && (
+                            {errors.startDate &&
                                 <p className="text-red-700 mt-2">
                                     {errors.startDate}
-                                </p>
-                            )}
+                                </p>}
                         </div>
 
                         <div className="input-box mb-8 w-full">
@@ -148,19 +185,17 @@ const CreateExperienceModel = ({ modalIsOpen, setModalIsOpen }) => {
                                 value={experience.endDate}
                                 onChange={inputHandler}
                             />
-                            {errors.endDate && (
+                            {errors.endDate &&
                                 <p className="text-red-700 mt-2">
                                     {errors.endDate}
-                                </p>
-                            )}
+                                </p>}
                         </div>
                     </div>
 
                     <div className="flex justify-end">
                         <button
                             type="submit"
-                            className="bg-primary text-white px-5 py-2 rounded-md text-lg"
-                        >
+                            className="bg-primary text-white px-5 py-2 rounded-md text-lg">
                             Submit
                         </button>
                     </div>

@@ -3,28 +3,14 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 
 import { db } from "../../firebaseConfig";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import { Loading } from "../loading/Loading";
 
 export const CommentContent = ({ data }) => {
     const [isLoading, setIsLoading] = useState(false);
-    const { comment, setComment } = useState(data.comment);
+    const { comment, setComment } = useState("");
 
-    const updateHandler = async (id) => {
-        console.log(id);
-
-        setIsLoading(true);
-        const dbRef = doc(db, "comments", id);
-        await updateDoc(dbRef, {
-            comment: comment,
-        });
-        setIsLoading(false);
-    };
-
-    const inputUpdateHandler = (e) => {
-        // setComment(e.target.value);
-        console.log(e.target.value);
-    };
+    const updateHandler = (e) => {};
 
     const deleteHandler = async (id) => {
         setIsLoading(true);
@@ -32,8 +18,6 @@ export const CommentContent = ({ data }) => {
         await deleteDoc(dbRef);
         setIsLoading(false);
     };
-
-    // console.log(data);
 
     return (
         <div className="flex space-x-2 px-5">
@@ -56,8 +40,8 @@ export const CommentContent = ({ data }) => {
                     <div className="input">
                         <input
                             type="text"
-                            value={comment}
-                            onChange={inputUpdateHandler}
+                            value={data.comment}
+                            onChange={updateHandler}
                         />
                     </div>
                     {/* <input type="text" className="break-all">
@@ -65,12 +49,7 @@ export const CommentContent = ({ data }) => {
                     </input> */}
                 </div>
                 <div className="flex justify-end me-5 space-x-5">
-                    <Link
-                        className="block text-xs"
-                        onClick={() => updateHandler(data.id)}
-                    >
-                        Update
-                    </Link>
+                    <Link className="block text-xs">Update</Link>
                     <Link
                         className="block text-xs"
                         onClick={() => deleteHandler(data.id)}

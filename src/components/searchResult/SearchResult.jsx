@@ -1,7 +1,9 @@
-import React from "react";
+import React from 'react'
 
 const SearchResult = () => {
-    return <div></div>;
-};
+  return (
+    <div></div>
+  )
+}
 
-export default SearchResult;
+export default SearchResult

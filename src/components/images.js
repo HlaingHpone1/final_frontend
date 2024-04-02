@@ -69,6 +69,8 @@ export const images = {
     imageIcon,
     group1,
     backArrow,
-
+    sent1,
+    edit,
+    delete1,
 };
 

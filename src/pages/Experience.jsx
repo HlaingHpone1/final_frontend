@@ -37,7 +37,7 @@ const Experience = () => {
         <div>
             <Header />
 
-            <div className="inner max-w-1240px mx-auto px-10 xl:px-0">
+            <div className="inner max-w-1240px mx-auto px-5 xl:px-0">
                 <div className="xs2:p-2 xs:p-3 sm:p-4 shadow-custom rounded-xl overflow-hidden">
                     <div className="flex justify-between xs2:pb-1 md:pb-3">
                         <div className="flex">
@@ -74,6 +74,7 @@ const Experience = () => {
                             <ProfileExperienceContent
                                 key={index}
                                 data={item}
+                                isOwnProfile={isOwnProfile}
                                 noBorder={index === experienceData.length - 1}
                             />
                         ))

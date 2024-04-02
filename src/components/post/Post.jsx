@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import moment from "moment";
+import { Link, useParams } from "react-router-dom";
 
 import { images } from "../images";
 import { CommentContent } from "../comment/CommentContent";
 import { useDeletePost, usePostMessage, useLocalSessionStore } from "../Store";
-
-import { Link, useParams } from "react-router-dom";
 
 import {
     collection,
@@ -118,7 +117,9 @@ const Post = ({ data, isOwner }) => {
         (comment) => comment.postId === data.id
     );
 
-    // console.log(data);
+    // console.log("====================================");
+    // console.log(filteredComments);
+    // console.log("====================================");
 
     return (
         <>
@@ -135,9 +136,7 @@ const Post = ({ data, isOwner }) => {
                             </div>
                             <div>
                                 <h2 className="text-base font-bold font-Roboto-Slab">
-                                    <Link to={`/profile/${data.userId}`}>
-                                        {data.accountName}
-                                    </Link>
+                                    {data.accountName}
                                 </h2>
                                 <p className="text-xs text-[#818181]">
                                     {followers} Followers

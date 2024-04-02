@@ -1,15 +1,12 @@
 import { React } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { MessageButton, ProfileFollowButton } from "../button/Button";
-import { useLocalSessionStore } from "../Store";
 
 const ProfileInfo = ({ data, edu, isOwnProfile }) => {
-    const { userData } = useLocalSessionStore();
-    const { id } = useParams();
     return (
-        <section className="py-2">
-            <div className="inner max-w-1240px mx-auto px-10 xl:px-0">
+        <section className="pb-2">
+            <div className="">
                 <div className="bg-white shadow-custom rounded-lg overflow-hidden ">
                     <div className="banner-img">
                         <img

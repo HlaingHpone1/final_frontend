@@ -1,6 +1,7 @@
 import React from "react";
 
 import { img } from "../img";
+import { Link } from "react-router-dom";
 
 export const ShortAds = () => {
     return (

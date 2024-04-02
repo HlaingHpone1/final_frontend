@@ -7,7 +7,7 @@ const LogIn = () => {
     return (
         <main className="login__section ">
             <div className="flex justify-center items-center h-screen">
-                <div className="bg-white shadow-2xl  px-10 py-14 rounded-lg">
+                <div className="bg-white shadow-2xl  px-5 py-14 rounded-lg">
                     <div className="title mb-8 text-3xl font-bold text-center">
                         Log in
                     </div>

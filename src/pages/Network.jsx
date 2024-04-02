@@ -52,7 +52,7 @@ const Network = () => {
     return (
         <main className="bg-background">
             <div className="max-w-1240px mx-auto">
-                <div className="grid-cols-1 md:grid-cols-4 grid pt-6 gap-6 px-10 xl:px-0">
+                <div className="grid-cols-1 md:grid-cols-4 grid pt-6 gap-6 px-5 xl:px-0">
                     <section className="col-span-1 md:col-span-2 lg:col-span-1 bg-white shadow-custom rounded-lg text-black h-fit">
                         <ManageNw />
                         <div className=" pt-28 pb-7 hidden md:block">
@@ -76,7 +76,7 @@ const Network = () => {
                                         </button>
                                     )}
                                 </div>
-                                <div className=" grid grid-cols-1 sm:max-lg:grid-cols-2 lg:grid-cols-3 gap-5 ">
+                                <div className=" grid grid-cols-1 sm:max-lg:grid-cols-2 lg:grid-cols-3 gap-5 z-10">
                                     {data &&
                                         data
                                             .filter(

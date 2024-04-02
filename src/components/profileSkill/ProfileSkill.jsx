@@ -10,7 +10,7 @@ const ProfileSkill = ({ data, isOwnProfile }) => {
 
     return (
         <section className="py-2">
-            <div className="inner max-w-1240px mx-auto px-10 xl:p-0">
+            <div className="">
                 <div className="bg-white shadow-custom rounded-lg overflow-hidden pt-4 ">
                     <div className="border-b border-black px-9">
                         <div className="flex justify-between">
@@ -36,13 +36,15 @@ const ProfileSkill = ({ data, isOwnProfile }) => {
                         </div>
                         <div className="">
                             {data.length > 0 ? (
-                                data.map((item, index) => (
-                                    <ProfileSkillContent
-                                        key={index}
-                                        data={item}
-                                        noBorder={index === data.length - 1}
-                                    />
-                                ))
+                                data
+                                    .slice(0, 2)
+                                    .map((item, index) => (
+                                        <ProfileSkillContent
+                                            key={index}
+                                            data={item}
+                                            noBorder={index === data.length - 1}
+                                        />
+                                    ))
                             ) : (
                                 <p className="text-lg py-4">
                                     No skills available yet.

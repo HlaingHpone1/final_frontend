@@ -1,41 +1,53 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import Modal from "react-modal";
 
 import { images } from "../images";
 
-import { useCreateEducation } from "../Store";
-import { useParams } from "react-router-dom";
+import { useCreateEducation, useUpdateEducation } from "../Store";
+import { useParams, useNavigate } from "react-router-dom";
 
 Modal.setAppElement("#root");
 
-const CreateEducationModel = ({ modalIsOpen, setModalIsOpen }) => {
-    const { id } = useParams();
-    const { apiCall, success } = useCreateEducation();
+const CreateEducationModel = ({ modalIsOpen, setModalIsOpen, data }) => {
+    const navigate = useNavigate();
+
+    const { id, eduID } = useParams();
+
+    const { apiCall: updateEducation } = useUpdateEducation();
+    const { apiCall: createEducation, success } = useCreateEducation();
 
     const [education, setEducation] = useState({
-        universityName: "",
+        schoolName: "",
         degree: "",
         fieldOfStudy: "",
         startDate: "",
         endDate: "",
     });
 
-    const postData = {
-        schoolName: education.universityName,
-        degree: education.degree,
-        fieldOfStudy: education.fieldOfStudy,
-        startDate: education.startDate,
-        endDate: education.endDate,
-    };
-
     const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        if (data) {
+            setEducation({
+                ...data,
+            });
+        }
+    }, [data]);
 
     const inputHandler = (e) => {
         const { name, value } = e.target;
         setEducation({
             ...education,
-            [name]: value.trim(),
+            [name]: value,
         });
+    };
+
+    const postData = {
+        schoolName: education.schoolName,
+        degree: education.degree,
+        fieldOfStudy: education.fieldOfStudy,
+        startDate: education.startDate,
+        endDate: education.endDate,
     };
 
     const handleSubmit = async (e) => {
@@ -52,7 +64,12 @@ const CreateEducationModel = ({ modalIsOpen, setModalIsOpen }) => {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
-            await apiCall(id, postData);
+            if (eduID === undefined) {
+                await createEducation(id, postData);
+            } else {
+                await updateEducation(eduID, postData);
+                window.location.href = `/profile/${id}/education`;
+            }
         }
     };
 
@@ -75,6 +92,8 @@ const CreateEducationModel = ({ modalIsOpen, setModalIsOpen }) => {
         },
     };
 
+    // console.log(education);
+
     return (
         <div>
             <Modal
@@ -88,6 +107,9 @@ const CreateEducationModel = ({ modalIsOpen, setModalIsOpen }) => {
                         className="absolute top-5 right-5 bg-slate-300 p-2 rounded-full"
                         onClick={() => {
                             setModalIsOpen(false);
+                            if (eduID) {
+                                navigate(`/profile/${id}/education`);
+                            }
                         }}
                     >
                         <img
@@ -97,51 +119,93 @@ const CreateEducationModel = ({ modalIsOpen, setModalIsOpen }) => {
                         />
                     </button>
                 </div>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        name="universityName"
-                        value={education.universityName}
-                        onChange={inputHandler}
-                        placeholder="University Name"
-                    />
-                    {errors.universityName && <p>{errors.universityName}</p>}
+                <form
+                    className="mt-8"
+                    onSubmit={handleSubmit}>
+                    <div className="input-box mb-3">
+                        <input
+                            type="text"
+                            name="schoolName"
+                            id="schoolName"
+                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                            value={education.schoolName}
+                            onChange={inputHandler}
+                            placeholder="University Name"
+                        />
+                        {errors.schoolName &&
+                            <p className="text-red-700 rounded-lg mt-2">
+                                {errors.schoolName}
+                            </p>}
+                    </div>
 
-                    <input
-                        type="text"
-                        name="degree"
-                        value={education.degree}
-                        onChange={inputHandler}
-                        placeholder="Degree"
-                    />
-                    {errors.degree && <p>{errors.degree}</p>}
+                    <div className="input-box mb-3">
+                        <input
+                            type="text"
+                            name="degree"
+                            id="degree"
+                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                            value={education.degree}
+                            onChange={inputHandler}
+                            placeholder="Degree"
+                        />
+                        {errors.degree &&
+                            <p className="text-red-700 rounded-lg mt-2">
+                                {errors.degree}
+                            </p>}
+                    </div>
 
-                    <input
-                        type="text"
-                        name="fieldOfStudy"
-                        value={education.fieldOfStudy}
-                        onChange={inputHandler}
-                        placeholder="Field of Study"
-                    />
-                    {errors.fieldOfStudy && <p>{errors.fieldOfStudy}</p>}
+                    <div className="input-box mb-3">
+                        <input
+                            type="text"
+                            name="fieldOfStudy"
+                            className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                            value={education.fieldOfStudy}
+                            onChange={inputHandler}
+                            placeholder="Field of Study"
+                        />
+                        {errors.fieldOfStudy &&
+                            <p className="text-red-700 rounded-lg mt-2">
+                                {errors.fieldOfStudy}
+                            </p>}
+                    </div>
 
-                    <input
-                        type="date"
-                        name="startDate"
-                        value={education.startDate}
-                        onChange={inputHandler}
-                    />
-                    {errors.startDate && <p>{errors.startDate}</p>}
+                    <div className="flex justify-center space-x-5 mt-5">
+                        <div className="input-box mb-3 w-full">
+                            <input
+                                type="date"
+                                name="startDate"
+                                className={`focus:outline-none bg-transparent border-b-2 rounded  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                                value={education.startDate}
+                                onChange={inputHandler}
+                            />
+                            {errors.startDate &&
+                                <p className="text-red-700 rounded-lg mt-2">
+                                    {errors.startDate}
+                                </p>}
+                        </div>
 
-                    <input
-                        type="date"
-                        name="endDate"
-                        value={education.endDate}
-                        onChange={inputHandler}
-                    />
-                    {errors.endDate && <p>{errors.endDate}</p>}
+                        <div className="input-box mb-5 w-full">
+                            <input
+                                type="date"
+                                name="endDate"
+                                className={`focus:outline-none bg-transparent border-b-2 rounded focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
+                                value={education.endDate}
+                                onChange={inputHandler}
+                            />
+                            {errors.endDate &&
+                                <p className="text-red-700 rounded-lg mt-2">
+                                    {errors.endDate}
+                                </p>}
+                        </div>
+                    </div>
 
-                    <button type="submit">Submit</button>
+                    <div className="flex justify-end">
+                        <button
+                            type="submit"
+                            className="bg-primary text-white px-5 py-2 rounded-md text-lg">
+                            Submit
+                        </button>
+                    </div>
                 </form>
             </Modal>
         </div>
