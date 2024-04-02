@@ -8,22 +8,37 @@ import { Loading } from "../loading/Loading";
 
 export const CommentContent = ({ data }) => {
     const [isLoading, setIsLoading] = useState(false);
-    const { comment, setComment } = useState(data.comment);
+    const [comment, setComment] = useState(data.comment);
+    const [update, setUpdate] = useState(false);
+
+    // console.log(data);
 
     const updateHandler = async (id) => {
         console.log(id);
 
         setIsLoading(true);
-        const dbRef = doc(db, "comments", id);
-        await updateDoc(dbRef, {
-            comment: comment,
-        });
-        setIsLoading(false);
+
+        const updateRef = doc(db, "comments", id);
+
+        try {
+            await updateDoc(updateRef, {
+                comment: comment,
+            });
+            setIsLoading(false);
+        } catch (e) {
+            console.log(e);
+            setIsLoading(false);
+        }
+
+        // const dbRef = doc(db, "comments", id);
+        // await updateDoc(dbRef, {
+        //     comment: comment,
+        // });
+        // setIsLoading(false);
     };
 
     const inputUpdateHandler = (e) => {
-        // setComment(e.target.value);
-        console.log(e.target.value);
+        setComment(e.target.value);
     };
 
     const deleteHandler = async (id) => {
@@ -55,21 +70,29 @@ export const CommentContent = ({ data }) => {
                     </div>
                     <div className="input">
                         <input
+                            className={`bg-transparent break-all focus:outline-none w-full ${
+                                update
+                                    ? "border border-black font-black"
+                                    : "border-none"
+                            }`}
                             type="text"
+                            disabled={!update}
                             value={comment}
                             onChange={inputUpdateHandler}
                         />
                     </div>
-                    {/* <input type="text" className="break-all">
-                        {data.comment}
-                    </input> */}
                 </div>
                 <div className="flex justify-end me-5 space-x-5">
                     <Link
                         className="block text-xs"
-                        onClick={() => updateHandler(data.id)}
+                        onClick={() => {
+                            if (update) {
+                                updateHandler(data.id);
+                            }
+                            setUpdate(!update);
+                        }}
                     >
-                        Update
+                        {update ? "Save" : "Edit"}
                     </Link>
                     <Link
                         className="block text-xs"
