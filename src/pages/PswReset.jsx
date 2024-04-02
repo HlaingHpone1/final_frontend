@@ -1,7 +1,12 @@
 import React from 'react'
 import EmailResetForm from '../components/emailResetForm/EmailResetForm'
-
+import PswChgForm from '../components/pswChangeForm/PswChgForm'
+import { Link } from 'react-router-dom'
+import { useLocalSessionStore } from '../components/Store'
 const PswReset = () => {
+
+    const { userData } = useLocalSessionStore();
+    
     return (
         <main className='container'>
             <div className='flex justify-center items-center h-screen'>
@@ -10,6 +15,8 @@ const PswReset = () => {
                         Reset Password
                     </div>
                     <EmailResetForm />
+
+                
                 </div>
             </div>
         </main>
