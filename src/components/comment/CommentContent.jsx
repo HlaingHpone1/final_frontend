@@ -6,7 +6,7 @@ import { db } from "../../firebaseConfig";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { Loading } from "../loading/Loading";
 
-export const CommentContent = ({ data }) => {
+export const CommentContent = ({ data, isOwner }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [comment, setComment] = useState(data.comment);
     const [update, setUpdate] = useState(false);
@@ -78,25 +78,27 @@ export const CommentContent = ({ data }) => {
                         {data.comment}
                     </input> */}
                 </div>
-                <div className="flex justify-end me-5 space-x-5">
-                    <Link
-                        className="block text-xs"
-                        onClick={() => {
-                            if (update) {
-                                updateHandler(data.id);
-                            }
-                            setUpdate(!update);
-                        }}
-                    >
-                        {update ? "Save" : "Edit"}
-                    </Link>
-                    <Link
-                        className="block text-xs"
-                        onClick={() => deleteHandler(data.id)}
-                    >
-                        Delete
-                    </Link>
-                </div>
+                {isOwner && (
+                    <div className="flex justify-end me-5 space-x-5">
+                        <Link
+                            className="block text-xs"
+                            onClick={() => {
+                                if (update) {
+                                    updateHandler(data.id);
+                                }
+                                setUpdate(!update);
+                            }}
+                        >
+                            {update ? "Save" : "Edit"}
+                        </Link>
+                        <Link
+                            className="block text-xs"
+                            onClick={() => deleteHandler(data.id)}
+                        >
+                            Delete
+                        </Link>
+                    </div>
+                )}
             </div>
         </div>
     );

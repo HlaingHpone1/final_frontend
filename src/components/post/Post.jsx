@@ -6,6 +6,8 @@ import { images } from "../images";
 import { CommentContent } from "../comment/CommentContent";
 import { useDeletePost, usePostMessage, useLocalSessionStore } from "../Store";
 
+import CreatePostModel from "../createPostModel/CreatePostModel";
+
 import {
     collection,
     doc,
@@ -27,6 +29,7 @@ const Post = ({ data, isOwner }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [dataComments, setDataComments] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [post, setPost] = useState([]);
 
     const { apiCall: deletePost } = useDeletePost();
     const { apiCall: postMessage } = usePostMessage();
@@ -109,16 +112,22 @@ const Post = ({ data, isOwner }) => {
         window.location.reload();
     };
 
+    const handleEdit = (postID) => {
+        setPost(data);
+    };
+
+    // console.log("====================================");
+    // console.log(post);
+    // console.log("====================================");
+
     const filteredComments = dataComments.filter(
         (comment) => comment.postId === data.id
     );
 
-    // console.log("====================================");
-    // console.log(data);
-    // console.log("====================================");
-
     return (
         <>
+            {isLoading && <Loading isLoading={isLoading} />}
+
             <section className="bg-white text-black  rounded-2xl shadow-custom mb-5 overflow-hidden">
                 <div className="">
                     {/* 1st row */}
@@ -147,14 +156,21 @@ const Post = ({ data, isOwner }) => {
                                 <img src={images.dot} className="size-5 mr-2" />
                             </button>
                             {isDropdownOpen && isOwner && (
-                                <div className="dropdown-menu absolute top-5 right-0 z-30 shadow-md bg-white rounded-md py-2">
-                                    <Link
-                                        to={`/profile/${userData.data.id}/posts/${data.id}/edit`}
+                                <div className="dropdown-menu absolute top-5 right-0 z-auto shadow-md bg-white rounded-md py-2">
+                                    <button
                                         className="block px-4 py-2 w-full text-base text-gray-700 hover:bg-gray-100"
-                                        onClick={() => handleEdit(data.id)}
+                                        onClick={() => {
+                                            handleEdit(data.id);
+                                            setModalIsOpen(true);
+                                        }}
                                     >
                                         Edit
-                                    </Link>
+                                    </button>
+                                    <CreatePostModel
+                                        modalIsOpen={modalIsOpen}
+                                        setModalIsOpen={setModalIsOpen}
+                                        data={post}
+                                    />
                                     <button
                                         className="block px-4 py-2 w-full text-base text-gray-700 hover:bg-gray-100"
                                         onClick={() => handleDelete(data.id)}
@@ -257,6 +273,7 @@ const Post = ({ data, isOwner }) => {
                                             <CommentContent
                                                 key={index}
                                                 data={comment}
+                                                isOwner={isOwner}
                                             />
                                         ))}
                                 </div>
@@ -267,7 +284,6 @@ const Post = ({ data, isOwner }) => {
                                         </button>
                                     </div>
                                 )}
-                                {isLoading && <Loading isLoading={isLoading} />}
 
                                 <form
                                     className="flex items-center p-2 border-t border-gray-300 bg-gray-200"
