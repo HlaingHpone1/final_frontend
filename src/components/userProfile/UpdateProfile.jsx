@@ -5,6 +5,7 @@ import Footer from "../footer/Footer";
 import { useGetUser, useLocalSessionStore } from "../Store";
 import { useParams } from "react-router-dom";
 import { RoleContext } from "../RoleContext";
+import axios from "axios";
 
 const UpdateProfile = () => {
     const { isRECRUITER, isJOBSEEKER } = useContext(RoleContext);
@@ -66,9 +67,20 @@ const UpdateProfile = () => {
             [name]: value,
         });
     };
-
     const submitHandler = async (e) => {
         e.preventDefault();
+        axios.put(`http://localhost:8080/users/${localUser.data.id}`, 
+        {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            mail: data.mail,
+            phoneNumber: data.phoneNumber,
+            gender: data.gender,
+            dob: data.dob,
+            address: data.address,
+            bio: data.bio,
+        }
+        )
     };
 
     return (
