@@ -10,8 +10,13 @@ import { RoleContext } from "./components/RoleContext";
 function App() {
     const { userData: localUser } = useLocalSessionStore();
 
-    const isRECRUITER = localUser.data.role === "RECRUITER";
-    const isJOBSEEKER = localUser.data.role === "JOBSEEKER";
+    let isUser, isRECRUITER, isJOBSEEKER;
+
+    if (localUser) {
+        isUser = localUser.data.role === "USER";
+        isRECRUITER = localUser.data.role === "RECRUITER";
+        isJOBSEEKER = localUser.data.role === "JOBSEEKER";
+    }
 
     const data = sessionStorage.getItem("userData");
     return (
