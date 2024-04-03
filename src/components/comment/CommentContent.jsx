@@ -62,13 +62,12 @@ export const CommentContent = ({ data, isOwner }) => {
                         </p>
                     </div>
                     <div className="input">
-                        <input
-                            className={`bg-transparent break-all focus:outline-none w-full ${
+                        <textarea
+                            className={`bg-transparent focus:outline-none w-full overflow-y-scroll scrollbar-hide scroll-smooth resize-none h-12 ${
                                 update
                                     ? "border border-black font-black"
                                     : "border-none"
                             }`}
-                            type="text"
                             disabled={!update}
                             value={comment}
                             onChange={inputUpdateHandler}

@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useLocalSessionStore } from "../Store";
+import axios from "axios";
+
+import { useParams } from "react-router-dom";
 
 const PswChgForm = () => {
     const [data, setData] = useState({
         newPassword: "",
-        confirmPassword: "",
+        Otp: "",
+        mail: "",
     });
 
     const [showPassword, setShowPassword] = useState({
@@ -18,7 +23,7 @@ const PswChgForm = () => {
         const { name, value } = e.target;
         setData({
             ...data,
-            [name]: value,
+            [name]: value.trim(),
         });
     };
 
@@ -27,6 +32,11 @@ const PswChgForm = () => {
             ...showPassword,
             [field]: !showPassword[field],
         });
+    };
+
+    const otpHandler = (e) => {
+        const otpWriteData = e.target.value;
+        setData({ ...data, Otp: otpWriteData });
     };
 
     const submitHandler = async (e) => {
@@ -45,6 +55,36 @@ const PswChgForm = () => {
         }
 
         setErrors(newErrors);
+        try {
+            const email = localStorage.getItem("email");
+            //   console.log("Shine Htet wai",email);
+            axios
+                .put(`http://localhost:8080/users/${id}/reset-password-otp`, {
+                    mail: email,
+                    otp: data.Otp,
+                    newPassword: data.newPassword,
+                })
+                .then((response) => {
+                    if (response.status === 204) {
+                        alert("Password Changed Successfully");
+                        localStorage.removeItem("email");
+                        window.location.href = "/login";
+                    } else if (response.status === 400) {
+                        alert("Invalid OTP");
+                    } else {
+                        console.log("An error occurred");
+                    }
+                    console.log(response.status);
+                })
+                .catch((error) => {
+                    console.error(
+                        "An error occurred while changing the password",
+                        error
+                    );
+                });
+        } catch (error) {
+            console.error("Erro on changing password", error);
+        }
     };
 
     return (
@@ -126,6 +166,22 @@ const PswChgForm = () => {
                             {errors.confirmPassword}
                         </p>
                     )}
+                    <div className="mb-5">
+                        <input
+                            type="text"
+                            name="Otp"
+                            value={data.Otp}
+                            placeholder="Enter OTP"
+                            className="bg-transparent border-b-2 focus:outline-none  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 rounded-sm my-3"
+                            onChange={otpHandler}
+                        />
+                        {errors.Otp && (
+                            <p className="text-red-700 rounded-lg mt-2">
+                                {errors.Otp}
+                            </p>
+                        )}
+                        <div className="flex justify-between"></div>
+                    </div>
                 </div>
 
                 <button

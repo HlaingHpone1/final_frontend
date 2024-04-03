@@ -15,6 +15,8 @@ import {
     addDoc,
     getDocs,
     onSnapshot,
+    deleteDoc,
+    serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
 import { Loading } from "../loading/Loading";
@@ -30,6 +32,7 @@ const Post = ({ data, isOwner }) => {
     const [dataComments, setDataComments] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [post, setPost] = useState([]);
+    const [isLiked, setIsLiked] = useState(false);
 
     const { apiCall: deletePost } = useDeletePost();
     const { apiCall: postMessage } = usePostMessage();
@@ -47,6 +50,39 @@ const Post = ({ data, isOwner }) => {
         });
     };
     const dbRef = collection(db, "comments");
+    const dbRefLike = collection(db, "likes");
+
+    const postId = v4();
+
+    const likeHandler = async (id) => {
+        setIsLiked(!isLiked);
+
+        const likeDataPost = {
+            id: id,
+            postId: data.id,
+            userId: userData.data.id,
+            likeTime: serverTimestamp(),
+        };
+
+        // console.log(data);
+        // console.log(likeData);
+
+        if (isLiked) {
+            const dbRef1 = doc(db, "likes", filteredData[0].id);
+            await deleteDoc(dbRef1);
+
+            // console.log("Unliked");
+        } else {
+            console.log(id);
+            // console.log("Liked");
+
+            const likeDocRef = doc(dbRefLike, id);
+
+            await setDoc(likeDocRef, likeDataPost);
+        }
+
+        console.log(filteredData);
+    };
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -83,6 +119,15 @@ const Post = ({ data, isOwner }) => {
             setIsLoading(false);
         }
     };
+
+    const [likeData, setLikeData] = useState([]);
+
+    const likeOnSnapshot = onSnapshot(dbRefLike, (data) => {
+        const newData = data.docs.map((doc) => doc.data());
+        setLikeData(newData);
+    });
+
+    const filteredLikes = likeData.filter((like) => like.postId === data.id);
 
     const onShap = onSnapshot(dbRef, (data) => {
         const newData = data.docs.map((doc) => doc.data());
@@ -124,6 +169,10 @@ const Post = ({ data, isOwner }) => {
         (comment) => comment.postId === data.id
     );
 
+    const filteredData = likeData.filter(
+        (d) => d.userId === data.userId && d.postId === data.id
+    );
+
     return (
         <>
             {isLoading && <Loading isLoading={isLoading} />}
@@ -141,7 +190,9 @@ const Post = ({ data, isOwner }) => {
                             </div>
                             <div>
                                 <h2 className="text-base font-bold font-Roboto-Slab">
-                                    {data.accountName}
+                                    <Link to={`/profile/${data.userId}`}>
+                                        {data.accountName}
+                                    </Link>
                                 </h2>
                                 <p className="text-xs text-[#818181]">
                                     {followers} Followers
@@ -216,7 +267,7 @@ const Post = ({ data, isOwner }) => {
                                 src={images.likeFull}
                                 className="size-6 mb-2"
                             />
-                            <p className="my-auto">234</p>
+                            <p className="my-auto">{filteredLikes.length}</p>
                         </div>
                         <div className="flex my-auto gap-4">
                             <p>{filteredComments.length} Comment</p>
@@ -226,9 +277,16 @@ const Post = ({ data, isOwner }) => {
 
                     {/* 5th row */}
                     <div className="flex flex-wrap">
-                        <button className="flex-1 flex justify-center py-3 gap-0 xs:gap-1">
+                        <button
+                            className="flex-1 flex justify-center py-3 gap-0 xs:gap-1"
+                            onClick={() => likeHandler(postId)}
+                        >
                             <img
-                                src={images.like}
+                                src={`${
+                                    filteredData.length > 0
+                                        ? images.likeFull
+                                        : images.like
+                                }`}
                                 className="size-4 xs:size-6"
                             />
                             <p className="text-xs xs:text-sm">Like</p>
@@ -262,7 +320,7 @@ const Post = ({ data, isOwner }) => {
                     <div className="">
                         {showCommentBox && (
                             <div className="">
-                                <div className="py-5">
+                                <div className="py-2.5">
                                     {dataComments
                                         .filter(
                                             (comment) =>

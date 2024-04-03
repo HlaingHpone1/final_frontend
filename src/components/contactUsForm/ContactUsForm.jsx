@@ -16,8 +16,6 @@ const ContactUsForm = () => {
         });
     };
 
-    console.log(data);
-
     const submitHandler = (e) => {
         e.preventDefault();
 

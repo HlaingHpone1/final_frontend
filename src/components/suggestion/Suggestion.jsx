@@ -36,18 +36,19 @@ const Suggestion = () => {
 
         return () => controller.abort();
     }, []);
-    
+
     function checkFollowStatus(following, follower) {
-        return axios.get(`http://localhost:8080/follower/${following}/hasFollowedBack/${follower}`)
-            .then(response => response.data)
-            .catch(error => {
+        return axios
+            .get(
+                `http://localhost:8080/follower/${following}/hasFollowedBack/${follower}`
+            )
+            .then((response) => response.data)
+            .catch((error) => {
                 console.error("Error on check follow status:", error);
             });
     }
 
     // console.log(userData.data.id)
-    
-
 
     useEffect(() => {
         Promise.all(
@@ -82,8 +83,12 @@ const Suggestion = () => {
                             .filter((item) => item.id !== userData.data.id)
                             .slice(0, 4)
                             .map((item, index) => (
-                                <CompanyPage key={index} data={item} followStatus={followStatuses[index]} />
-                ))}
+                                <CompanyPage
+                                    key={index}
+                                    data={item}
+                                    followStatus={followStatuses[index]}
+                                />
+                            ))}
                 </div>
                 <div className="view-all">
                     <Link to="/network" className="text-sm font-semibold">

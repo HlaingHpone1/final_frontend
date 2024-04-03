@@ -3,13 +3,18 @@ import { ShortAds } from "../ads/Ads";
 import Footer from "../footer/Footer";
 
 import { useGetUser, useLocalSessionStore } from "../Store";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { RoleContext } from "../RoleContext";
 import axios from "axios";
+import { Loading } from "../loading/Loading";
 
 const UpdateProfile = () => {
     const { isRECRUITER, isJOBSEEKER } = useContext(RoleContext);
-    const { isLoading, apiCall: userInfoAPI } = useGetUser();
+    const { apiCall: userInfoAPI } = useGetUser();
+
+    const navigate = useNavigate();
+
+    const [loading, setLoading] = useState(false);
 
     const { userData: localUser } = useLocalSessionStore();
 
@@ -69,8 +74,9 @@ const UpdateProfile = () => {
     };
     const submitHandler = async (e) => {
         e.preventDefault();
-        axios.put(`http://localhost:8080/users/${localUser.data.id}`, 
-        {
+        setLoading(true);
+
+        axios.put(`http://localhost:8080/users/${id}`, {
             firstName: data.firstName,
             lastName: data.lastName,
             mail: data.mail,
@@ -79,8 +85,10 @@ const UpdateProfile = () => {
             dob: data.dob,
             address: data.address,
             bio: data.bio,
-        }
-        )
+        });
+
+        setLoading(false);
+        navigate(`/profile/${id}`);
     };
 
     return (
@@ -144,9 +152,9 @@ const UpdateProfile = () => {
                                 </div>
                                 <div className="input-box w-full mb-3">
                                     <input
-                                        className={`focus:outline-none bg-transparent border-b-2 rounded-md  focus:border-slate-700 transition-colors duration-200 w-full ease-linear  mx-auto block text-lg px-2 py-2.5 `}
+                                        className={`focus:outline-none bg-transparent border-b-2 focus:border-slate-700 transition-colors duration-200 w-full ease-linear  mx-auto block text-lg px-2 py-2.5 `}
                                         type="date"
-                                        name="dateofbirth"
+                                        name="dob"
                                         value={data.dob}
                                         onChange={inputHandler}
                                         autoComplete="off"
@@ -160,7 +168,7 @@ const UpdateProfile = () => {
                                             name="gender"
                                             value={data.gender}
                                             onChange={inputHandler}
-                                            className="focus:outline-none bg-transparent border-b-2 rounded-md  focus:border-slate-600 transition-colors duration-200 w-full ease-linear  mx-auto block text-lg px-2 py-2.5"
+                                            className="focus:outline-none bg-transparent border-b-2 focus:border-slate-600 transition-colors duration-200 w-full ease-linear  mx-auto block text-lg px-2 py-2.5"
                                         >
                                             <option>Male</option>
                                             <option>Female</option>

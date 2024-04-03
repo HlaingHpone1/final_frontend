@@ -33,10 +33,6 @@ const Home = () => {
 
     const isOwnProfile = id === localUser.data.id;
 
-    console.log("====================================");
-    console.log(isJOBSEEKER);
-    console.log("====================================");
-
     useEffect(() => {
         const controller = new AbortController();
 

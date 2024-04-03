@@ -39,6 +39,11 @@ const Router = () => {
                         ></Route>
                         <Route path="/login" element={<LogIn />}></Route>
                         <Route path="/register" element={<Register />}></Route>
+                        <Route path="/reset" element={<PswReset />}></Route>
+                        <Route
+                            path="/changepassword"
+                            element={<ChangePsw />}
+                        ></Route>
                     </>
                 )}
 
