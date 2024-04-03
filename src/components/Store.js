@@ -502,10 +502,10 @@ export const useDeletePost = create(devtools(
         errorMessage: null,
         errorCode: null,
         success: false,
-        apiCall: async (id) => {
+        apiCall: async (userId, postId) => {
             set({ isLoading: true });
             try {
-                const res = await axios.delete(`${apiPostNewPost}/${id}`);
+                const res = await axios.delete(`${apiPostNewPost}?userId=${userId}&postId=${postId}`);
                 // if (res.data.httpStatusCode === 200) {
                 set(() => ({
                     success: true, isLoading: false, error: false, errorMessage: null, errorCode: null

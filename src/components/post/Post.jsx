@@ -105,7 +105,7 @@ const Post = ({ data, isOwner }) => {
     };
 
     const handleDelete = async (postID) => {
-        await deletePost(postID);
+        await deletePost(userData.data.id, postID);
         window.location.reload();
     };
 
@@ -114,7 +114,7 @@ const Post = ({ data, isOwner }) => {
     );
 
     // console.log("====================================");
-    // console.log(filteredComments);
+    // console.log(data);
     // console.log("====================================");
 
     return (
@@ -148,17 +148,16 @@ const Post = ({ data, isOwner }) => {
                             </button>
                             {isDropdownOpen && isOwner && (
                                 <div className="dropdown-menu absolute top-5 right-0 z-30 shadow-md bg-white rounded-md py-2">
-                                    <button
+                                    <Link
+                                        to={`/profile/${userData.data.id}/posts/${data.id}/edit`}
                                         className="block px-4 py-2 w-full text-base text-gray-700 hover:bg-gray-100"
-                                        onClick={() => handleEdit(data.postId)}
+                                        onClick={() => handleEdit(data.id)}
                                     >
                                         Edit
-                                    </button>
+                                    </Link>
                                     <button
                                         className="block px-4 py-2 w-full text-base text-gray-700 hover:bg-gray-100"
-                                        onClick={() =>
-                                            handleDelete(data.postId)
-                                        }
+                                        onClick={() => handleDelete(data.id)}
                                     >
                                         Delete
                                     </button>
