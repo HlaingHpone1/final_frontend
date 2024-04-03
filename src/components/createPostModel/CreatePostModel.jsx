@@ -1,6 +1,6 @@
-import { React, useState, useRef } from "react";
+import { React, useState, useRef, useEffect } from "react";
 
-import { useCreatePost, useLocalSessionStore } from "../Store";
+import { useCreatePost, useLocalSessionStore, useUpdatePost } from "../Store";
 import { images } from "../images";
 import { storage } from "../../firebaseConfig";
 import { v4 } from "uuid";
@@ -11,7 +11,9 @@ import Modal from "react-modal";
 
 Modal.setAppElement("#root");
 
-const CreatePostModel = ({ modalIsOpen, setModalIsOpen }) => {
+const CreatePostModel = ({ modalIsOpen, setModalIsOpen, data }) => {
+    const { apiCall: updatePost } = useUpdatePost();
+
     const [inputValue, setInputValue] = useState(``);
     const [file, setFile] = useState(null);
     const [fileName, setFileName] = useState("");
@@ -19,6 +21,14 @@ const CreatePostModel = ({ modalIsOpen, setModalIsOpen }) => {
     const fileInputRef = useRef();
     const [imgUrl, setImgUrl] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if (data) {
+            setInputValue(data.caption);
+            setPreview(data.uploadPhoto);
+            setImgUrl(data.uploadPhoto);
+        }
+    }, [data]);
 
     const { apiCall, success } = useCreatePost();
 
@@ -82,7 +92,7 @@ const CreatePostModel = ({ modalIsOpen, setModalIsOpen }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const imageUrl = await uploadImage();
+        let imageUrl = await uploadImage();
 
         const postData = {
             caption: inputValue,
@@ -93,7 +103,25 @@ const CreatePostModel = ({ modalIsOpen, setModalIsOpen }) => {
             postData.uploadPhoto = imageUrl;
         }
 
-        await apiCall(postData);
+        console.log(data);
+
+        if (data == undefined) {
+            await apiCall(postData);
+        }
+        {
+            const updatePostData = {
+                postId: data.id,
+                caption: inputValue,
+            };
+
+            if (file) {
+                updatePostData.uploadPhoto = imageUrl;
+            }
+
+            await updatePost(updatePostData);
+            setModalIsOpen(false);
+            window.location.reload();
+        }
     };
 
     if (success) {
