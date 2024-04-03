@@ -23,6 +23,7 @@ import ChangePsw from "../../pages/ChangePsw";
 import UserPosts from "../userPosts/UserPosts";
 import UpdateProfile from "../userProfile/UpdateProfile";
 import Subscription from "../../pages/Subscription";
+import Search from "../../pages/Search";
 
 const Router = () => {
     const data = sessionStorage.getItem("userData");
@@ -109,6 +110,7 @@ const Router = () => {
                             path="/changepsw"
                             element={<ChangePsw />}
                         ></Route>
+                        <Route path="/search" element={<Search />}></Route>
                     </>
                 )}
             </Routes>

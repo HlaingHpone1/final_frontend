@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 
 import {
     useGetUser,
@@ -18,9 +18,15 @@ import ProfileSkill from "../components/profileSkill/ProfileSkill";
 import { LongAds } from "../components/ads/Ads";
 import Footer from "../components/footer/Footer";
 
+import Recruiter from "../components/job/Recruiter";
+
+import { RoleContext } from "../components/RoleContext";
+
 import { Loading } from "../components/loading/Loading";
 
 const Profile = () => {
+    const { isRECRUITER, isJOBSEEKER } = useContext(RoleContext);
+
     const { isLoading, apiCall: userInfoAPI } = useGetUser();
 
     const { apiCall: postAPI } = useGetPostByUser();
@@ -110,7 +116,9 @@ const Profile = () => {
                             />
                         </div>
                         <div className="lg:col-span-1 lg:block hidden">
-                            <LongAds />
+                            {!(isJOBSEEKER || isRECRUITER) && <LongAds />}
+                            {isRECRUITER && <Recruiter />}
+
                             <Footer />
                         </div>
                     </div>

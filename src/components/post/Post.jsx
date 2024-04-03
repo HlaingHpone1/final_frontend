@@ -45,10 +45,6 @@ const Post = ({ data, isOwner }) => {
     };
     const dbRef = collection(db, "comments");
 
-    // console.log("====================================");
-    // console.log(userData);
-    // console.log("====================================");
-
     const submitHandler = async (e) => {
         e.preventDefault();
 

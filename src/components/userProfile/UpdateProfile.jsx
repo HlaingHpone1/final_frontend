@@ -1,25 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ShortAds } from "../ads/Ads";
 import Footer from "../footer/Footer";
 
+import { useGetUser, useLocalSessionStore } from "../Store";
+import { useParams } from "react-router-dom";
+import { RoleContext } from "../RoleContext";
+
 const UpdateProfile = () => {
+    const { isRECRUITER, isJOBSEEKER } = useContext(RoleContext);
+    const { isLoading, apiCall: userInfoAPI } = useGetUser();
+
+    const { userData: localUser } = useLocalSessionStore();
+
+    const { id } = useParams();
+    const isOwnProfile = id === localUser.data.id;
+
+    const [userData, setUserData] = useState([]);
+
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
-        username: "",
-        email: "",
-        phNumber: "",
+        mail: "",
+        phoneNumber: "",
         gender: "",
         dob: "",
         address: "",
         bio: "",
     });
 
+    let keys = [
+        "firstName",
+        "lastName",
+        "mail",
+        "phoneNumber",
+        "gender",
+        "dob",
+        "address",
+        "bio",
+    ];
+
+    useEffect(() => {
+        const controller = new AbortController();
+
+        const fetchUser = async () => {
+            const result = await userInfoAPI(id, controller.signal);
+
+            keys.forEach((key) => {
+                data[key] = result.data[key] == null ? "" : result.data[key];
+            });
+
+            setData({
+                ...data,
+            });
+        };
+
+        fetchUser();
+
+        return () => controller.abort();
+    }, []);
+
     const inputHandler = (e) => {
         const { name, value } = e.target;
         setData({
             ...data,
-            [name]: value.trim(),
+            [name]: value,
         });
     };
 
@@ -37,10 +81,10 @@ const UpdateProfile = () => {
 
                     <div className="grid grid-cols-3">
                         <form className="col-span-2" onSubmit={submitHandler}>
-                            <div className="flex justify-between">
-                                <div className="input-box mb-3">
+                            <div className="flex justify-center space-x-5">
+                                <div className="input-box mb-3 w-full">
                                     <input
-                                        className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-96 block text-lg px-2 py-2.5 `}
+                                        className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 `}
                                         type="text"
                                         name="firstName"
                                         value={data.firstName}
@@ -50,11 +94,11 @@ const UpdateProfile = () => {
                                     />
                                 </div>
 
-                                <div className="input-box mb-3">
+                                <div className="input-box mb-3 w-full">
                                     <input
-                                        className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-96  mx-auto block text-lg px-2 py-2.5 `}
+                                        className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full  mx-auto block text-lg px-2 py-2.5 `}
                                         type="text"
-                                        name="lastname"
+                                        name="lastName"
                                         value={data.lastName}
                                         onChange={inputHandler}
                                         placeholder="Last Name"
@@ -67,52 +111,49 @@ const UpdateProfile = () => {
                                 <input
                                     className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full mx-auto block text-lg px-2 py-2.5 `}
                                     type="email"
-                                    name="email"
-                                    value={data.email}
+                                    name="mail"
+                                    value={data.mail}
                                     onChange={inputHandler}
                                     placeholder="Enter your Email"
                                     autoComplete="off"
                                 />
                             </div>
 
-                            <div className="flex justify-between">
-                                <div className="input-box mb-3">
+                            <div className="flex justify-center space-x-5">
+                                <div className="input-box w-full mb-3">
                                     <input
-                                        className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-96  mx-auto block text-lg px-2 py-2.5 `}
+                                        className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear  mx-auto block w-full text-lg px-2 py-2.5 `}
                                         type="text"
-                                        name="phNumber"
-                                        value={data.phNumber}
+                                        name="phoneNumber"
+                                        value={data.phoneNumber}
                                         onChange={inputHandler}
                                         placeholder="Enter your Phone Number"
                                     />
                                 </div>
+                                <div className="input-box w-full mb-3">
+                                    <input
+                                        className={`focus:outline-none bg-transparent border-b-2 rounded-md  focus:border-slate-700 transition-colors duration-200 w-full ease-linear  mx-auto block text-lg px-2 py-2.5 `}
+                                        type="date"
+                                        name="dateofbirth"
+                                        value={data.dob}
+                                        onChange={inputHandler}
+                                        autoComplete="off"
+                                    />
+                                </div>
 
-                                <div className="flex space-x-4">
-                                    <div className="input-box mb-3">
-                                        <input
-                                            className={`focus:outline-none bg-transparent border-b-2 rounded-md  focus:border-slate-700 transition-colors duration-200 ease-linear w-60  mx-auto block text-lg px-2 py-2.5 `}
-                                            type="date"
-                                            name="dateofbirth"
-                                            value={data.dob}
+                                <div className="input-box w-full mb-3">
+                                    <div className="mt-2 flex">
+                                        <select
+                                            id="gender"
+                                            name="gender"
+                                            value={data.gender}
                                             onChange={inputHandler}
-                                            autoComplete="off"
-                                        />
-                                    </div>
-
-                                    <div className="input-box mb-3">
-                                        <div class="mt-2 flex">
-                                            <select
-                                                id="gender"
-                                                name="gender"
-                                                value={data.gender}
-                                                onChange={inputHandler}
-                                                class="focus:outline-none bg-transparent border-b-2 rounded-md  focus:border-slate-600 transition-colors duration-200 ease-linear w-32  mx-auto block text-lg px-2 py-2.5"
-                                            >
-                                                <option>Male</option>
-                                                <option>Female</option>
-                                                <option>Other</option>
-                                            </select>
-                                        </div>
+                                            className="focus:outline-none bg-transparent border-b-2 rounded-md  focus:border-slate-600 transition-colors duration-200 w-full ease-linear  mx-auto block text-lg px-2 py-2.5"
+                                        >
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                            <option>Other</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +190,7 @@ const UpdateProfile = () => {
                         </form>
 
                         <div className=" col-span-1 mx-auto">
-                            <ShortAds />
+                            {!(isJOBSEEKER || isRECRUITER) && <ShortAds />}
                             <Footer />
                         </div>
                     </div>
