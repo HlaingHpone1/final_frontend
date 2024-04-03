@@ -3,20 +3,44 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 
 import { db } from "../../firebaseConfig";
-import { deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { Loading } from "../loading/Loading";
 
 export const CommentContent = ({ data }) => {
     const [isLoading, setIsLoading] = useState(false);
-    const { comment, setComment } = useState("");
+    const [comment, setComment] = useState(data.comment);
+    const [update, setUpdate] = useState(false);
 
-    const updateHandler = (e) => {};
+    const updateHandler = async (id) => {
+        setIsLoading(true);
+        const dbRef = doc(db, "comments", id);
+        await updateDoc(dbRef, {
+            comment: comment,
+        });
+        setIsLoading(false);
+
+        const updateRef = doc(db, "comments", id);
+
+        try {
+            await updateDoc(updateRef, {
+                comment: comment,
+            });
+            setIsLoading(false);
+        } catch (e) {
+            console.log(e);
+            setIsLoading(false);
+        }
+    };
 
     const deleteHandler = async (id) => {
         setIsLoading(true);
         const dbRef = doc(db, "comments", id);
         await deleteDoc(dbRef);
         setIsLoading(false);
+    };
+
+    const inputUpdateHandler = (e) => {
+        setComment(e.target.value);
     };
 
     return (
@@ -39,9 +63,15 @@ export const CommentContent = ({ data }) => {
                     </div>
                     <div className="input">
                         <input
+                            className={`bg-transparent break-all focus:outline-none w-full ${
+                                update
+                                    ? "border border-black font-black"
+                                    : "border-none"
+                            }`}
                             type="text"
-                            value={data.comment}
-                            onChange={updateHandler}
+                            disabled={!update}
+                            value={comment}
+                            onChange={inputUpdateHandler}
                         />
                     </div>
                     {/* <input type="text" className="break-all">
@@ -49,7 +79,17 @@ export const CommentContent = ({ data }) => {
                     </input> */}
                 </div>
                 <div className="flex justify-end me-5 space-x-5">
-                    <Link className="block text-xs">Update</Link>
+                    <Link
+                        className="block text-xs"
+                        onClick={() => {
+                            if (update) {
+                                updateHandler(data.id);
+                            }
+                            setUpdate(!update);
+                        }}
+                    >
+                        {update ? "Save" : "Edit"}
+                    </Link>
                     <Link
                         className="block text-xs"
                         onClick={() => deleteHandler(data.id)}

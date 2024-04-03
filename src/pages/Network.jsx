@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { ShortAds } from "../components/ads/Ads";
 import Footer from "../components/footer/Footer";
@@ -9,7 +9,11 @@ import Group from "../components/group/Group";
 import { useGetAllUsers, useLocalSessionStore } from "../components/Store";
 import { NetworkLoading } from "../components/loading/Loading";
 
+import { RoleContext } from "../components/RoleContext";
+
 const Network = () => {
+    const { isRECRUITER, isJOBSEEKER } = useContext(RoleContext);
+
     const {
         isLoading,
         error,
@@ -56,7 +60,8 @@ const Network = () => {
                     <section className="col-span-1 md:col-span-2 lg:col-span-1 bg-white shadow-custom rounded-lg text-black h-fit">
                         <ManageNw />
                         <div className=" pt-28 pb-7 hidden md:block">
-                            <ShortAds />
+                            {!(isJOBSEEKER || isRECRUITER) && <ShortAds />}
+
                             <Footer />
                         </div>
                     </section>

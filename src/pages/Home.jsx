@@ -24,6 +24,9 @@ const Home = () => {
     const { id } = useParams();
     const { userData: localUser } = useLocalSessionStore();
 
+    const isRECRUITER = localUser.data.role === "RECRUITER";
+    const isJOBSEEKER = localUser.data.role === "JOBSEEKER";
+
     const { error, errorMessage, errorCode, postsAllData, success, apiCall } =
         useGetPostPagination();
 
@@ -113,7 +116,7 @@ const Home = () => {
 
                         <section className="col-span-1 hidden lg:block">
                             <Suggestion />
-                            <ShortAds />
+                            {!(isJOBSEEKER || isRECRUITER) && <ShortAds />}
                             <Footer />
                         </section>
                     </div>

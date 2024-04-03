@@ -174,12 +174,12 @@ const NavBar = () => {
                                                 text={images.message}
                                             />
                                         </li>
-                                        <li>
+                                        {/* <li>
                                             <MyLink
                                                 to="/dd"
                                                 text={images.noti}
                                             />
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </div>
                                 <div
@@ -195,7 +195,7 @@ const NavBar = () => {
                                         }
                                     />
                                     {dropdownOpen && (
-                                        <div className="dropdown-list absolute right-0 w-28 text-center bg-white shadow-md mt-2 rounded-md py-2 z-50">
+                                        <div className="dropdown-list absolute right-0  text-center bg-white shadow-md mt-2 rounded-md py-2 z-50">
                                             {/* Dropdown items */}
                                             <Link
                                                 to={`/profile/${userData.data.id}`}
@@ -208,6 +208,12 @@ const NavBar = () => {
                                                 className="block px-4 py-2 text-base text-gray-700 hover:bg-gray-100"
                                             >
                                                 Settings
+                                            </Link>
+                                            <Link
+                                                to="/subscription"
+                                                className="block px-4 py-2 text-base text-gray-700 hover:bg-gray-100"
+                                            >
+                                                Subscription Plan
                                             </Link>
                                             <Link
                                                 className="block px-4 py-2 text-base text-gray-700 hover:bg-gray-100"

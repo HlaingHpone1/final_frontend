@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useContext } from "react";
 
 import { ShortAds } from "../components/ads/Ads";
 import Footer from "../components/footer/Footer";
@@ -7,7 +7,11 @@ import Chat from "../components/message/Chat";
 
 import { images } from "../components/images";
 
+import { RoleContext } from "../components/RoleContext";
+
 const Message = () => {
+    const { isRECRUITER, isJOBSEEKER } = useContext(RoleContext);
+
     return (
         <div className=" h-screen">
             <div className="inner max-w-1240px mx-auto px-5 xl:px-0 pt-8">
@@ -63,7 +67,8 @@ const Message = () => {
                         </div>
                     </div>
                     <div className="col-span-1 ">
-                        <ShortAds />
+                        {!(isJOBSEEKER || isRECRUITER) && <ShortAds />}
+
                         <Footer />
                     </div>
                 </div>

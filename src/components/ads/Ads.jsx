@@ -6,7 +6,10 @@ import { Link } from "react-router-dom";
 export const ShortAds = () => {
     return (
         <div>
-            <img src={img.ads} className="rounded-2xl w-80 h-64 mb-4" />
+            <img
+                src={img.ads}
+                className="object-cover rounded-2xl w-80 h-64 mb-4"
+            />
         </div>
     );
 };
@@ -24,7 +27,10 @@ export const SubscriptionAds = () => {
                 </p>
 
                 <div className="flex pb-4">
-                    <img src={img.users} className=" size-10 mr-2" />
+                    <img
+                        src={img.users}
+                        className="object-cover  size-10 mr-2"
+                    />
                     <p className=" text-sm my-auto text-gray-300">
                         Millions of members use Premium
                     </p>
@@ -49,7 +55,10 @@ export const SubscriptionAds = () => {
 export const LongAds = () => {
     return (
         <div className="">
-            <img src={img.longads2} className=" rounded-2xl mb-5 h-[500px]" />
+            <img
+                src={img.longads2}
+                className="object-cover  rounded-2xl mb-5 h-[500px]"
+            />
         </div>
     );
 };
@@ -57,7 +66,10 @@ export const LongAds = () => {
 export const MediumAds = () => {
     return (
         <div className="">
-            <img src={img.mediumads} className=" rounded-2xl mb-5 h-[400px]" />
+            <img
+                src={img.mediumads}
+                className="object-cover  rounded-2xl mb-5 h-[400px]"
+            />
         </div>
     );
 };
