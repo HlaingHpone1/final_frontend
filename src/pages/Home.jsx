@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { ShortAds } from "../components/ads/Ads";
@@ -15,22 +15,27 @@ import {
 } from "../components/Store";
 import { PostLoading } from "../components/loading/Loading";
 
+import { RoleContext } from "../components/RoleContext";
+
 const Home = () => {
+    const { isRECRUITER, isJOBSEEKER } = useContext(RoleContext);
+
     const [data, setData] = useState([]);
     const [page, setPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [postLoad, setPostLoad] = useState(true);
 
     const { id } = useParams();
-    const { userData: localUser } = useLocalSessionStore();
-
-    const isRECRUITER = localUser.data.role === "RECRUITER";
-    const isJOBSEEKER = localUser.data.role === "JOBSEEKER";
+    let { userData: localUser } = useLocalSessionStore();
 
     const { error, errorMessage, errorCode, postsAllData, success, apiCall } =
         useGetPostPagination();
 
     const isOwnProfile = id === localUser.data.id;
+
+    console.log("====================================");
+    console.log(isJOBSEEKER);
+    console.log("====================================");
 
     useEffect(() => {
         const controller = new AbortController();

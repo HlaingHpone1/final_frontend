@@ -40,7 +40,7 @@ const NavBar = () => {
         if (event.key === "Enter") {
             return axios.get(`http://localhost:8080/feed/search?pageNumber=0&searchKey=${inputValue}`)
             .then(response => {
-                console.log(response.data); // Print out the data
+                // console.log(response.data); // Print out the data
                 setSearchData(response.data);
                 navigate('/search', {state: {data: response.data}});
                 return response.data;

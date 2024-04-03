@@ -502,10 +502,10 @@ export const useDeletePost = create(devtools(
         errorMessage: null,
         errorCode: null,
         success: false,
-        apiCall: async (id) => {
+        apiCall: async (userId, postId) => {
             set({ isLoading: true });
             try {
-                const res = await axios.delete(`${apiPostNewPost}/${id}`);
+                const res = await axios.delete(`${apiPostNewPost}?userId=${userId}&postId=${postId}`);
                 // if (res.data.httpStatusCode === 200) {
                 set(() => ({
                     success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
@@ -900,6 +900,39 @@ export const usePostMessage = create(devtools(
                 }
             } finally {
                 // abortController.abort();
+                set({ isLoading: false })
+            }
+        },
+    })
+))
+
+// API_UPDATE_POST
+export const useUpdatePost = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        postsData: null,
+        apiCall: async (postData) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.put(`${apiPostNewPost}`, postData);
+                if (res.data.httpStatusCode === 200) {
+                    set(() => ({
+                        postsData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+                    return res.data;
+                }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
                 set({ isLoading: false })
             }
         },

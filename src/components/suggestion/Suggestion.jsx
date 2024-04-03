@@ -42,11 +42,10 @@ const Suggestion = () => {
             .then(response => response.data)
             .catch(error => {
                 console.error("Error on check follow status:", error);
-                // Handle the error
             });
     }
 
-    console.log(userData.data.id)
+    // console.log(userData.data.id)
     
 
 
@@ -64,7 +63,7 @@ const Suggestion = () => {
             });
     }, [data, userData]);
 
-    console.log(followStatuses)
+    // console.log(followStatuses)
     return (
         <div className="mb-5 bg-white shadow-custom rounded-2xl">
             <div className="inner-card px-3 py-4">

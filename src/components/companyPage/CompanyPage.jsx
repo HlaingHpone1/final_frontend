@@ -9,7 +9,7 @@ const CompanyPage = ({ data, followStatus }) => {
 
 
 // Your routes here
-console.log(data.id)
+// console.log(data.id)
     const unFollowHandler = async () => {
     setFollow(!follow);
     return axios.delete(`http://localhost:8080/follower/${userData.data.id}/hasUnfollowed/${data.id}`)
