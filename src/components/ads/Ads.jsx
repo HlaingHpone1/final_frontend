@@ -19,13 +19,13 @@ export const SubscriptionAds = () => {
                 <p className="text-sm py-2">Premium InMail is 4.6x more effective in hearing back than cold email.</p>
 
                 <div className="flex pb-4">
-                    <img src={img.users} className=" size-10 mr-2"/>
+                    <img src={img.users} className=" size-10 mr-2" />
                     <p className=" text-sm my-auto text-gray-300">Millions of members use Premium</p>
                 </div>
-                
+
 
                 <Link to={"/subscription"}
-                className="py-2 px-5 bg-yellow-200 text-black font-semibold rounded-3xl " >
+                    className="py-2 px-5 bg-yellow-200 text-black font-semibold rounded-3xl " >
                     Try Premium for free
                 </Link>
 
@@ -36,7 +36,7 @@ export const SubscriptionAds = () => {
     )
 }
 
-export const LongAds = ()=>{
+export const LongAds = () => {
     return (
         <div className="">
             <img src={img.longads2} className=" rounded-2xl mb-5 h-[500px]" />
@@ -44,7 +44,7 @@ export const LongAds = ()=>{
     )
 }
 
-export const MediumAds = ()=>{
+export const MediumAds = () => {
     return (
         <div className="">
             <img src={img.mediumads} className=" rounded-2xl mb-5 h-[400px]" />
@@ -52,3 +52,28 @@ export const MediumAds = ()=>{
     )
 }
 
+export const SubscriptionShortAds = () => {
+    return (
+        <div className=" w-full bg-white shadow-custom rounded-xl">
+            <div className="flex p-3 pb-4 space-x-1">
+                <div>
+                    <img src={img.rounduser} className=" w-16 h-11" />
+                </div>
+                <div className=" text-black">
+                    <p className="font-medium text-base">See the full list of jobs where you'd be a top applicant</p>
+
+                    <div className="flex pb-2">
+                        <img src={img.users} className=" size-8 mr-1" />
+                        <p className=" text-xs my-auto text-gray-700">Millions of members use Premium</p>
+                    </div>
+
+
+                    <Link to={"/subscription"}
+                        className="py-2 px-5 bg-amber-300 text-black font-semibold rounded-3xl" >
+                        Try Premium for $0
+                    </Link>
+                </div>
+            </div>
+        </div>
+    )
+}
