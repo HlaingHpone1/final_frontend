@@ -1,24 +1,51 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
+import { useGetAllUsers, useLocalSessionStore } from "../Store";
 
-const UserChat = () => {
+import {
+    collection,
+    doc,
+    setDoc,
+    addDoc,
+    getDocs,
+    onSnapshot,
+    deleteDoc,
+    serverTimestamp,
+    query,
+    orderBy
+} from "firebase/firestore";
+import { db } from "../../firebaseConfig";
+import { v4 } from "uuid";
+
+const UserChat = ({ data, onUserClick }) => {
     const [active, setActive] = useState(false);
 
+    const handleButtonClick = (user) => {
+        onUserClick({
+            id: data.id,
+            userName: data.userName,
+            profileImg: data.profileImg,
+            email: data.email
+        });
+        console.log(user.userName)
+    };
+    
     return (
         <button
-            className={`message-users px-4 py-2 flex w-full justify-between hover:bg-slate-200 ${
+            className={`message-users px-4 py-2 flex w-full justify-between hover:bg-[#303030] ${
                 active ? "" : ""
             }`}
-            onClick={() => setActive(!active)}
+            onClick={handleButtonClick}
+            // onClick={() => setActive(!active)}
         >
             <div className="user-info flex space-x-3">
                 <img
                     className="block rounded-full size-16"
-                    src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                    src={ data.profileImg }
                     alt="This is Photo"
                 />
                 <div className="content text-start">
                     <div className="name text-xl font-semibold">
-                        Hlaing Hpone
+                        { data.userName }
                     </div>
                     <div className="message text-sm text-slate-400">
                         Lorem ipsum dolor sit amet.
