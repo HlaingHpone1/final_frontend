@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useLocalSessionStore } from "../Store";
 import { images } from "../images";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const MyLink = ({ text, to }) => {
     // const isActive = useActiveLink(to);
@@ -32,37 +32,37 @@ const NavBar = () => {
 
     // ------------------------------------------------------------------------
 
-    console.log(inputValue)
     const navigate = useNavigate();
 
     // http://localhost:8080/feed/search?pageNumber=0&searchKey=kyaw
     const searchHandler = (event) => {
         if (event.key === "Enter") {
-            return axios.get(`http://localhost:8080/feed/search?pageNumber=0&searchKey=${inputValue}`)
-            .then(response => {
-                // console.log(response.data); // Print out the data
-                setSearchData(response.data);
-                navigate('/search', {state: {data: response.data}});
-                return response.data;
-            })
-            .catch(error => {
-                console.error("Error on search:", error);
-            });
+            return axios
+                .get(
+                    `http://localhost:8080/feed/search?pageNumber=0&searchKey=${inputValue}`
+                )
+                .then((response) => {
+                    // console.log(response.data); // Print out the data
+                    setSearchData(response.data);
+                    navigate("/search", { state: { data: response.data } });
+                    return response.data;
+                })
+                .catch((error) => {
+                    console.error("Error on search:", error);
+                });
         }
-    }
-
-
+    };
 
     // const searchHandler = () => {
     //     setSearchData(inputRef.current.value);
     // };
 
     // const handleKeyDown = (event) => {
-        // if (event.key === "Enter") {
-        //     searchHandler();
-        //     setInputValue("");
-        //     navigate(`/search?query=${inputValue}`)
-        // }
+    // if (event.key === "Enter") {
+    //     searchHandler();
+    //     setInputValue("");
+    //     navigate(`/search?query=${inputValue}`)
+    // }
     // };
     // ------------------------------------------------------------------------
 
@@ -72,8 +72,6 @@ const NavBar = () => {
             setTimeout(() => inputRef.current?.focus(), 0);
         }
     };
-
-
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -174,12 +172,12 @@ const NavBar = () => {
                                                 text={images.message}
                                             />
                                         </li>
-                                        {/* <li>
+                                        <li>
                                             <MyLink
-                                                to="/dd"
-                                                text={images.noti}
+                                                to="/jobs"
+                                                text={images.job}
                                             />
-                                        </li> */}
+                                        </li>
                                     </ul>
                                 </div>
                                 <div

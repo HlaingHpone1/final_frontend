@@ -24,6 +24,9 @@ import UserPosts from "../userPosts/UserPosts";
 import UpdateProfile from "../userProfile/UpdateProfile";
 import Subscription from "../../pages/Subscription";
 import Search from "../../pages/Search";
+import CreateJobPost from "../job/CreateJobPost";
+import Jobs from "../../components/job/Jobs";
+import JobPostsDetail from "../../pages/JobPostsDetail";
 
 const Router = () => {
     const data = sessionStorage.getItem("userData");
@@ -116,6 +119,19 @@ const Router = () => {
                             element={<ChangePsw />}
                         ></Route>
                         <Route path="/search" element={<Search />}></Route>
+                        <Route path="/jobs" element={<Jobs />}></Route>
+                        <Route
+                            path="/profile/:id/createjobpost"
+                            element={<CreateJobPost />}
+                        ></Route>
+                        <Route
+                            path="/jobs/createjobpost"
+                            element={<CreateJobPost />}
+                        ></Route>
+                        <Route
+                            path="/jobs/:jobID"
+                            element={<JobPostsDetail />}
+                        ></Route>
                     </>
                 )}
             </Routes>

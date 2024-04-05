@@ -73,7 +73,7 @@ const Post = ({ data, isOwner }) => {
 
             // console.log("Unliked");
         } else {
-            console.log(id);
+            // console.log(id);
             // console.log("Liked");
 
             const likeDocRef = doc(dbRefLike, id);
@@ -81,7 +81,7 @@ const Post = ({ data, isOwner }) => {
             await setDoc(likeDocRef, likeDataPost);
         }
 
-        console.log(filteredData);
+        // console.log(filteredData);
     };
 
     const submitHandler = async (e) => {
@@ -309,7 +309,7 @@ const Post = ({ data, isOwner }) => {
                             />
                             <p className="text-xs xs:text-sm">Repost</p>
                         </button>
-                        <button className="flex-1 flex justify-center py-3 gap-0 xs:gap-1">
+                        <button className="flex-1 flex justify-center py-3 gap-0 xs:gap-1 ">
                             <img
                                 src={images.send}
                                 className="size-4 xs:size-6 "
