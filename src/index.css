@@ -5,3 +5,20 @@
 body {
     background-color: #ebebeb;
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.chat-right {
+    text-align: right;
+}
+
+.chat-left {
+    text-align: left;
+}
