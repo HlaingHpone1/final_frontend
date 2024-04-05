@@ -8,12 +8,14 @@ const SearchResult = () => {
     const location = useLocation();
     const data = location.state
         ? location.state.data
-        : { users: [], posts: [] };
-    // console.log(data);
+        : { users: [], posts: [], jobPosts: [] };
 
+    console.log(data);
     return (
         <div>
-            {data.users.length === 0 && data.posts.length === 0 ? (
+            {data.users.length === 0 &&
+            data.posts.length === 0 &&
+            data.jobPosts.length === 0 ? (
                 <p className="text-3xl font-bold font-Roboto-Slab">
                     There is no search result
                 </p>
@@ -25,7 +27,9 @@ const SearchResult = () => {
                                 <UserCard key={index} data={item} />
                             ))
                         ) : (
-                            <p>No results found in Users.</p>
+                            <p className="bg-white rounded-lg p-3 mb-3 col-span-3">
+                                No results found in Users.
+                            </p>
                         )}
                     </div>
                     <div className="grid grid-cols-1 ">

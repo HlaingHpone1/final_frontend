@@ -27,6 +27,7 @@ import Search from "../../pages/Search";
 import CreateJobPost from "../job/CreateJobPost";
 import Jobs from "../../components/job/Jobs";
 import JobPostsDetail from "../../pages/JobPostsDetail";
+import RecruiterJobPosts from "../job/RecruiterJobPosts";
 
 const Router = () => {
     const data = sessionStorage.getItem("userData");
@@ -123,6 +124,10 @@ const Router = () => {
                         <Route
                             path="/profile/:id/createjobpost"
                             element={<CreateJobPost />}
+                        ></Route>
+                        <Route
+                            path="/profile/:id/jobposts/all"
+                            element={<RecruiterJobPosts />}
                         ></Route>
                         <Route
                             path="/jobs/createjobpost"

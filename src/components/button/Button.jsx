@@ -1,5 +1,6 @@
 import React from "react";
 
+import { useNavigate } from "react-router-dom";
 import { images } from "../images";
 import { useLocalSessionStore, useMessage } from "../Store";
 
@@ -25,26 +26,13 @@ export const FollowingButton = () => {
     );
 };
 
-export const MessageButton = ({ userID }) => {
-    const { userData } = useLocalSessionStore();
-    const { apiCall } = useMessage();
-
-    const postData = {
-        chatId: userID + userData.data.id,
-        senderId: userData.data.id,
-        recipientId: userID,
-        content: "This is content",
-    };
-
-    const clickHandler = async () => {
-        await apiCall(postData);
-    };
-
+export const MessageButton = () => {
+    const navigate = useNavigate();
     return (
         <div>
             <button
                 className="flex items-center justify-center space-x-3 py-2 px-5 bg-primary text-white rounded-2xl"
-                onClick={clickHandler}
+                onClick={() => navigate("/message")}
             >
                 <p>Message</p>
             </button>

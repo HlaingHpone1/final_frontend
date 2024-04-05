@@ -36,10 +36,6 @@ const Jobs = () => {
         }
     };
 
-    console.log("====================================");
-    console.log(jobPosts);
-    console.log("====================================");
-
     return (
         <div>
             <div className="inner max-w-1240px mx-auto px-5 xl:px-0">
@@ -64,7 +60,7 @@ const Jobs = () => {
                             </div>
                             <div className="jobpost-container">
                                 {jobPosts.map((job) =>
-                                    !isUSER ? (
+                                    isUSER ? (
                                         <div key={job.id}>
                                             <JobPosts job={job} />
                                         </div>

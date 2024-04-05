@@ -22,7 +22,7 @@ import {
     serverTimestamp,
     query,
     limit,
-    orderBy
+    orderBy,
 } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 // import { Loading } from "../loading/Loading";
@@ -31,22 +31,24 @@ import { v4 } from "uuid";
 const Message = () => {
     const { isRECRUITER, isJOBSEEKER } = useContext(RoleContext);
     const { userData } = useLocalSessionStore();
-    const [ message, setMessage ] = useState("")
-    const [ chatData, setChatData ] = useState([])
-    const [ users, setUsers ] = useState([]);
+    const [message, setMessage] = useState("");
+    const [chatData, setChatData] = useState([]);
+    const [users, setUsers] = useState([]);
     // const [ personData, setPersonData ] = useState(
     //     {
     //         userName: "",
     //         profileImg: ""
     //     }
     // );
-    const [ recipientData, setRecipientData ] = useState({
+    const [recipientData, setRecipientData] = useState({
         id: "",
         userName: "",
         profileImg: "",
-        email: ""
+        email: "",
     });
-    const [ messageRoute, setMessageRoute ] = useState(userData.data.id + "AND" + recipientData.id)
+    const [messageRoute, setMessageRoute] = useState(
+        userData.data.id + "AND" + recipientData.id
+    );
 
     const newMessage = {
         id: v4(),
@@ -54,9 +56,9 @@ const Message = () => {
         senderId: userData.data.id,
         content: message,
         timeStamp: serverTimestamp(),
-    }
+    };
 
-    const chatCollection = collection(db, messageRoute)
+    const chatCollection = collection(db, messageRoute);
 
     async function checkCollectionExists(collectionId) {
         const collectionRef = collection(db, collectionId);
@@ -65,7 +67,6 @@ const Message = () => {
 
         return !snapshot.empty;
     }
-
 
     useEffect(() => {
         const checkAndSetMessageRoute = async () => {
@@ -85,7 +86,7 @@ const Message = () => {
                     }
                 }
             }
-        }
+        };
 
         checkAndSetMessageRoute();
     }, [recipientData.id, userData.data.id]);
@@ -99,77 +100,90 @@ const Message = () => {
         async function getCollectionData() {
             const q = query(chatCollection, orderBy("timeStamp"));
             const querySnapshot = await getDocs(q);
-            setChatData(querySnapshot.docs.map(doc => doc.data()));
+            setChatData(querySnapshot.docs.map((doc) => doc.data()));
         }
         getCollectionData();
-    }, [chatCollection, recipientData.id]);  // Run getCollectionData whenever chatCollection changes
+    }, [chatCollection, recipientData.id]); // Run getCollectionData whenever chatCollection changes
 
-    const userCollection = collection(db, 'users')
+    const userCollection = collection(db, "users");
 
     async function getUsersCollectionData() {
         const querySnapshot = await getDocs(userCollection);
-        const users = querySnapshot.docs.map(doc => doc.data());
+        const users = querySnapshot.docs.map((doc) => doc.data());
         setUsers(users);
     }
 
     useEffect(() => {
         getUsersCollectionData();
-        console.log(messageRoute)
+        console.log(messageRoute);
     }, []);
 
     const messageHandler = (e) => {
         if (e.key === "Enter") {
             addMessageToCollection(newMessage);
-            console.log("Message sent to" + messageRoute)
-            e.target.value = ""
+            console.log("Message sent to" + messageRoute);
+            e.target.value = "";
         }
-    }
+    };
 
     return (
-            <div className="">
+        <div className="">
             <div className="inner max-w-1240px mx-auto px-5 xl:px-0 pt-8">
-                <div className="grid grid-cols-2 bg-black text-white  shadow-custom rounded-lg overflow-hidden">
+                <div className="grid grid-cols-2 bg-[#222831] text-white  shadow-custom rounded-lg overflow-hidden">
                     <div className="col-span-3">
                         <div className="grid grid-cols-3 h-[80vh]">
                             <div className="col-span-1 border-r border-gray overflow-y-scroll scroll-smooth">
-                                <div className="title px-4 py-2 text-2xl font-bold font-Roboto-Slab">
-                                </div>
-                                {
-                                    users.map((user, index) => (
-                                        <UserChat onUserClick={setRecipientData} key={index} data={user} />
-                                    ))
-                                }
+                                <div className="title px-4 py-2 text-2xl font-bold font-Roboto-Slab"></div>
+                                {users.map((user, index) => (
+                                    <UserChat
+                                        onUserClick={setRecipientData}
+                                        key={index}
+                                        data={user}
+                                    />
+                                ))}
                             </div>
                             <div className="col-span-2 flex justify-between flex-col relative overflow-y-scroll scroll-smooth hide-scrollbar">
                                 <div className="">
                                     <div className="name p-4 text-xl font-bold font-Roboto-Slab border-b border-gray mb-5">
-                                    {
-                                        recipientData.userName
-                                    }
+                                        {recipientData.userName}
                                     </div>
 
                                     <div className="chat-history px-4 h-full">
                                         {chatData.map((document, index) => (
-                                            <div key={index} className={userData.data.id === document.senderId ? 'chat-right' : 'chat-left'}>
-                                                <Chat key={index} data={document} personData={recipientData}/>
+                                            <div
+                                                key={index}
+                                                className={
+                                                    userData.data.id ===
+                                                    document.senderId
+                                                        ? "chat-right"
+                                                        : "chat-left"
+                                                }
+                                            >
+                                                <Chat
+                                                    key={index}
+                                                    data={document}
+                                                    personData={recipientData}
+                                                />
                                             </div>
                                         ))}
                                     </div>
                                 </div>
-                                <div className="message-box flex items-center px-4 bottom-0 bg-black sticky py-5">
+                                <div className="message-box flex items-center px-4 bottom-0 bg-[#222831] sticky py-5">
                                     <input
                                         type="text"
                                         name="comment"
                                         onKeyDown={messageHandler}
-                                        onInput={
-                                            (e) => 
-                                                setMessage(e.target.value)
+                                        onInput={(e) =>
+                                            setMessage(e.target.value)
                                         }
                                         // value={input.comment}
-                                        className="rounded-full border-none px-4 py-3 bg-gray-300 focus:outline-none w-full "
+                                        className="rounded-full border-none px-4 py-3 text-black bg-gray-300 focus:outline-none w-full "
                                         placeholder="Write a comment..."
                                     />
-                                    <button type="submit" className="ml-2 rounded-3xl p-3 bg-white">
+                                    <button
+                                        type="submit"
+                                        className="ml-2 rounded-3xl p-3 bg-white"
+                                    >
                                         <img
                                             src={images.sent1}
                                             className="size-6"

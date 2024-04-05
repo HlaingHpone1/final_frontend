@@ -140,7 +140,7 @@ const ProfileInfo = ({ data, edu, isOwnProfile }) => {
                                                 </button>
                                             </div>
                                         )}
-                                        <MessageButton userID={data.id} />
+                                        <MessageButton />
                                     </div>
                                 ) : (
                                     ""
@@ -163,7 +163,10 @@ const ProfileInfo = ({ data, edu, isOwnProfile }) => {
                         </div>
                         {isOwnProfile && (
                             <div className="col-span-4 text-center md:text-left">
-                                <Link to={`/profile/${data.id}/updateprofile`}>
+                                <Link
+                                    className="bg-primary text-white py-3 px-4 rounded-md text-sm font-bold"
+                                    to={`/profile/${data.id}/updateprofile`}
+                                >
                                     Update Profile
                                 </Link>
                             </div>

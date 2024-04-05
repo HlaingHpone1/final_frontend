@@ -105,6 +105,9 @@ const Profile = () => {
                                 isOwnProfile={isOwnProfile}
                                 data={postData}
                             />
+                            <div className="block lg:hidden">
+                                {isOwnProfile && isRECRUITER && <Recruiter />}
+                            </div>
                             <ProfileEducation
                                 isOwnProfile={isOwnProfile}
                                 data={educationData}

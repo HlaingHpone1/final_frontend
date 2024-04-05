@@ -63,10 +63,10 @@ const CreateJobPost = () => {
             };
 
             await apiCall(postData);
+        }
 
-            if (success) {
-                navigate(-1);
-            }
+        if (success) {
+            navigate(-1);
         }
     };
 

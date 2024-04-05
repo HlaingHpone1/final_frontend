@@ -1024,12 +1024,13 @@ export const useGetJobPostById = create(devtools(
                 const res = await axios.get(`${apiJob}/${id}`, {
                     signal
                 });
-                if (res.data.httpStatusCode === 200) {
-                    set(() => ({
-                        jobPostData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
-                    }))
-                    return res.data;
-                }
+                // if (res.data.httpStatusCode === 200) {
+                set(() => ({
+                    jobPostData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                }))
+
+                return res.data;
+                // }
 
             } catch (err) {
                 if (err.response) {

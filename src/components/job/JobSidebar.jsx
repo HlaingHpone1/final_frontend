@@ -34,7 +34,7 @@ const JobSidebar = () => {
                     <p className="text-xl">Resume Builder</p>
                 </button>
             </div>
-            {!isRESCRUITER && (
+            {isRESCRUITER && (
                 <Link
                     to={`/jobs/createjobpost`}
                     className="border-primary block text-center border-2 hover:bg-teal-50 transition-colors duration-200 rounded-xl py-2 w-full text-xl capitalize"

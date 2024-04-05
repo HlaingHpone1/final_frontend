@@ -11,7 +11,7 @@ import {
     deleteDoc,
     serverTimestamp,
     query,
-    orderBy
+    orderBy,
 } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
 import { v4 } from "uuid";
@@ -24,11 +24,10 @@ const UserChat = ({ data, onUserClick }) => {
             id: data.id,
             userName: data.userName,
             profileImg: data.profileImg,
-            email: data.email
+            email: data.email,
         });
-        console.log(user.userName)
     };
-    
+
     return (
         <button
             className={`message-users px-4 py-2 flex w-full justify-between hover:bg-[#303030] ${
@@ -40,12 +39,12 @@ const UserChat = ({ data, onUserClick }) => {
             <div className="user-info flex space-x-3">
                 <img
                     className="block rounded-full size-16"
-                    src={ data.profileImg }
+                    src={data.profileImg}
                     alt="This is Photo"
                 />
                 <div className="content text-start">
                     <div className="name text-xl font-semibold">
-                        { data.userName }
+                        {data.userName}
                     </div>
                     <div className="message text-sm text-slate-400">
                         Lorem ipsum dolor sit amet.

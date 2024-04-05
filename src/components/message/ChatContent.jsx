@@ -16,7 +16,7 @@ const ChatContent = ({ data, personData }) => {
             setTimeStamp(date.toString());
         }
     }, [data]);
-    console.log("value" + userData.data.userName);
+
     return (
         <div className="chat-content text-sm  ">
             <div className="flex w-full space-x-3 mb-2">
@@ -27,7 +27,13 @@ const ChatContent = ({ data, personData }) => {
                 </p>
                 {/* <p className="chat-time">{ data.timeStamp.toDate().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' }) + " " + data.timeStamp.toDate().toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) }</p> */}
             </div>
-            <div className={`chat w-[200px] break-all p-3 rounded-lg ${userData.data.id === data.senderId ? 'bg-[#654CEB]' : 'bg-[#303030]'}`}>
+            <div
+                className={`chat w-[200px] break-all p-3 rounded-lg ${
+                    userData.data.id === data.senderId
+                        ? "bg-primary"
+                        : "bg-[#393e46]"
+                }`}
+            >
                 <p>{data && data.content}</p>
             </div>
         </div>
@@ -35,6 +41,8 @@ const ChatContent = ({ data, personData }) => {
 };
 
 export default ChatContent;
-{/* <div className={`chat w-[200px] break-all p-3 rounded-lg ${userData.data.id === data.senderId ? 'bg-[#654CEB]' : 'bg-[#303030]'}`}>
+{
+    /* <div className={`chat w-[200px] break-all p-3 rounded-lg ${userData.data.id === data.senderId ? 'bg-[#654CEB]' : 'bg-[#303030]'}`}>
     <p>{data && data.content}</p>
-</div> */}
+</div> */
+}
