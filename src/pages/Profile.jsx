@@ -46,6 +46,7 @@ const Profile = () => {
     const [skillData, setSkillData] = useState([]);
 
     const { id } = useParams();
+    const [followStatuses, setFollowStatuses] = useState([]);
 
     const isOwnProfile = id === localUser.data.id;
 

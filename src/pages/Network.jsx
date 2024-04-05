@@ -10,6 +10,7 @@ import { useGetAllUsers, useLocalSessionStore } from "../components/Store";
 import { NetworkLoading } from "../components/loading/Loading";
 
 import { RoleContext } from "../components/RoleContext";
+import axios from "axios";
 
 const Network = () => {
     const { isRECRUITER, isJOBSEEKER } = useContext(RoleContext);
@@ -30,6 +31,7 @@ const Network = () => {
     const [page, setPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [loading, setLoading] = useState(true);
+    const [followStatuses, setFollowStatuses] = useState([]);
 
     const addPageHandler = () => {
         if (page < totalPages - 1) {
@@ -52,6 +54,32 @@ const Network = () => {
 
         return () => controller.abort();
     }, [page]);
+
+    function checkFollowStatus(following, follower) {
+        return axios.get(`http://localhost:8080/follower/${following}/hasFollowedBack/${follower}`)
+            .then(response => response.data)
+            .catch(error => {
+                console.error("Error on check follow status:", error);
+            });
+    }
+
+    // console.log(userData.data.id)
+    
+
+
+    useEffect(() => {
+        Promise.all(
+            data
+                .filter((item) => item.id !== userData.data.id)
+                .slice(0, 4)
+                .map((item) => checkFollowStatus(userData.data.id, item.id))
+        )
+            .then((statuses) => setFollowStatuses(statuses))
+            .catch((error) => {
+                console.error(error);
+                setFollowStatuses(data.slice(0, 4).map(() => false));
+            });
+    }, [data, userData]);
 
     return (
         <main className="bg-background">
@@ -91,7 +119,8 @@ const Network = () => {
                                             .map((item, index) => (
                                                 <UserCard
                                                     key={index}
-                                                    data={item}
+                                                    data={item} 
+                                                    followStatus={followStatuses[index]}
                                                 />
                                             ))}
                                     {loading && (

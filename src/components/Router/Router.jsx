@@ -39,6 +39,16 @@ const Router = () => {
                         ></Route>
                         <Route path="/login" element={<LogIn />}></Route>
                         <Route path="/register" element={<Register />}></Route>
+                        <Route
+                            path="/settings/:id/oldpsw"
+                            element={<OldPswReset />}
+                        ></Route>
+                        <Route path="/reset" element={<PswReset />}></Route>
+                        <Route path="/otp" element={<OtpReset />}></Route>
+                        <Route
+                            path="/changepsw"
+                            element={<ChangePsw />}
+                        ></Route>
                     </>
                 )}
 

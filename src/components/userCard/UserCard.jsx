@@ -1,9 +1,37 @@
 import React from "react";
+import { useLocalSessionStore } from "../Store";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import { FollowButton, FollowingButton } from "../button/Button";
 
-import Btn from "../btn/Btn";
+const UserCard = ({ data ,followStatus}) => {
+    const {userData} =useLocalSessionStore();
+    const [follow, setFollow] = useState(followStatus);
+    
+    const unFollowHandler = async () => {
+        setFollow(!follow);
+        return axios.delete(`http://localhost:8080/follower/${userData.data.id}/hasUnfollowed/${data.id}`)
+            .catch(error => {
+                console.error("Error on unfollow:", error);
+              
+            });
+        }
+    
+    
 
-const UserCard = ({ data }) => {
+    const followHandler = async () => {
+        setFollow(!follow);
+        return axios.post(`http://localhost:8080/follower`,
+        {
+            followingId: userData.data.id,
+            followerId: data.id
+        })
+            .catch(error => {
+                console.error("Error on unfollow:", error);
+              
+            });
+        }
     const followers = data.followers.toLocaleString();
 
     const limitWords = (text, limit) => {
@@ -45,10 +73,13 @@ const UserCard = ({ data }) => {
                 </Link>
             </div>
             <div className="p-2">
-                <Btn text="Follow" />
+            
+            <div className=" text-black py-1 w-full text-lg rounded-2xl">
+                    {followStatus || follow ? <div onClick={unFollowHandler}> <FollowingButton/></div>: <div onClick={followHandler}> <FollowButton/></div>}
+                </div>
             </div>
         </div>
     );
-};
+    }
 
 export default UserCard;
