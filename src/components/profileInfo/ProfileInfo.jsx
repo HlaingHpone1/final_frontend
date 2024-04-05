@@ -1,9 +1,84 @@
 import { React } from "react";
 import { Link } from "react-router-dom";
-
-import { MessageButton, ProfileFollowButton } from "../button/Button";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import { useLocalSessionStore } from "../Store";
+import {
+    FollowButton,
+    FollowingButton,
+    MessageButton,
+    ProfileFollowButton,
+} from "../button/Button";
 
 const ProfileInfo = ({ data, edu, isOwnProfile }) => {
+    const [follow, setFollow] = useState(false);
+
+    const [loading, setLoading] = useState(true);
+
+    const { followStatus, setFollowStatuses } = useState(false);
+    const { userData } = useLocalSessionStore();
+
+    function checkFollowStatus(following, follower) {
+        return axios
+            .get(
+                `http://localhost:8080/follower/${following}/hasFollowedBack/${follower}`
+            )
+            .then((response) => response.data)
+            .catch((error) => {
+                console.error("Error on check follow status:", error);
+            });
+    }
+
+    useEffect(() => {
+        if (!Array.isArray(data)) {
+            return;
+        }
+
+        Promise.all(
+            data
+                .filter((item) => item.id !== userData.data.id)
+                .slice(0, 4)
+                .map((item) => checkFollowStatus(userData.data.id, item.id))
+        )
+            .then((statuses) => {
+                const isFollowing = statuses.includes(true);
+                setFollowStatuses(statuses);
+                setFollow(isFollowing);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error(error);
+                setFollowStatuses(data.slice(0, 4).map(() => false));
+                setFollow(false);
+                setLoading(false);
+            });
+    }, [data, userData]);
+
+    const unFollowHandler = async () => {
+        setFollow(!follow);
+        return axios
+            .delete(
+                `http://localhost:8080/follower/${userData.data.id}/hasUnfollowed/${data.id}`
+            )
+            .catch((error) => {
+                console.error("Error on unfollow:", error);
+                // Handle the error
+            });
+    };
+
+    const followHandler = async () => {
+        setFollow(!follow);
+        return axios
+            .post(`http://localhost:8080/follower`, {
+                followingId: userData.data.id,
+                followerId: data.id,
+            })
+            .catch((error) => {
+                console.error("Error on unfollow:", error);
+                // Handle the error
+            });
+    };
     return (
         <section className="pb-2">
             <div className="">
@@ -50,7 +125,17 @@ const ProfileInfo = ({ data, edu, isOwnProfile }) => {
                             <div className="button-gp mt-5">
                                 {!isOwnProfile ? (
                                     <div className="flex items-center space-x-4">
-                                        <ProfileFollowButton />
+                                        {followStatus || follow ? (
+                                            <div onClick={unFollowHandler}>
+                                                {" "}
+                                                <FollowingButton />
+                                            </div>
+                                        ) : (
+                                            <div onClick={followHandler}>
+                                                {" "}
+                                                <FollowButton />
+                                            </div>
+                                        )}
                                         <MessageButton userID={data.id} />
                                     </div>
                                 ) : (
@@ -74,10 +159,7 @@ const ProfileInfo = ({ data, edu, isOwnProfile }) => {
                         </div>
                         {isOwnProfile && (
                             <div className="col-span-4 text-center md:text-left">
-                                <Link
-                                    className="bg-primary text-white py-3 px-4 rounded-md text-sm font-bold"
-                                    to={`/profile/${data.id}/updateprofile`}
-                                >
+                                <Link to={`/profile/${data.id}/updateprofile`}>
                                     Update Profile
                                 </Link>
                             </div>
