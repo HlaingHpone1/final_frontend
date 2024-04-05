@@ -10,10 +10,10 @@ import { RoleContext } from "./components/RoleContext";
 function App() {
     const { userData: localUser } = useLocalSessionStore();
 
-    let isUser, isRECRUITER, isJOBSEEKER;
+    let isUSER, isRECRUITER, isJOBSEEKER;
 
     if (localUser) {
-        isUser = localUser.data.role === "USER";
+        isUSER = localUser.data.role === "FREE_USER";
         isRECRUITER = localUser.data.role === "RECRUITER";
         isJOBSEEKER = localUser.data.role === "JOBSEEKER";
     }
@@ -25,7 +25,7 @@ function App() {
                 {data != null && (
                     <div className="">
                         <RoleContext.Provider
-                            value={{ isRECRUITER, isJOBSEEKER }}
+                            value={{ isRECRUITER, isJOBSEEKER, isUSER }}
                         >
                             <NavBar />
                             <Router />

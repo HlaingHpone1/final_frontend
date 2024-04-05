@@ -25,6 +25,7 @@ const apiPostSkill = `${import.meta.env.VITE_API_SKILL_URL}`;
 const apiMessage = `${import.meta.env.VITE_API_MESSAGE_URL}`;
 
 const apiComment = `${import.meta.env.VITE_API_COMMENT_URL}`;
+const apiJob = `${import.meta.env.VITE_API_JOB_URL}`;
 
 // API_NewUserRegister
 export const useUserStorage = create(
@@ -922,6 +923,110 @@ export const useUpdatePost = create(devtools(
                 if (res.data.httpStatusCode === 200) {
                     set(() => ({
                         postsData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+                    return res.data;
+                }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                set({ isLoading: false })
+            }
+        },
+    })
+))
+
+// API_CREATE_JOB
+export const useCreateJob = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        jobData: null,
+        apiCall: async (postData) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.post(apiJob, postData);
+                if (res.data.httpStatusCode === 201) {
+                    set(() => ({
+                        jobData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                    }))
+                    return res.data;
+                }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                set({ isLoading: false })
+            }
+        },
+    })
+))
+
+// API_GET_JOBPOSTS
+export const useGetJobPosts = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        jobPostsData: null,
+        apiCall: async (page, signal) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.get(`${apiJob}/jobposts?page=${page}`, {
+                    signal
+                });
+                // if (res.data.httpStatusCode === 200) {
+                set(() => ({
+                    jobPostsData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
+                }))
+
+                return res.data;
+                // }
+
+            } catch (err) {
+                if (err.response) {
+                    set({ error: true, errorMessage: err.response.data, errorCode: err.response.status, isLoading: false });
+                } else {
+                    set({ error: true })
+                }
+            } finally {
+                set({ isLoading: false })
+            }
+        },
+    })
+))
+
+// API_GET_JOBPOST_BY_ID
+export const useGetJobPostById = create(devtools(
+    (set, get) => ({
+        isLoading: false,
+        error: false,
+        errorMessage: null,
+        errorCode: null,
+        success: false,
+        jobPostData: null,
+        apiCall: async (id, signal) => {
+            set({ isLoading: true });
+            try {
+                const res = await axios.get(`${apiJob}/${id}`, {
+                    signal
+                });
+                if (res.data.httpStatusCode === 200) {
+                    set(() => ({
+                        jobPostData: res.data, success: true, isLoading: false, error: false, errorMessage: null, errorCode: null
                     }))
                     return res.data;
                 }

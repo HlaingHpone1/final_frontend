@@ -86,6 +86,8 @@ const Profile = () => {
         return () => controller.abort();
     }, [id]);
 
+    // sessionStorage.setItem("userData", JSON.stringify(userData));
+
     return (
         <>
             <Loading isLoading={isLoading} />
@@ -117,7 +119,7 @@ const Profile = () => {
                         </div>
                         <div className="lg:col-span-1 lg:block hidden">
                             {!(isJOBSEEKER || isRECRUITER) && <LongAds />}
-                            {isRECRUITER && <Recruiter />}
+                            {isOwnProfile && isRECRUITER && <Recruiter />}
 
                             <Footer />
                         </div>

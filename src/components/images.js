@@ -33,11 +33,25 @@ import attach from "../assets/myicon/attach.png"
 import cam from "../assets/myicon/cam.png"
 import img from "../assets/myicon/img.png"
 import more from "../assets/myicon/more.png"
+import job from "../assets/myicon/job.png"
+import job1 from "../assets/myicon/job1.png"
+import bookmark from "../assets/myicon/bookmark.png"
+import list from "../assets/myicon/list.png"
+import cv from "../assets/myicon/cv.png"
+import userProfile from "../assets/myicon/userProfile.jpg"
+import code from "../assets/myicon/code.png"
+import salary from "../assets/myicon/salary.png"
+import qua from "../assets/myicon/qua.png"
+import exp from "../assets/myicon/experience.png"
 
 
 
 export const images = {
     add,
+    exp,
+    qua,
+    code,
+    salary,
     addAvatar,
     attach,
     cam,
@@ -72,5 +86,14 @@ export const images = {
     sent1,
     edit,
     delete1,
+    job,
+    job1,
+    bookmark,
+    list,
+    cv,
+    userProfile,
+
+
+
 };
 

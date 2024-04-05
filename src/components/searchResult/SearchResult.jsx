@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
 import UserCard from "../userCard/UserCard";
 import Post from "../post/Post";
+import JobPost from "../job/JobPosts";
 import { useLocation } from "react-router-dom";
 
 const SearchResult = () => {
@@ -8,7 +9,7 @@ const SearchResult = () => {
     const data = location.state
         ? location.state.data
         : { users: [], posts: [] };
-    console.log(data);
+    // console.log(data);
 
     return (
         <div>
@@ -19,14 +20,33 @@ const SearchResult = () => {
             ) : (
                 <>
                     <div className="grid grid-col-1 xs:grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
-                        {data.users.map((item, index) => (
-                            <UserCard key={index} data={item} />
-                        ))}
+                        {data.users.length > 0 ? (
+                            data.users.map((item, index) => (
+                                <UserCard key={index} data={item} />
+                            ))
+                        ) : (
+                            <p>No results found in Users.</p>
+                        )}
                     </div>
-                    <div className="grid grid-cols-1">
-                        {data.posts.map((item, index) => (
-                            <Post key={index} data={item} />
-                        ))}
+                    <div className="grid grid-cols-1 ">
+                        {data.posts.length > 0 ? (
+                            data.posts.map((item, index) => (
+                                <Post key={index} data={item} />
+                            ))
+                        ) : (
+                            <p className="bg-white rounded-lg p-3 mb-3">
+                                No results found in Posts.
+                            </p>
+                        )}
+                    </div>
+                    <div className="grid grid-cols-1 bg-white rounded-lg p-3">
+                        {data.jobPosts.length > 0 ? (
+                            data.jobPosts.map((item, index) => (
+                                <JobPost key={index} job={item} />
+                            ))
+                        ) : (
+                            <p>No results found in Job Posts.</p>
+                        )}
                     </div>
                 </>
             )}

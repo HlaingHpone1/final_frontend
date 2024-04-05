@@ -10,6 +10,7 @@ import { Loading } from "../loading/Loading";
 
 const UpdateProfile = () => {
     const { isRECRUITER, isJOBSEEKER } = useContext(RoleContext);
+
     const { apiCall: userInfoAPI } = useGetUser();
 
     const navigate = useNavigate();
@@ -21,6 +22,7 @@ const UpdateProfile = () => {
     const { id } = useParams();
     const isOwnProfile = id === localUser.data.id;
 
+    const [allData, setAllData] = useState({});
     const [userData, setUserData] = useState([]);
 
     const [data, setData] = useState({
@@ -45,21 +47,25 @@ const UpdateProfile = () => {
         "bio",
     ];
 
+    const controller = new AbortController();
+
+    const fetchUser = async () => {
+        const result = await userInfoAPI(id, controller.signal);
+
+        keys.forEach((key) => {
+            data[key] = result.data[key] == null ? "" : result.data[key];
+        });
+
+        setData({
+            ...data,
+        });
+
+        // setAllData(result);
+
+        sessionStorage.setItem("userData", JSON.stringify(result));
+    };
+
     useEffect(() => {
-        const controller = new AbortController();
-
-        const fetchUser = async () => {
-            const result = await userInfoAPI(id, controller.signal);
-
-            keys.forEach((key) => {
-                data[key] = result.data[key] == null ? "" : result.data[key];
-            });
-
-            setData({
-                ...data,
-            });
-        };
-
         fetchUser();
 
         return () => controller.abort();
@@ -88,7 +94,10 @@ const UpdateProfile = () => {
         });
 
         setLoading(false);
-        navigate(`/profile/${id}`);
+
+        fetchUser();
+
+        window.location.href = `/profile/${id}`;
     };
 
     return (

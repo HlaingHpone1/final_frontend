@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import { db } from "../../firebaseConfig";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { Loading } from "../loading/Loading";
+import { useLocalSessionStore } from "../Store";
 
 export const CommentContent = ({ data, isOwner }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [comment, setComment] = useState(data.comment);
     const [update, setUpdate] = useState(false);
+    const { userData: localUser } = useLocalSessionStore();
 
     const updateHandler = async (id) => {
         setIsLoading(true);
@@ -31,6 +33,8 @@ export const CommentContent = ({ data, isOwner }) => {
             setIsLoading(false);
         }
     };
+
+    const isOwnComment = data.userId === localUser.data.id;
 
     const deleteHandler = async (id) => {
         setIsLoading(true);
@@ -77,7 +81,7 @@ export const CommentContent = ({ data, isOwner }) => {
                         {data.comment}
                     </input> */}
                 </div>
-                {isOwner && (
+                {isOwnComment && (
                     <div className="flex justify-end me-5 space-x-5">
                         <Link
                             className="block text-xs"
