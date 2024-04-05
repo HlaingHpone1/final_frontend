@@ -73,3 +73,34 @@ export const MediumAds = () => {
         </div>
     );
 };
+
+export const SubscriptionShortAds = () => {
+    return (
+        <div className=" w-full bg-white shadow-custom rounded-xl">
+            <div className="flex p-3 pb-4 space-x-1">
+                <div>
+                    <img src={img.rounduser} className=" w-16 h-11" />
+                </div>
+                <div className=" text-black">
+                    <p className="font-medium text-base">
+                        See the full list of jobs where you'd be a top applicant
+                    </p>
+
+                    <div className="flex pb-2">
+                        <img src={img.users} className=" size-8 mr-1" />
+                        <p className=" text-xs my-auto text-gray-700">
+                            Millions of members use Premium
+                        </p>
+                    </div>
+
+                    <Link
+                        to={"/subscription"}
+                        className="py-2 px-5 bg-amber-300 text-black font-semibold rounded-3xl"
+                    >
+                        Try Premium for $0
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
+};

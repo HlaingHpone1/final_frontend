@@ -14,6 +14,7 @@ import longads from "../assets/img/longads.jpg";
 import longads2 from "../assets/img/longads2.jpg";
 import mediumads from "../assets/img/mediumads.jpg";
 import users from "../assets/img/users.png";
+import rounduser from "../assets/img/rounduser.png";
 
 export const img = {
     twopeople,
