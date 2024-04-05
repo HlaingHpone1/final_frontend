@@ -11,6 +11,9 @@ const PswChgForm = () => {
         Otp: "",
         mail: "",
     });
+    const [isLoading, setIsLoading] = useState(false);
+
+    const storeEmail = localStorage.getItem("email");
 
     const [showPassword, setShowPassword] = useState({
         newPassword: "",
@@ -34,6 +37,21 @@ const PswChgForm = () => {
         });
     };
 
+    function validatePassword(password) {
+        const lengthCheck = password.length >= 8;
+        const specialCharacterCheck = /[!@#$%^&*(),.?":{}|<>]/g.test(password);
+        const numberCheck = /\d/g.test(password);
+        const uppercaseCheck = /[A-Z]/g.test(password);
+        const lowercaseCheck = /[a-z]/g.test(password);
+        return (
+            lengthCheck &&
+            specialCharacterCheck &&
+            numberCheck &&
+            uppercaseCheck &&
+            lowercaseCheck
+        );
+    }
+
     const otpHandler = (e) => {
         const otpWriteData = e.target.value;
         setData({ ...data, Otp: otpWriteData });
@@ -54,19 +72,26 @@ const PswChgForm = () => {
             newErrors.notSamePassword = "Password aren't same";
         }
 
+        const pass = validatePassword(data.newPassword);
+        if (!pass) {
+            newErrors.passwordStrength =
+                "Password must contain at least 8 characters, including uppercase, lowercase, number and special character";
+        }
+
         setErrors(newErrors);
         try {
+            setIsLoading(true);
+
             const email = localStorage.getItem("email");
             //   console.log("Shine Htet wai",email);
             axios
-                .put(`http://localhost:8080/users/${id}/reset-password-otp`, {
-                    mail: email,
+                .put(`http://localhost:8080/users/reset-password-otp`, {
+                    mail: storeEmail,
                     otp: data.Otp,
                     newPassword: data.newPassword,
                 })
                 .then((response) => {
                     if (response.status === 204) {
-                        alert("Password Changed Successfully");
                         localStorage.removeItem("email");
                         window.location.href = "/login";
                     } else if (response.status === 400) {
@@ -82,13 +107,20 @@ const PswChgForm = () => {
                         error
                     );
                 });
+            setIsLoading(false);
         } catch (error) {
             console.error("Erro on changing password", error);
+            setIsLoading(false);
         }
     };
 
     return (
         <section>
+            {errors.passwordStrength && (
+                <p className="text-red-700 rounded-lg mt-2">
+                    {errors.passwordStrength}
+                </p>
+            )}
             <form className=" min-w-[350px]" action="" onSubmit={submitHandler}>
                 {errors.notSamePassword && (
                     <p className="text-red-700 rounded-lg mt-2">
@@ -187,8 +219,9 @@ const PswChgForm = () => {
                 <button
                     className="bg-slate-500 text-white px-5 py-2 rounded-md text-lg"
                     type="submit"
+                    disabled={isLoading}
                 >
-                    Submit
+                    {isLoading ? "Loading..." : "Submit"}
                 </button>
             </form>
         </section>

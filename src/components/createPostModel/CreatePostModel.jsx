@@ -130,7 +130,7 @@ const CreatePostModel = ({ modalIsOpen, setModalIsOpen, data }) => {
 
     return (
         <>
-            <Loading isLoading={loading} />
+            {/* <Loading isLoading={loading} /> */}
             <div>
                 <Modal
                     isOpen={modalIsOpen}

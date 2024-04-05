@@ -27,18 +27,18 @@ const SearchResult = () => {
                                 <UserCard key={index} data={item} />
                             ))
                         ) : (
-                            <p className="bg-white rounded-lg p-3 mb-3 col-span-3">
+                            <p className="bg-white rounded-lg p-3 col-span-3">
                                 No results found in Users.
                             </p>
                         )}
                     </div>
-                    <div className="grid grid-cols-1 ">
+                    <div className="grid grid-cols-1 mb-5">
                         {data.posts.length > 0 ? (
                             data.posts.map((item, index) => (
                                 <Post key={index} data={item} />
                             ))
                         ) : (
-                            <p className="bg-white rounded-lg p-3 mb-3">
+                            <p className="bg-white rounded-lg p-3">
                                 No results found in Posts.
                             </p>
                         )}

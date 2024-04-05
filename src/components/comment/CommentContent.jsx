@@ -49,7 +49,7 @@ export const CommentContent = ({ data, isOwner }) => {
 
     return (
         <div className="flex space-x-2 px-5">
-            <Loading isLoading={isLoading} />
+            {/* <Loading isLoading={isLoading} /> */}
             <img
                 src={data.profileImg}
                 alt="this is profile image"

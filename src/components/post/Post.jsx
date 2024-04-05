@@ -175,7 +175,7 @@ const Post = ({ data, isOwner }) => {
 
     return (
         <>
-            {isLoading && <Loading isLoading={isLoading} />}
+            {/* {isLoading && <Loading isLoading={isLoading} />} */}
 
             <section className="bg-white text-black  rounded-2xl shadow-custom mb-5 overflow-hidden">
                 <div className="">

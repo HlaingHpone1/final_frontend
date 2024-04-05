@@ -54,6 +54,21 @@ const RegisterForm = () => {
         });
     };
 
+    function validatePassword(password) {
+        const lengthCheck = password.length >= 8;
+        const specialCharacterCheck = /[!@#$%^&*(),.?":{}|<>]/g.test(password);
+        const numberCheck = /\d/g.test(password);
+        const uppercaseCheck = /[A-Z]/g.test(password);
+        const lowercaseCheck = /[a-z]/g.test(password);
+        return (
+            lengthCheck &&
+            specialCharacterCheck &&
+            numberCheck &&
+            uppercaseCheck &&
+            lowercaseCheck
+        );
+    }
+
     const showPasswordVisibility = (field) => {
         setShowPassword({
             ...showPassword,
@@ -78,6 +93,12 @@ const RegisterForm = () => {
 
         if (data.password != data.confirmPassword) {
             newErrors.notSamePassword = "Password aren't same";
+        }
+
+        const pass = validatePassword(data.password);
+        if (!pass) {
+            newErrors.passwordStrength =
+                "Password must contain at least 8 characters, including uppercase, lowercase, number and special character";
         }
 
         setErrors(newErrors);
@@ -110,29 +131,30 @@ const RegisterForm = () => {
     return (
         <section>
             <Loading isLoading={isLoading} />
-            {firebaseError && (
-                <p className="text-red-500 text-xl font-semibold text-center">
-                    {errorMessage}
-                </p>
-            )}
+
             {error && errorMessage && (
                 <p className="text-red-500 text-xl font-semibold text-center">
                     {errorMessage}
                 </p>
             )}
             <form
-                className="min-w-[350px]"
+                className="min-w-[350px] w-[450px]"
                 action=""
                 method="POST"
                 onSubmit={submitHandler}
             >
+                {errors.passwordStrength && (
+                    <p className="text-red-700 rounded-lg mt-2">
+                        {errors.passwordStrength}
+                    </p>
+                )}
                 {errors.notSamePassword && (
                     <p className="text-red-700 rounded-lg mt-2">
                         {errors.notSamePassword}
                     </p>
                 )}
                 <div className="flex space-x-4">
-                    <div className="input-box mb-3">
+                    <div className="input-box mb-3 w-full">
                         <input
                             className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 ${
                                 errors.firstName
@@ -153,7 +175,7 @@ const RegisterForm = () => {
                             </p>
                         )}
                     </div>
-                    <div className="input-box mb-3">
+                    <div className="input-box mb-3 w-full">
                         <input
                             className={`focus:outline-none bg-transparent border-b-2  focus:border-slate-700 transition-colors duration-200 ease-linear w-full block text-lg px-2 py-2.5 ${
                                 errors.lastName
