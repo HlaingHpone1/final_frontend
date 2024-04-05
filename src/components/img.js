@@ -33,5 +33,6 @@ export const img = {
     longads2,
     mediumads,
     users,
+    rounduser
 };
 

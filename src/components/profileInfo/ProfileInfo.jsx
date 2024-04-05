@@ -128,12 +128,16 @@ const ProfileInfo = ({ data, edu, isOwnProfile }) => {
                                         {followStatus || follow ? (
                                             <div onClick={unFollowHandler}>
                                                 {" "}
-                                                <FollowingButton />
+                                                <button className="flex items-center justify-center space-x-3 py-2 px-5 bg-primary text-white rounded-2xl">
+                                                    <p>Following</p>
+                                                </button>
                                             </div>
                                         ) : (
                                             <div onClick={followHandler}>
                                                 {" "}
-                                                <FollowButton />
+                                                <button className="flex items-center justify-center space-x-3 py-2 px-5 bg-primary text-white rounded-2xl">
+                                                    <p>Follow</p>
+                                                </button>
                                             </div>
                                         )}
                                         <MessageButton userID={data.id} />
