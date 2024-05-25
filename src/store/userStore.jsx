@@ -12,7 +12,7 @@ export const userStore = create (
             setIsLogInUser:(loginUser)=> set({isLogInUser: loginUser}),
             setUserData:(userData)=> set({userData: userData}),
             setToken:(token)=>set({token:token}),
-            setOrgKey:(key)=>set({orgKey:key}),
+            setOrgKey:(key)=>set({orgKey:key})
         })
     )
 )
