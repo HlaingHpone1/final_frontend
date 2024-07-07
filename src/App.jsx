@@ -11,6 +11,7 @@ function App() {
     const { userData: localUser } = useLocalSessionStore();
 
     let isUSER, isRECRUITER, isJOBSEEKER;
+    // testingaccc
 
     if (localUser) {
         isUSER = localUser.data.role === "FREE_USER";
